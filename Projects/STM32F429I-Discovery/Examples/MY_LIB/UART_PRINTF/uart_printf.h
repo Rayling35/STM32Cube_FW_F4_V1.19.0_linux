@@ -10,8 +10,8 @@
 #define USARTxPrintf_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
 #define USARTxPrintf_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE() 
 
-#define USARTxPrintf_FORCE_RESET()             __HAL_RCC_USART2_FORCE_RESET()
-#define USARTxPrintf_RELEASE_RESET()           __HAL_RCC_USART2_RELEASE_RESET()
+#define USARTxPrintf_FORCE_RESET()             __HAL_RCC_USART1_FORCE_RESET()
+#define USARTxPrintf_RELEASE_RESET()           __HAL_RCC_USART1_RELEASE_RESET()
 
 /* Definition for USARTxPrintf Pins */
 #define USARTxPrintf_TX_PIN                    GPIO_PIN_9
