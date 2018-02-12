@@ -50,7 +50,8 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef *huart)
   HAL_GPIO_DeInit(USARTxPrintf_RX_GPIO_PORT, USARTxPrintf_RX_PIN);
 }
 
-int UART_Printf_Init(void)
+
+void uart_printf_init(void)
 {
   UartHandlePrintf.Instance          = USARTxPrintf;
   UartHandlePrintf.Init.BaudRate     = 115200;
@@ -61,11 +62,8 @@ int UART_Printf_Init(void)
   UartHandlePrintf.Init.Mode         = UART_MODE_TX_RX;
   UartHandlePrintf.Init.OverSampling = UART_OVERSAMPLING_16;
     
-  if(HAL_UART_Init(&UartHandlePrintf) != HAL_OK) {
-    return -1;
-  }
-  
-  printf("** UART Printf() OK ** \n\r");
-	return 0;
+  HAL_UART_Init(&UartHandlePrintf);
+  printf("** UART Printf() init OK ** \n\r");
+
 }
 

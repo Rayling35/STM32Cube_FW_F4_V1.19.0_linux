@@ -22,6 +22,7 @@
 #define USARTxPrintf_RX_GPIO_PORT              GPIOA 
 #define USARTxPrintf_RX_AF                     GPIO_AF7_USART1
 
-int UART_Printf_Init(void);
+
+void uart_printf_init(void);
 
 #endif /* __UART_PRINTF_H */
