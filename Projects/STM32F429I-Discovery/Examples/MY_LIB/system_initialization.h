@@ -6,4 +6,4 @@
 
 void system_initialization(void);
 
-#endif /* __SYSTEM_INITIALIZATION_H */
+#endif
