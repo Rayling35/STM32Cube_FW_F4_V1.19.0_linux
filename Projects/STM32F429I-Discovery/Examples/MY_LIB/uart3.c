@@ -39,10 +39,8 @@ void _UART3_MspDeInit(void)
 
 void uart3_init(void)
 {
-  HAL_Init();
-  
   UartHandle3.Instance          = USART3;
-  UartHandle3.Init.BaudRate     = 38400;
+  UartHandle3.Init.BaudRate     = 115200;
   UartHandle3.Init.WordLength   = UART_WORDLENGTH_8B;
   UartHandle3.Init.StopBits     = UART_STOPBITS_1;
   UartHandle3.Init.Parity       = UART_PARITY_NONE;
