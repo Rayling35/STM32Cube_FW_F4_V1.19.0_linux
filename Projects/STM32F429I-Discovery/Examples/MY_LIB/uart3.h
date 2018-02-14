@@ -19,12 +19,16 @@
 #define USART3_RX_GPIO_PORT              GPIOD 
 #define USART3_RX_AF                     GPIO_AF7_USART3
 
+#ifdef UART3_IT
 /* Definition for USART3's NVIC */
 #define USART3_IRQn                      USART3_IRQn
-#define USART3_IRQHandler                USART3_IRQHandler
+#endif
 
 void _UART3_MspInit(void);
 void _UART3_MspDeInit(void);
+#ifdef UART3_IT
+void USART3_IRQHandler(void);
+#endif
 void uart3_init(void);
 
 #endif
