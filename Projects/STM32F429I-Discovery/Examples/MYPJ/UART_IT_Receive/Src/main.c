@@ -2,8 +2,8 @@
 
 extern UART_HandleTypeDef UartHandle3;
 
-uint8_t aTxBuffer[] = "\nGPIO_INT\r\n";
-uint8_t aRxBuffer[50];
+uint8_t TxBuffer[] = "\nGPIO_INT\r\n";
+uint8_t RxBuffer[50];
 
 static void EXTILine0_Config(void)
 {
@@ -26,18 +26,13 @@ static void EXTILine0_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   if(GPIO_Pin == GPIO_PIN_0) {
-		HAL_UART_Transmit_IT(&UartHandle3, (uint8_t *)aTxBuffer, 15);
+		HAL_UART_Transmit_IT(&UartHandle3, (uint8_t *)TxBuffer, 15);
   }
 }
 
-void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle3)
+void EXTI0_IRQHandler(void)
 {
-	printf("TX callback, transmit complete\r\n");
-}
-
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle3)
-{
-	printf("\n%s\r\n", aRxBuffer);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
 }
 
 int main(void)
@@ -48,6 +43,17 @@ int main(void)
   EXTILine0_Config();
 	
   while(1) {
-		HAL_UART_Receive_IT(&UartHandle3, aRxBuffer, 50);
+		HAL_UART_Receive_IT(&UartHandle3, RxBuffer, 50);
   }
+}
+
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle3)
+{
+	printf("TX callback:~\r\n");
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle3)
+{
+	printf("\nRX callback:%s\r\n", RxBuffer);
 }
