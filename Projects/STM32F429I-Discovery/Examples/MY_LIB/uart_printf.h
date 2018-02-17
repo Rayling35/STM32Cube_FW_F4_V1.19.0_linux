@@ -6,7 +6,7 @@
 
 /* Definition for USARTxPrintf clock resources */
 #define USARTxPrintf                           USART1
-#define USARTxPrintf_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE();
+#define USARTxPrintf_CLK_ENABLE()              __HAL_RCC_USART1_CLK_ENABLE()
 #define USARTxPrintf_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
 #define USARTxPrintf_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE() 
 

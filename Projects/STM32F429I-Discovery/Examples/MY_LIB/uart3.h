@@ -3,7 +3,7 @@
 
 #include "stm32f4xx_hal.h"
 
-#define USART3_CLK_ENABLE()              __HAL_RCC_USART3_CLK_ENABLE();
+#define USART3_CLK_ENABLE()              __HAL_RCC_USART3_CLK_ENABLE()
 #define USART3_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOD_CLK_ENABLE()
 #define USART3_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOD_CLK_ENABLE() 
 
