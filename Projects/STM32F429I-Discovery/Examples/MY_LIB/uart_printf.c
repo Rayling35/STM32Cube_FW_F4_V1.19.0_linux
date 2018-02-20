@@ -56,5 +56,5 @@ void uart_printf_init(void)
   UartHandlePrintf.Init.OverSampling = UART_OVERSAMPLING_16;
   HAL_UART_Init(&UartHandlePrintf);
 	
-  printf("** Printf() init OK ** \n\r");
+//  printf("** Printf() init OK ** \n\r");
 }
