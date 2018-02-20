@@ -1,11 +1,11 @@
 #ifndef _dev_H_
 #define _dev_H_
 
-#include "stdio.h"
+#include "stm32f4xx_hal.h"
 
 struct device {
-	void *data;
 	const void *api;
+	void *data;
 	const void *config;
 	int (*init)(struct device *dev);
 };
