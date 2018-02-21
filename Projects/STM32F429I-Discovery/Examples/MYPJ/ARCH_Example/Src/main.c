@@ -1,16 +1,15 @@
 #include <dev.h>
-#include <io.h>
+#include <io_api.h>
 #include "main.h"
 
 extern struct device real_io_0;
+struct device *ptr_real_io_0 = &real_io_0;
 
 int main(void)
 {
 	system_initialization();
 	uart_printf_init();
 /*----------------------------*/
-	
-	struct device *ptr_real_io_0 = &real_io_0;
 
 	printf("The init => %d\n", ptr_real_io_0->init(ptr_real_io_0));
 	printf("Ues APP => %d\n", io_print(ptr_real_io_0, 4));

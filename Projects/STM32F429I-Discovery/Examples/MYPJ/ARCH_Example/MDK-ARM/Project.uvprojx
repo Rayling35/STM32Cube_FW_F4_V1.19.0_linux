@@ -15,7 +15,7 @@
         <TargetCommonOption>
           <Device>STM32F429ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -375,16 +375,6 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>ARCH/Driver</GroupName>
-          <Files>
-            <File>
-              <FileName>io_1.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\ARCH_define\io_1.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Example/User</GroupName>
           <Files>
             <File>
@@ -401,6 +391,16 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>ARCH/Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>io_1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\ARCH_define\io_1.c</FilePath>
             </File>
           </Files>
         </Group>
