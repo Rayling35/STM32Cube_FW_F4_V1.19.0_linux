@@ -41,7 +41,6 @@ static void a_init(struct receive_table_a *fmt)
 uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
 {
 	char *name = "$ABCDE";
-	struct receive_table_a *a;
 	uint32_t tickstart = 0U;
 	
 	while(1) {
@@ -57,8 +56,7 @@ uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t leng
 			printf("No compare!\n");
 			continue;
 		}
-		a = (struct receive_table_a*)buffer;
-		a_init(a);
+		a_init((struct receive_table_a*)buffer);
 		return 0;
 	}
 }
@@ -74,7 +72,6 @@ static void version_init(struct receive_table_version *fmt)
 uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
 {
 	char name[] = {0x0A,0x56};
-	struct receive_table_version *version;
 	uint32_t tickstart = 0U;
 	
 	while(1) {
@@ -90,8 +87,7 @@ uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_
 			printf("No compare!\n");
 			continue;
 		}
-		version = (struct receive_table_version*)buffer;
-		version_init(version);
+		version_init((struct receive_table_version*)buffer);
 		return 0;
 	}
 }
