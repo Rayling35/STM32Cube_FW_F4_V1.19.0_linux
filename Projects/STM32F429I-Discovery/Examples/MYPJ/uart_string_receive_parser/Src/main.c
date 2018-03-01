@@ -21,7 +21,11 @@ int main(void)
 	struct receive_table_version *version;
 	version = (struct receive_table_version*)rx_buffer;
 	receive_cmd_version(&UartHandle3, rx_buffer, rx_length);
-	printf("version->start: %x\n", *version->start);
-	printf("version->cmd: %x\n", *version->cmd);
-	printf("version->ver1: %s\n", version->ver1);
+	printf("START = %02X\n", *version->start);
+	printf("CMD = %c\n", *version->cmd);
+	printf("VER1 = %.5s\n", version->ver1);
+	printf("ID = %.26s\n", version->id);
+	printf("VER2 = %.3s\n", version->ver2);
+	printf("REGION = %.10s\n", version->region);
+	printf("END = %02X %02X\n", *version->end, *(version->end+1));
 }

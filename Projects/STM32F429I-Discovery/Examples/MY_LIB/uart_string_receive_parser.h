@@ -41,15 +41,14 @@ struct receive_table_a {
 struct receive_table_version {
 	char start[1];
 	char cmd[1];
-	char ver1[10];
+	char ver1[5];
 	char o1[1];
-	char id[10];
+	char id[26];
 	char o2[1];
-	char ver2[10];
+	char ver2[3];
 	char o3[1];
 	char region[10];
 	char end[2];
-	char o4[1];
 };
 
 uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length);

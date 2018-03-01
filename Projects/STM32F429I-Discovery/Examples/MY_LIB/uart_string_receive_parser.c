@@ -67,7 +67,6 @@ static void version_init(struct receive_table_version *fmt)
 	*fmt->o1 = '\0';
 	*fmt->o2 = '\0';
 	*fmt->o3 = '\0';
-	*fmt->o4 = '\0';
 }
 uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
 {
