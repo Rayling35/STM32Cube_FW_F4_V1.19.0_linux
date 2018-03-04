@@ -22,8 +22,8 @@
 #define USARTxPrintf_RX_GPIO_PORT              GPIOA 
 #define USARTxPrintf_RX_AF                     GPIO_AF7_USART1
 
-void _UARTxPrintf_MspInit(void);
-void _UARTxPrintf_MspDeInit(void);
+
 void uart_printf_init(void);
+//Note: Remember enable the "#define HAL_UART_MODULE_ENABLED" in stm32f4xx_hal_conf.h
 
 #endif
