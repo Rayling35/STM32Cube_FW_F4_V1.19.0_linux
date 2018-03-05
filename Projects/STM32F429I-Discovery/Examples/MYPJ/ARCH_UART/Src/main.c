@@ -11,7 +11,6 @@ uint8_t tx[] = "uart3_txxx";
 int main(void)
 {
 	system_initialization();
-	//uart_printf_init();
 /*----------------------------*/
 
 	uart3->init(uart3);

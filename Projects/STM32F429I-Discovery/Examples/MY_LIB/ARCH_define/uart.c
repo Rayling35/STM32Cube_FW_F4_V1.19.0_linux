@@ -1,11 +1,12 @@
 #include <uart_api.h>
-#include "uart_3.h"
+#include "uart.h"
 
-struct uart3_data {
+struct uart_data {
 	uint32_t temp;
 };
 
-struct uart3_config {
+struct uart_config {
+	UART_HandleTypeDef *UartHandle;
 	uint32_t BaudRate;
 	uint32_t WordLength;
   uint32_t StopBits;
@@ -15,29 +16,38 @@ struct uart3_config {
   uint32_t OverSampling;
 };
 
-static UART_HandleTypeDef UartHandle3;
-
-               /*-----------API--------------*/
+/*-----------API--------------*/
 static int receive_data(struct device *dev, uint8_t *rxBuffer)
 {
-	HAL_UART_Receive(&UartHandle3, rxBuffer, 1, 5000);
+	const struct uart_config *config = dev->config;
+	UART_HandleTypeDef *UartHandle = config->UartHandle;
+	
+	HAL_UART_Receive(UartHandle, rxBuffer, 1, 5000);
 	return 0;
 }
 
 static int transmit_data(struct device *dev, uint8_t *txBuffer)
 {
-	HAL_UART_Transmit(&UartHandle3, txBuffer, 8, 5000);
+	const struct uart_config *config = dev->config;
+	UART_HandleTypeDef *UartHandle = config->UartHandle;
+	
+	HAL_UART_Transmit(UartHandle, txBuffer, 8, 5000);
 	return 0;
 }
-               /*-----------Define-----------*/
+
+/*-----------UART3 define-----------*/
+#ifdef UART3
 static const struct uart_api uart3_api = {
 	.read = receive_data,
 	.write = transmit_data,
 };
 
-static struct uart3_data uart3_data;
+static struct uart_data uart3_data;
 
-static const struct uart3_config uart3_config = {
+static UART_HandleTypeDef UartHandle3;
+
+static const struct uart_config uart3_config = {
+	.UartHandle   = &UartHandle3,
 	.BaudRate     = 115200,
 	.WordLength   = UART_WORDLENGTH_8B,
   .StopBits     = UART_STOPBITS_1,
@@ -47,38 +57,41 @@ static const struct uart3_config uart3_config = {
   .OverSampling = UART_OVERSAMPLING_16,
 };
 
+void _UART3_MspInit(void);
+void _UART3_MspDeInit(void);
+
 static int uart3_init(struct device *dev)
 {
-	const struct uart3_config *config = dev->config;
+	const struct uart_config *config = dev->config;
+	UART_HandleTypeDef *UartHandle = config->UartHandle;
 	
-	UartHandle3.Instance          = USART3;
-	UartHandle3.Init.BaudRate     = config->BaudRate;
-	UartHandle3.Init.WordLength   = config->WordLength;
-	UartHandle3.Init.StopBits     = config->StopBits;
-	UartHandle3.Init.Parity       = config->Parity;
-	UartHandle3.Init.HwFlowCtl    = config->HwFlowCtl;
-	UartHandle3.Init.Mode         = config->Mode;
-	UartHandle3.Init.OverSampling = config->OverSampling;
-	HAL_UART_Init(&UartHandle3);
+	_UART3_MspDeInit();
+	_UART3_MspInit();
+	UartHandle->Instance          = USART3;
+	UartHandle->Init.BaudRate     = config->BaudRate;
+	UartHandle->Init.WordLength   = config->WordLength;
+	UartHandle->Init.StopBits     = config->StopBits;
+	UartHandle->Init.Parity       = config->Parity;
+	UartHandle->Init.HwFlowCtl    = config->HwFlowCtl;
+	UartHandle->Init.Mode         = config->Mode;
+	UartHandle->Init.OverSampling = config->OverSampling;
+	HAL_UART_Init(UartHandle);
 	
 	return 0;
 }
 
 struct device uart_3 = {
-	.api     = &uart3_api,
+	.api    = &uart3_api,
 	.data   = &uart3_data,
 	.config = &uart3_config,
-	.init     = uart3_init,
+	.init   = uart3_init,
 };
 
-
-/*----------External----------*/
 void _UART3_MspInit(void)
 {  
   GPIO_InitTypeDef  GPIO_InitStruct;
   
   __HAL_RCC_GPIOD_CLK_ENABLE();
-
   __HAL_RCC_USART3_CLK_ENABLE(); 
   
   GPIO_InitStruct.Pin       = GPIO_PIN_8;
@@ -115,3 +128,4 @@ void USART3_IRQHandler(void)
   HAL_UART_IRQHandler(&UartHandle3);
 }
 #endif
+#endif //UART3
