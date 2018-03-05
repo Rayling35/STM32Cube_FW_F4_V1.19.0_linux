@@ -46,7 +46,7 @@ int main(void)
   while(1) {
 		HAL_UART_Receive(&UartHandle3, Buffer, 1, 5000);
 		if(Buffer[0] == 0x66) {
-			printf("Hi ggg\n");
+			printf("Hi fff\r\n");
 			HAL_UART_Transmit(&UartHandle3, ok, 2, 5000);
 		}		
   }

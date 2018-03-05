@@ -24,8 +24,6 @@
 #define USART3_IRQn                      USART3_IRQn
 #endif
 
-void _UART3_MspInit(void);
-void _UART3_MspDeInit(void);
 #ifdef UART3_IT
 void USART3_IRQHandler(void);
 #endif

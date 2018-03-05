@@ -48,6 +48,8 @@ void USART3_IRQHandler(void)
 
 void uart3_init(void)
 {
+	_UART3_MspDeInit();
+	_UART3_MspInit();
   UartHandle3.Instance          = USART3;
   UartHandle3.Init.BaudRate     = 115200;
   UartHandle3.Init.WordLength   = UART_WORDLENGTH_8B;
