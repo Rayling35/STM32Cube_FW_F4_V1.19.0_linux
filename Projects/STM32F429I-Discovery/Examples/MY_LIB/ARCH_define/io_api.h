@@ -3,19 +3,19 @@
 
 #include <dev.h>
 
-/*-----------API--------------*/
+               /*-----------API--------------*/
 typedef int (*io_api_1)(struct device *dev, int len);
 
 struct io_api {
-	io_api_1 print;
+	io_api_1 func;
 };
 
 
-/*----------User-APP----------*/
-static inline int io_print(struct device *dev, int len)
+               /*-----------APP--------------*/
+static inline int io_func(struct device *dev, int len)
 {
-	const struct io_api *ptr_io_api = dev->api;
-	return ptr_io_api->print(dev, len);
+	const struct io_api *io_api = dev->api;
+	return io_api->func(dev, len);
 }
 
 #endif

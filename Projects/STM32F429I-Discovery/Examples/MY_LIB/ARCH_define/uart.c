@@ -35,7 +35,7 @@ static int transmit_data(struct device *dev, uint8_t *txBuffer)
 	return 0;
 }
 
-/*-----------UART3 define-----------*/
+/*-------UART3 definition-------*/
 #ifdef UART3
 static const struct uart_api uart3_api = {
 	.read = receive_data,
