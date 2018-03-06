@@ -4,8 +4,8 @@
 #include <dev.h>
 
                /*-----------API--------------*/
-typedef int (*uart_api_1)(struct device *dev, uint8_t *rxBuffer);
-typedef int (*uart_api_2)(struct device *dev, uint8_t *txBuffer);
+typedef int (*uart_api_1)(struct device *dev, uint8_t *rxBuffer, uint16_t longth, uint16_t timeout);
+typedef int (*uart_api_2)(struct device *dev, uint8_t *txBuffer, uint16_t longth, uint16_t timeout);
 
 struct uart_api {
 	uart_api_1 read;
@@ -14,16 +14,16 @@ struct uart_api {
 
 
                /*-----------APP--------------*/
-static inline int uart_read(struct device *dev, uint8_t *rxBuffer)
+static inline int uart_read(struct device *dev, uint8_t *rxBuffer, uint16_t length)
 {
 	const struct uart_api *uart_api = dev->api;
-	return uart_api->read(dev, rxBuffer);
+	return uart_api->read(dev, rxBuffer, length, 100);
 }
 
-static inline int uart_write(struct device *dev, uint8_t *txBuffer)
+static inline int uart_write(struct device *dev, uint8_t *txBuffer, uint16_t length)
 {
 	const struct uart_api *uart_api = dev->api;
-	return uart_api->write(dev, txBuffer);
+	return uart_api->write(dev, txBuffer, length, 100);
 }
 
 #endif

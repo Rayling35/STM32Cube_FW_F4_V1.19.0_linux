@@ -17,22 +17,20 @@ struct uart_config {
 };
 
 /*-----------API--------------*/
-static int receive_data(struct device *dev, uint8_t *rxBuffer)
+static int receive_data(struct device *dev, uint8_t *rxBuffer, uint16_t length, uint16_t timeout)
 {
 	const struct uart_config *config = dev->config;
 	UART_HandleTypeDef *UartHandle = config->UartHandle;
 	
-	HAL_UART_Receive(UartHandle, rxBuffer, 1, 5000);
-	return 0;
+	return HAL_UART_Receive(UartHandle, rxBuffer, length, timeout);
 }
 
-static int transmit_data(struct device *dev, uint8_t *txBuffer)
+static int transmit_data(struct device *dev, uint8_t *txBuffer, uint16_t length, uint16_t timeout)
 {
 	const struct uart_config *config = dev->config;
 	UART_HandleTypeDef *UartHandle = config->UartHandle;
-	
-	HAL_UART_Transmit(UartHandle, txBuffer, 8, 5000);
-	return 0;
+
+	return HAL_UART_Transmit(UartHandle, txBuffer, length, timeout);
 }
 
 /*-------UART3 definition-------*/
