@@ -6,5 +6,6 @@
 #include "system_initialization.h"
 #include "uart_printf.h"
 #include "uart3.h"
+#include "uart6.h"
 
 #endif

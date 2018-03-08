@@ -10,7 +10,6 @@
 #define USART3_FORCE_RESET()             __HAL_RCC_USART3_FORCE_RESET()
 #define USART3_RELEASE_RESET()           __HAL_RCC_USART3_RELEASE_RESET()
 
-/* Definition for USART3 Pins */
 #define USART3_TX_PIN                    GPIO_PIN_8
 #define USART3_TX_GPIO_PORT              GPIOD  
 #define USART3_TX_AF                     GPIO_AF7_USART3
@@ -20,7 +19,6 @@
 #define USART3_RX_AF                     GPIO_AF7_USART3
 
 #ifdef UART3_IT
-/* Definition for USART3's NVIC */
 #define USART3_IRQn                      USART3_IRQn
 #endif
 

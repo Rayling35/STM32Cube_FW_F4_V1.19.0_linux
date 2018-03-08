@@ -8,7 +8,6 @@ void _UART3_MspInit(void)
   
   USART3_TX_GPIO_CLK_ENABLE();
   USART3_RX_GPIO_CLK_ENABLE();
-
   USART3_CLK_ENABLE(); 
   
   GPIO_InitStruct.Pin       = USART3_TX_PIN;
@@ -21,7 +20,8 @@ void _UART3_MspInit(void)
   GPIO_InitStruct.Pin       = USART3_RX_PIN;
   GPIO_InitStruct.Alternate = USART3_RX_AF;
   HAL_GPIO_Init(USART3_RX_GPIO_PORT, &GPIO_InitStruct);
-#ifdef UART3_IT
+
+  #ifdef UART3_IT
   HAL_NVIC_SetPriority(USART3_IRQn, 0, 1);
   HAL_NVIC_EnableIRQ(USART3_IRQn);
 #endif
@@ -34,10 +34,12 @@ void _UART3_MspDeInit(void)
 
   HAL_GPIO_DeInit(USART3_TX_GPIO_PORT, USART3_TX_PIN);
   HAL_GPIO_DeInit(USART3_RX_GPIO_PORT, USART3_RX_PIN);
+
 #ifdef UART3_IT
   HAL_NVIC_DisableIRQ(USART3_IRQn);
 #endif
 }
+
 
 #ifdef UART3_IT
 void USART3_IRQHandler(void)
@@ -45,6 +47,7 @@ void USART3_IRQHandler(void)
   HAL_UART_IRQHandler(&UartHandle3);
 }
 #endif
+
 
 void uart3_init(void)
 {
