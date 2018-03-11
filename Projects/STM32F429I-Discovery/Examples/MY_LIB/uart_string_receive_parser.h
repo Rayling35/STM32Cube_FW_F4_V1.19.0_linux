@@ -6,52 +6,38 @@
 #include <stdlib.h>
 
 struct receive_table_a {
-	char start[6];
-	char o1[1];
-	char data1[10];
-	char o2[1];
-	char data2[10];
-	char o3[1];
-	char data3[1];
-	char o4[1];
-	char data4[11];
-	char o5[1];
-	char data5[1];
-	char o6[1];
-	char data6[1];
-	char o7[1];
-	char data7[2];
-	char o8[1];
-	char data8[4];
-	char o9[1];
-	char data9[6];
-	char o10[1];
-	char data10[1];
-	char o11[1];
-	char data11[3];
-	char o12[1];
-	char data12[1];
-	char o13[1];
-	char data13[1];
-	char o14[1];
-	char end[3];
-	char o15[1];
-};
+	char start[6]; //GPABCD
+	char o1[1];    //,
+	char data1[1]; //T
+	char o2[1];    //,
+	char data2[2]; //QW
+	char o3[1];    //,
+	char data3[3]; //Y22
+	char o4[1];    //,
+	char data4[4]; //56tr
+	char o5[1];    //,
+	char data5[5]; //S23_E
+	char o6[1];    //,
+	char data6[6]; //KK2341
+	char o7[1];    //,
+	char end[3];   //Off
+	char o8[1];    //,
+};//GPABCD,T,QW,Y22,56tr,S23_E,KK2341,Off
 
 struct receive_table_version {
-	char start[1];
-	char cmd[1];
-	char ver1[5];
-	char o1[1];
-	char id[26];
-	char o2[1];
-	char ver2[3];
-	char o3[1];
-	char region[10];
-	char end[2];
-};
+	char start[1];  //0x0A
+	char cmd[1];    //0x41
+	char ver1[4];   //R001
+	char id[16];    //a1b2c3d4e5f6g7h8
+	char ver2[3];   //A01
+	char region[5]; //5D1F7
+	char end[2];    //0x0D 0x0A
+};//0A 41 52 30 30 31 61 31 62 32 63 33 64 34 65 35 66 36 67 37 68 38 41 30 31 35 44 31 46 37 0D 0A
+
 
 uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length);
+uint16_t a_parser(uint8_t *buffer);
 uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length);
+uint16_t version_parser(uint8_t *buffer);
 
 #endif

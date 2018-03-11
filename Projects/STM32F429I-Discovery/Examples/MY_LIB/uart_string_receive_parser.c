@@ -31,20 +31,13 @@ static uint16_t buffer_cmp(uint8_t *buffer1, uint8_t *buffer2, uint16_t length)
 }
 
 /*---------------------------------------------------------------------------------------------------*/
-static void a_init(struct receive_table_a *fmt)
-{
-	*fmt->o1 = '\0'; *fmt->o2 = '\0'; *fmt->o3 = '\0'; *fmt->o4 = '\0';
-	*fmt->o5 = '\0'; *fmt->o6 = '\0'; *fmt->o7 = '\0'; *fmt->o8 = '\0';
-	*fmt->o9 = '\0'; *fmt->o10 = '\0'; *fmt->o11 = '\0'; *fmt->o12 = '\0';
-	*fmt->o13 = '\0'; *fmt->o14 = '\0'; *fmt->o15 = '\0';
-}
 uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
 {
-	char *name = "$ABCDE";
+	char *name = "GPABCD";
 	uint32_t tickstart = 0U;
 	
 	while(1) {
-		if(uart_string_out(huart, '$', buffer, length, 1000)) {
+		if(uart_string_out(huart, 'G', buffer, length, 100)) {
 			printf("Timeout!\n");
 			tickstart++;
 			if(tickstart > 5) {
@@ -56,25 +49,36 @@ uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t leng
 			printf("No compare!\n");
 			continue;
 		}
-		a_init((struct receive_table_a*)buffer);
 		return 0;
 	}
 }
 
-/*---------------------------------------------------------------------------------------------------*/
-static void version_init(struct receive_table_version *fmt)
+uint16_t a_parser(uint8_t *buffer)
 {
-	*fmt->o1 = '\0';
-	*fmt->o2 = '\0';
-	*fmt->o3 = '\0';
+	uint16_t length = strlen((char*)buffer);
+	struct receive_table_a *fmt = (struct receive_table_a*)buffer;
+	
+	*fmt->o1 = '\0'; *fmt->o2 = '\0'; *fmt->o3 = '\0'; *fmt->o4 = '\0';
+	*fmt->o5 = '\0'; *fmt->o6 = '\0'; *fmt->o7 = '\0'; *fmt->o8 = '\0';
+	printf("START = %s\r\n", fmt->start);
+	printf("Data1 = %s\r\n", fmt->data1);
+	printf("Data2 = %s\r\n", fmt->data2);
+	printf("Data3 = %s\r\n", fmt->data3);
+	printf("Data4 = %s\r\n", fmt->data4);
+	printf("Data5 = %s\r\n", fmt->data5);
+	printf("Data6 = %s\r\n", fmt->data6);
+	printf("END = %s\r\n", fmt->end);	
+	
+	return 0;
 }
+/*---------------------------------------------------------------------------------------------------*/
 uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
 {
-	char name[] = {0x0A,0x56};
+	char name[] = {0x0A,0x41};
 	uint32_t tickstart = 0U;
 	
 	while(1) {
-		if(uart_string_out(huart, 0x0A, buffer, length, 1000)) {
+		if(uart_string_out(huart, 0x0A, buffer, length, 100)) {
 			printf("Timeout!\n");
 			tickstart++;
 			if(tickstart > 5) {
@@ -86,9 +90,23 @@ uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_
 			printf("No compare!\n");
 			continue;
 		}
-		version_init((struct receive_table_version*)buffer);
 		return 0;
 	}
 }
 
+uint16_t version_parser(uint8_t *buffer)
+{
+	uint16_t length = strlen((char*)buffer);
+	struct receive_table_version *fmt = (struct receive_table_version*)buffer;
+	
+	printf("START = %02X\r\n", *fmt->start);
+	printf("CMD = 0x%02x\r\n", *fmt->cmd);
+	printf("VER1 = %.4s\r\n", fmt->ver1);
+	printf("ID = %.16s\r\n", fmt->id);
+	printf("VER2 = %.3s\r\n", fmt->ver2);
+	printf("Region = %.5s\r\n", fmt->region);
+	printf("END = %02X %02X\r\n", *fmt->end, *(fmt->end+1));
+	
+	return 0;
+}
 /*---------------------------------------------------------------------------------------------------*/
