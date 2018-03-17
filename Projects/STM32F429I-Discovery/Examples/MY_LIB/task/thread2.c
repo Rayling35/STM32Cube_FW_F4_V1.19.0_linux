@@ -1,32 +1,32 @@
+#include <stdio.h>
 #include "thread2.h"
 
 static osMessageQId osQueue;
 
-void message_put(uint16_t msg)
+void message_put(uint32_t msg)
 {
-	osMessagePut(osQueue, msg, 0);
+	osMessagePut(osQueue, msg, osWaitForever);
 }
 
-
-static void Thread2 (const void *argument)
+static void Thread2(const void *argument)
 {
 	osEvent event;
 	
 	for(;;) {
 		event = osMessageGet(osQueue, osWaitForever);
+		
 		if(event.status == osEventMessage) {
-			if(event.value.v == 100) {
-				printf("100\r\n");
-			}else {
-				printf("99\r\n");
-			}
+			struct message *p = (struct message*)event.value.p;
+			printf("%s\r\n", p->name);
+			printf("%d\r\n", p->age);
+			printf("%f\r\n", p->height);
 		}
 	}
 }
 
-void r_queue(void)
+void thread2(void)
 {
-	osMessageQDef(osqueue, 1, uint16_t);
+	osMessageQDef(osqueue, 2, struct message); //¦î¦Cªø«×¡B¦î¦C«¬ºA
 	osQueue = osMessageCreate(osMessageQ(osqueue), NULL);
 
 	osThreadDef(RxThread, Thread2, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);

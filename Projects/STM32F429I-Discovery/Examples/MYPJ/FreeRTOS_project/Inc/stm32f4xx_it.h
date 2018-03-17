@@ -5,7 +5,6 @@
  extern "C" {
 #endif 
 
-#include "main.h"
 
 void NMI_Handler(void);
 void HardFault_Handler(void);

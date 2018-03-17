@@ -1,4 +1,7 @@
+#include "stm32f4xx_hal.h"
+#include "cmsis_os.h"
 #include "stm32f4xx_it.h"
+
 
 void NMI_Handler(void)
 {
