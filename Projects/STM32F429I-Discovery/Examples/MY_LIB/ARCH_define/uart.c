@@ -33,6 +33,7 @@ static int transmit_data(struct device *dev, uint8_t *txBuffer, uint16_t length,
 	return HAL_UART_Transmit(UartHandle, txBuffer, length, timeout);
 }
 
+
 /*-------UART3 definition-------*/
 #ifdef UART3
 static const struct uart_api uart3_api = {
@@ -53,36 +54,6 @@ static const struct uart_config uart3_config = {
 	.HwFlowCtl    = UART_HWCONTROL_NONE,
 	.Mode         = UART_MODE_TX_RX,
 	.OverSampling = UART_OVERSAMPLING_16,
-};
-
-void _UART3_MspInit(void);
-void _UART3_MspDeInit(void);
-
-static int uart3_init(struct device *dev)
-{
-	const struct uart_config *config = dev->config;
-	UART_HandleTypeDef *UartHandle = config->UartHandle;
-	
-	_UART3_MspDeInit();
-	_UART3_MspInit();
-	UartHandle->Instance          = USART3;
-	UartHandle->Init.BaudRate     = config->BaudRate;
-	UartHandle->Init.WordLength   = config->WordLength;
-	UartHandle->Init.StopBits     = config->StopBits;
-	UartHandle->Init.Parity       = config->Parity;
-	UartHandle->Init.HwFlowCtl    = config->HwFlowCtl;
-	UartHandle->Init.Mode         = config->Mode;
-	UartHandle->Init.OverSampling = config->OverSampling;
-	HAL_UART_Init(UartHandle);
-	
-	return 0;
-}
-
-struct device uart_3 = {
-	.api    = &uart3_api,
-	.data   = &uart3_data,
-	.config = &uart3_config,
-	.init   = uart3_init,
 };
 
 void _UART3_MspInit(void)
@@ -120,10 +91,42 @@ void _UART3_MspDeInit(void)
 #endif
 }
 
+static int uart3_init(struct device *dev)
+{
+	const struct uart_config *config = dev->config;
+	UART_HandleTypeDef *UartHandle = config->UartHandle;
+	
+	_UART3_MspDeInit();
+	_UART3_MspInit();
+	UartHandle->Instance          = USART3;
+	UartHandle->Init.BaudRate     = config->BaudRate;
+	UartHandle->Init.WordLength   = config->WordLength;
+	UartHandle->Init.StopBits     = config->StopBits;
+	UartHandle->Init.Parity       = config->Parity;
+	UartHandle->Init.HwFlowCtl    = config->HwFlowCtl;
+	UartHandle->Init.Mode         = config->Mode;
+	UartHandle->Init.OverSampling = config->OverSampling;
+	HAL_UART_Init(UartHandle);
+	
+	return 0;
+}
+
+struct device uart_3 = {
+	.api    = &uart3_api,
+	.data   = &uart3_data,
+	.config = &uart3_config,
+	.init   = uart3_init,
+};
+
 #ifdef UART3_IT
 void USART3_IRQHandler(void)
 {
   HAL_UART_IRQHandler(&UartHandle3);
 }
 #endif
+
+uint32_t uart3_binding(void)
+{
+	return (uint32_t)&uart_3;
+}
 #endif //UART3

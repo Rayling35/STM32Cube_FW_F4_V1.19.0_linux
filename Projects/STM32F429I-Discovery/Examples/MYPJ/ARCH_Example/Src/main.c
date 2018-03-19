@@ -1,12 +1,14 @@
 #include <dev.h>
 #include <io_api.h>
+#include "system_initialization.h"
+#include "uart_printf.h"
 #include "main.h"
+#include "io.h"
 
-extern struct device io_0;
-struct device *io0 = &io_0;
 
 int main(void)
 {
+	struct device *io0 = (struct device *)io0_binding();
 	system_initialization();
 	uart_printf_init();
 /*----------------------------*/

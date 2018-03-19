@@ -45,5 +45,9 @@ struct device io_0 = {
 	.config = &io0_config,
 	.init     = io0_init,
 };
-#endif //IO0
 
+uint32_t io0_binding(void)
+{
+	return (uint32_t)&io_0;
+}
+#endif //IO0
