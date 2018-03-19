@@ -1,4 +1,5 @@
 #include "uart6.h"
+#include "api_define.h"
 
 UART_HandleTypeDef UartHandle6;
 
@@ -51,8 +52,8 @@ void USART6_IRQHandler(void)
 
 void uart6_init(void)
 {
-	_UART6_MspDeInit();
-	_UART6_MspInit();
+  _UART6_MspDeInit();
+  _UART6_MspInit();
   UartHandle6.Instance          = USART6;
   UartHandle6.Init.BaudRate     = 115200;
   UartHandle6.Init.WordLength   = UART_WORDLENGTH_8B;
@@ -62,4 +63,41 @@ void uart6_init(void)
   UartHandle6.Init.Mode         = UART_MODE_TX_RX;
   UartHandle6.Init.OverSampling = UART_OVERSAMPLING_16;
   HAL_UART_Init(&UartHandle6);
+}
+
+int uart6_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
+{
+	HAL_UART_Transmit(&UartHandle6, data, length, timeout);
+	return 0;
+}
+
+int uart6_receive(uint8_t *data, uint16_t length, uint32_t timeout)
+{
+	HAL_UART_Receive(&UartHandle6, data, length, timeout);
+	return 0;
+}
+
+int uart6_transmit_it(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Transmit_IT(&UartHandle6, data, length);
+	return 0;
+}
+
+int uart6_receive_it(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Receive_IT(&UartHandle6, data, length);
+	return 0;
+}
+
+struct uart_api uart6_api = {
+	.init = uart6_init,
+	.transmit = uart6_transmit,
+	.receive = uart6_receive,
+	.transmit_it = uart6_transmit_it,
+	.receive_it = uart6_receive_it,
+};
+
+uint32_t uart6_binding(void)
+{
+	return (uint32_t)&uart6_api; //¶Ç»¼¦ì¸m 4Byte
 }

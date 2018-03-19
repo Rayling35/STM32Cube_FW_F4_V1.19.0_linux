@@ -2,8 +2,8 @@
 #define __UART_STRING_RECEIVE_PARSER_H
 
 #include "stm32f4xx_hal.h"
-#include <string.h>
-#include <stdlib.h>
+#include "api_define.h"
+
 
 struct receive_table_a {
 	char start[6]; //GPABCD
@@ -35,9 +35,9 @@ struct receive_table_version {
 };//0A 41 52 30 30 31 61 31 62 32 63 33 64 34 65 35 66 36 67 37 68 38 41 30 31 35 44 31 46 37 0D 0A
 
 
-uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length);
+uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length);
 uint16_t a_parser(uint8_t *buffer);
-uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length);
+uint16_t receive_cmd_version(struct uart_api *huart, uint8_t *buffer, uint16_t length);
 uint16_t version_parser(uint8_t *buffer);
 
 #endif

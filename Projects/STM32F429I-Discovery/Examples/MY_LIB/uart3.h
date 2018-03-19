@@ -25,6 +25,7 @@
 #ifdef UART3_IT
 void USART3_IRQHandler(void);
 #endif
-void uart3_init(void);
+
+uint32_t uart3_binding(void);
 
 #endif

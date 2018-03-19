@@ -10,7 +10,7 @@ static struct message meter = {
 
 static void Thread1(const void *argument)
 {
-		message_put((uint32_t)&meter);
+	message_put((uint32_t)&meter);
 }
 
 void thread1(void)

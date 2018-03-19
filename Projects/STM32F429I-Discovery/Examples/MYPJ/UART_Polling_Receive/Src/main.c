@@ -1,6 +1,10 @@
+#include "system_initialization.h"
+#include "uart_printf.h"
 #include "main.h"
+#include "api_define.h"
+#include "uart3.h"
+#include "uart6.h"
 
-extern UART_HandleTypeDef UartHandle3;
 
 uint8_t myBuffer[] = "\nGPIO_INT\r\n";
 uint8_t Buffer[1];
@@ -40,14 +44,19 @@ int main(void)
 {
 	system_initialization();
 	uart_printf_init();
-	uart3_init();
+	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
+	uart3->init();
+	uart6->init();
   EXTILine0_Config();
 	
   while(1) {
-		HAL_UART_Receive(&UartHandle3, Buffer, 1, 5000);
+		uart3->receive(Buffer, 1, 5000);
+		uart6->receive(Buffer, 1, 5000);
 		if(Buffer[0] == 0x66) {
 			printf("Hi fff\r\n");
-			HAL_UART_Transmit(&UartHandle3, ok, 2, 5000);
+			uart3->transmit(ok, 2, 5000);
+			uart6->transmit(ok, 2, 5000);
 		}		
   }
 }

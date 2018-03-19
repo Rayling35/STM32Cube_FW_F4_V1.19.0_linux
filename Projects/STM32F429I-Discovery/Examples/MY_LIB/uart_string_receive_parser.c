@@ -1,14 +1,16 @@
+#include <string.h>
 #include "uart_string_receive_parser.h"
 
-static uint16_t uart_string_out(UART_HandleTypeDef *huart, uint8_t first_char, uint8_t *buffer, uint16_t length, uint32_t timeout)
+
+static uint16_t uart_string_out(struct uart_api *huart, uint8_t first_char, uint8_t *buffer, uint16_t length, uint32_t timeout)
 {
 	uint32_t tickstart = 0U;
 	
 	memset((char*)buffer, '\0', length);
 	while(1) {
-		HAL_UART_Receive(huart, &buffer[0], 1, 1);
+		huart->receive(&buffer[0], 1, 1);
 		if(buffer[0] == first_char) {
-			HAL_UART_Receive(huart, &buffer[1], length, timeout);
+			huart->receive(&buffer[1], length, timeout);
 			return 0;
 		}
 		tickstart++;
@@ -31,14 +33,14 @@ static uint16_t buffer_cmp(uint8_t *buffer1, uint8_t *buffer2, uint16_t length)
 }
 
 /*---------------------------------------------------------------------------------------------------*/
-uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
+uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length)
 {
 	char *name = "GPABCD";
 	uint32_t tickstart = 0U;
 	
 	while(1) {
 		if(uart_string_out(huart, 'G', buffer, length, 100)) {
-			printf("Timeout!\n");
+			printf("Timeout!\r\n");
 			tickstart++;
 			if(tickstart > 5) {
 				return 1;
@@ -46,7 +48,7 @@ uint16_t receive_cmd_a(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t leng
 			continue;
 		}
 		if(buffer_cmp((uint8_t*)name, buffer, strlen(name))) {
-			printf("No compare!\n");
+			printf("No compare!\r\n");
 			continue;
 		}
 		return 0;
@@ -72,14 +74,14 @@ uint16_t a_parser(uint8_t *buffer)
 	return 0;
 }
 /*---------------------------------------------------------------------------------------------------*/
-uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_t length)
+uint16_t receive_cmd_version(struct uart_api *huart, uint8_t *buffer, uint16_t length)
 {
 	char name[] = {0x0A,0x41};
 	uint32_t tickstart = 0U;
 	
 	while(1) {
 		if(uart_string_out(huart, 0x0A, buffer, length, 100)) {
-			printf("Timeout!\n");
+			printf("Timeout!\r\n");
 			tickstart++;
 			if(tickstart > 5) {
 				return 1;
@@ -87,7 +89,7 @@ uint16_t receive_cmd_version(UART_HandleTypeDef *huart, uint8_t *buffer, uint16_
 			continue;
 		}
 		if(buffer_cmp((uint8_t*)name, buffer, strlen(name))) {
-			printf("No compare!\n");
+			printf("No compare!\r\n");
 			continue;
 		}
 		return 0;

@@ -1,11 +1,13 @@
+#include "system_initialization.h"
+#include "uart_printf.h"
 #include "main.h"
+#include "api_define.h"
+#include "uart3.h"
+#include "uart6.h"
 
-extern UART_HandleTypeDef UartHandle3;
-extern UART_HandleTypeDef UartHandle6;
-#define UartHandle UartHandle6
 
 uint8_t TxBuffer[] = "GPIO_INT\r\n";
-uint8_t RxBuffer[30];
+uint8_t RxBuffer[10];
 
 static void EXTILine0_Config(void)
 {
@@ -27,8 +29,11 @@ static void EXTILine0_Config(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
   if(GPIO_Pin == GPIO_PIN_0) {
-		HAL_UART_Transmit_IT(&UartHandle, (uint8_t *)TxBuffer, 15);
+		uart3->transmit_it((uint8_t *)TxBuffer, 10);
+		uart6->transmit_it((uint8_t *)TxBuffer, 10);
   }
 }
 
@@ -41,12 +46,15 @@ int main(void)
 {
 	system_initialization();
 	uart_printf_init();
-	uart3_init();
-	uart6_init();
+	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
+	uart3->init();
+	uart6->init();
   EXTILine0_Config();
 	
   while(1) {
-		HAL_UART_Receive_IT(&UartHandle, RxBuffer, 20);
+		uart3->receive_it(RxBuffer, 10);
+		uart6->receive_it(RxBuffer, 10);
   }
 }
 

@@ -1,4 +1,7 @@
+#include "system_initialization.h"
+#include "uart_printf.h"
 #include "main.h"
+
 
 int main(void)
 {

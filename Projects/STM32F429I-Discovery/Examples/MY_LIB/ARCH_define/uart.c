@@ -9,11 +9,11 @@ struct uart_config {
 	UART_HandleTypeDef *UartHandle;
 	uint32_t BaudRate;
 	uint32_t WordLength;
-  uint32_t StopBits;
-  uint32_t Parity;
-  uint32_t HwFlowCtl;
-  uint32_t Mode;
-  uint32_t OverSampling;
+	uint32_t StopBits;
+	uint32_t Parity;
+	uint32_t HwFlowCtl;
+	uint32_t Mode;
+	uint32_t OverSampling;
 };
 
 /*-----------API--------------*/
@@ -48,11 +48,11 @@ static const struct uart_config uart3_config = {
 	.UartHandle   = &UartHandle3,
 	.BaudRate     = 115200,
 	.WordLength   = UART_WORDLENGTH_8B,
-  .StopBits     = UART_STOPBITS_1,
-  .Parity       = UART_PARITY_NONE,
-  .HwFlowCtl    = UART_HWCONTROL_NONE,
-  .Mode         = UART_MODE_TX_RX,
-  .OverSampling = UART_OVERSAMPLING_16,
+	.StopBits     = UART_STOPBITS_1,
+	.Parity       = UART_PARITY_NONE,
+	.HwFlowCtl    = UART_HWCONTROL_NONE,
+	.Mode         = UART_MODE_TX_RX,
+	.OverSampling = UART_OVERSAMPLING_16,
 };
 
 void _UART3_MspInit(void);

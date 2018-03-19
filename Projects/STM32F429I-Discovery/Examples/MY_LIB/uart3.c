@@ -1,4 +1,5 @@
 #include "uart3.h"
+#include "api_define.h"
 
 UART_HandleTypeDef UartHandle3;
 
@@ -51,8 +52,8 @@ void USART3_IRQHandler(void)
 
 void uart3_init(void)
 {
-	_UART3_MspDeInit();
-	_UART3_MspInit();
+  _UART3_MspDeInit();
+  _UART3_MspInit();
   UartHandle3.Instance          = USART3;
   UartHandle3.Init.BaudRate     = 115200;
   UartHandle3.Init.WordLength   = UART_WORDLENGTH_8B;
@@ -62,4 +63,41 @@ void uart3_init(void)
   UartHandle3.Init.Mode         = UART_MODE_TX_RX;
   UartHandle3.Init.OverSampling = UART_OVERSAMPLING_16;
   HAL_UART_Init(&UartHandle3);
+}
+
+int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
+{
+	HAL_UART_Transmit(&UartHandle3, data, length, timeout);
+	return 0;
+}
+
+int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
+{
+	HAL_UART_Receive(&UartHandle3, data, length, timeout);
+	return 0;
+}
+
+int uart3_transmit_it(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Transmit_IT(&UartHandle3, data, length);
+	return 0;
+}
+
+int uart3_receive_it(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Receive_IT(&UartHandle3, data, length);
+	return 0;
+}
+
+struct uart_api uart3_api = {
+	.init = uart3_init,
+	.transmit = uart3_transmit,
+	.receive = uart3_receive,
+	.transmit_it = uart3_transmit_it,
+	.receive_it = uart3_receive_it,
+};
+
+uint32_t uart3_binding(void)
+{
+	return (uint32_t)&uart3_api; //¶Ç»¼¦ì¸m 4Byte
 }

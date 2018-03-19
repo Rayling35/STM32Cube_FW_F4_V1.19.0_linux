@@ -25,6 +25,7 @@
 #ifdef UART6_IT
 void USART6_IRQHandler(void);
 #endif
-void uart6_init(void);
+
+uint32_t uart6_binding(void);
 
 #endif

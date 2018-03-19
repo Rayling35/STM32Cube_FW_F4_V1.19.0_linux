@@ -1,4 +1,6 @@
+#include <string.h>
 #include "uart_string_transmit_parser.h"
+
 
 struct transmit_table_pzem004t {
 	uint8_t head;
@@ -20,12 +22,12 @@ static void pzem_voltage_fill(struct transmit_table_pzem004t *fill)
 	fill->data5 = 0x00;
 	fill->sum = (fill->head + fill->data1 + fill->data2 + fill->data3 + fill->data4 + fill->data5) & 0xFF;
 }
-uint16_t transmit_pzem_voltage(UART_HandleTypeDef *huart)
+uint16_t transmit_pzem_voltage(struct uart_api *huart)
 {
 	uint8_t buffer[7];
 	
 	pzem_voltage_fill((struct transmit_table_pzem004t*)buffer);
-	HAL_UART_Transmit(huart, buffer, 7, 1000);
+	huart->transmit(buffer, 7, 1000);
 	return 0;
 }
 
@@ -46,14 +48,14 @@ static void at_uart_fill(struct transmit_table_at_uart *fill)
 	fill->data2 = 0;
 	fill->data3 = 1;
 }
-uint16_t transmit_at_uart(UART_HandleTypeDef *huart)
+uint16_t transmit_at_uart(struct uart_api *huart)
 {
 	struct transmit_table_at_uart at;
 	char buffer[] = "\0";
 	
 	at_uart_fill(&at);
 	sprintf(buffer, "%s+%s=%d,%d,%d", at.command, at.device, at.data1, at.data2, at.data3);
-	HAL_UART_Transmit(huart, (uint8_t*)buffer, strlen(buffer), 1000);
+	huart->transmit((uint8_t*)buffer, strlen(buffer), 1000);
 	return 0;
 }
 

@@ -46,8 +46,8 @@ void _UARTxPrintf_MspDeInit(void)
 
 void uart_printf_init(void)
 {
-	_UARTxPrintf_MspDeInit();
-	_UARTxPrintf_MspInit();
+  _UARTxPrintf_MspDeInit();
+  _UARTxPrintf_MspInit();
   UartHandlePrintf.Instance          = USARTxPrintf;
   UartHandlePrintf.Init.BaudRate     = 115200;
   UartHandlePrintf.Init.WordLength   = UART_WORDLENGTH_8B;
