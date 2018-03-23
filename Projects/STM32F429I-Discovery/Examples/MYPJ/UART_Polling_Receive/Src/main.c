@@ -4,6 +4,7 @@
 #include "api_define.h"
 #include "uart3.h"
 #include "uart6.h"
+#include "uart7.h"
 
 
 uint8_t myBuffer[] = "\nGPIO_INT\r\n";
@@ -46,17 +47,21 @@ int main(void)
 	uart_printf_init();
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
+	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	uart3->init();
 	uart6->init();
+	uart7->init();
   EXTILine0_Config();
 	
   while(1) {
-		uart3->receive(Buffer, 1, 5000);
-		uart6->receive(Buffer, 1, 5000);
+		uart3->receive(Buffer, 1, 1000);
+		uart6->receive(Buffer, 1, 1000);
+		uart7->receive(Buffer, 1, 1000);
 		if(Buffer[0] == 0x66) {
 			printf("Hi fff\r\n");
-			uart3->transmit(ok, 2, 5000);
-			uart6->transmit(ok, 2, 5000);
+			uart3->transmit(ok, 2, 1000);
+			uart6->transmit(ok, 2, 1000);
+			uart7->transmit(ok, 2, 1000);
 		}		
   }
 }

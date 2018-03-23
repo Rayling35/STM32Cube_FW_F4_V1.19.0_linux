@@ -4,6 +4,7 @@
 #include "stm32f4xx_hal.h"
 
 struct uart_api {
+	UART_HandleTypeDef *handle;
 	void (*init)(void);
 	int (*transmit)(uint8_t *data, uint16_t length, uint32_t timeout);
 	int (*receive)(uint8_t *data, uint16_t length, uint32_t timeout);
