@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, UART3_IT, UART6_IT, UART7_IT, UART7_DMA</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>
@@ -416,6 +416,16 @@
               <FileName>uart7.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart7.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_callback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart_callback.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart7_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart7_dma.c</FilePath>
             </File>
           </Files>
         </Group>

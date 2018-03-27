@@ -2,7 +2,6 @@
 #include "api_define.h"
 
 
-#ifdef UART6_ENABLE
 static UART_HandleTypeDef UartHandle6;
 
 void _UART6_MspInit(void)
@@ -70,6 +69,7 @@ int uart6_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return 0;
 }
 
+#ifdef UART6_IT
 int uart6_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_IT(&UartHandle6, data, length);
@@ -82,13 +82,30 @@ int uart6_receive_it(uint8_t *data, uint16_t length)
 	return 0;
 }
 
+int uart6_transmit_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Transmit_DMA(&UartHandle6, data, length);
+	return 0;
+}
+
+int uart6_receive_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Receive_DMA(&UartHandle6, data, length);
+	return 0;
+}
+#endif
+
 struct uart_api uart6_api = {
 	.handle = &UartHandle6,
 	.init = uart6_init,
 	.transmit = uart6_transmit,
 	.receive = uart6_receive,
+	#ifdef UART6_IT
 	.transmit_it = uart6_transmit_it,
 	.receive_it = uart6_receive_it,
+	.transmit_dma = uart6_transmit_dma,
+	.receive_dma = uart6_receive_dma,
+	#endif
 };
 
 uint32_t uart6_binding(void)
@@ -102,4 +119,3 @@ void USART6_IRQHandler(void)
 	HAL_UART_IRQHandler(&UartHandle6);
 }
 #endif
-#endif //#ifdef UART6_ENABLE

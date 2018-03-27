@@ -2,7 +2,6 @@
 #include "api_define.h"
 
 
-#ifdef UART7_ENABLE
 static UART_HandleTypeDef UartHandle7;
 
 void _UART7_MspInit(void)
@@ -70,6 +69,7 @@ int uart7_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return 0;
 }
 
+#ifdef UART7_IT
 int uart7_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_IT(&UartHandle7, data, length);
@@ -82,13 +82,30 @@ int uart7_receive_it(uint8_t *data, uint16_t length)
 	return 0;
 }
 
+int uart7_transmit_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Transmit_DMA(&UartHandle7, data, length);
+	return 0;
+}
+
+int uart7_receive_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Receive_DMA(&UartHandle7, data, length);
+	return 0;
+}
+#endif
+
 struct uart_api uart7_api = {
 	.handle = &UartHandle7,
 	.init = uart7_init,
 	.transmit = uart7_transmit,
 	.receive = uart7_receive,
+	#ifdef UART7_IT
 	.transmit_it = uart7_transmit_it,
 	.receive_it = uart7_receive_it,
+	.transmit_dma = uart7_transmit_dma,
+	.receive_dma = uart7_receive_dma,
+	#endif
 };
 
 uint32_t uart7_binding(void)
@@ -102,4 +119,3 @@ void UART7_IRQHandler(void)
 	HAL_UART_IRQHandler(&UartHandle7);
 }
 #endif
-#endif //#ifdef UART7_ENABLE

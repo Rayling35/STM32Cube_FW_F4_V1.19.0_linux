@@ -10,6 +10,8 @@ struct uart_api {
 	int (*receive)(uint8_t *data, uint16_t length, uint32_t timeout);
 	int (*transmit_it)(uint8_t *data, uint16_t length);
 	int (*receive_it)(uint8_t *data, uint16_t length);
+	int (*transmit_dma)(uint8_t *data, uint16_t length);
+	int (*receive_dma)(uint8_t *data, uint16_t length);
 };
 
 #endif

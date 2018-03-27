@@ -3,8 +3,6 @@
 
 #include "stm32f4xx_hal.h"
 
-
-#ifdef UART6_ENABLE
 #define USART6_CLK_ENABLE()              __HAL_RCC_USART6_CLK_ENABLE()
 #define USART6_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
 #define USART6_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE() 
@@ -25,7 +23,6 @@ uint32_t uart6_binding(void);
 #ifdef UART6_IT
 void USART6_IRQHandler(void);
 #endif
-#endif //#ifdef UART6_ENABLE
 
 
-#endif //#ifndef __UART6_H
+#endif

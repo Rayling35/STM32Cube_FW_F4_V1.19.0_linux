@@ -2,7 +2,6 @@
 #include "api_define.h"
 
 
-#ifdef UART3_ENABLE
 static UART_HandleTypeDef UartHandle3;
 
 void _UART3_MspInit(void)
@@ -70,6 +69,7 @@ int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return 0;
 }
 
+#ifdef UART3_IT
 int uart3_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_IT(&UartHandle3, data, length);
@@ -82,13 +82,30 @@ int uart3_receive_it(uint8_t *data, uint16_t length)
 	return 0;
 }
 
+int uart3_transmit_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Transmit_DMA(&UartHandle3, data, length);
+	return 0;
+}
+
+int uart3_receive_dma(uint8_t *data, uint16_t length)
+{
+	HAL_UART_Receive_DMA(&UartHandle3, data, length);
+	return 0;
+}
+#endif
+
 struct uart_api uart3_api = {
 	.handle = &UartHandle3,
 	.init = uart3_init,
 	.transmit = uart3_transmit,
 	.receive = uart3_receive,
+	#ifdef UART3_IT
 	.transmit_it = uart3_transmit_it,
 	.receive_it = uart3_receive_it,
+	.transmit_dma = uart3_transmit_dma,
+	.receive_dma = uart3_receive_dma,
+	#endif
 };
 
 uint32_t uart3_binding(void)
@@ -102,4 +119,3 @@ void USART3_IRQHandler(void)
 	HAL_UART_IRQHandler(&UartHandle3);
 }
 #endif
-#endif //#ifdef UART3_ENABLE

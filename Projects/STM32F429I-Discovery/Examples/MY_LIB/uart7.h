@@ -3,8 +3,6 @@
 
 #include "stm32f4xx_hal.h"
 
-
-#ifdef UART7_ENABLE
 #define UART7_CLK_ENABLE()              __HAL_RCC_UART7_CLK_ENABLE()
 #define UART7_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOF_CLK_ENABLE()
 #define UART7_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOF_CLK_ENABLE()
@@ -25,7 +23,6 @@ uint32_t uart7_binding(void);
 #ifdef UART7_IT
 void UART7_IRQHandler(void);
 #endif
-#endif //#ifdef UART7_ENABLE
 
 
-#endif //#ifndef __UART7_H
+#endif
