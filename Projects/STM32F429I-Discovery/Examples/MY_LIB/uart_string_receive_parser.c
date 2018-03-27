@@ -2,24 +2,6 @@
 #include "uart_string_receive_parser.h"
 
 
-static uint16_t uart_string_out(struct uart_api *huart, uint8_t first_char, uint8_t *buffer, uint16_t length, uint32_t timeout)
-{
-	uint32_t tickstart = 0U;
-	
-	memset((char*)buffer, '\0', length);
-	while(1) {
-		huart->receive(&buffer[0], 1, 1);
-		if(buffer[0] == first_char) {
-			huart->receive(&buffer[1], length, timeout);
-			return 0;
-		}
-		tickstart++;
-		if(tickstart > timeout) {
-			return 1;
-		}
-	}
-}
-
 static uint16_t buffer_cmp(uint8_t *buffer1, uint8_t *buffer2, uint16_t length)
 {
 	while(length--) {
@@ -32,14 +14,30 @@ static uint16_t buffer_cmp(uint8_t *buffer1, uint8_t *buffer2, uint16_t length)
 	return 0;
 }
 
-/*---------------------------------------------------------------------------------------------------*/
-uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length)
+static uint16_t uart_string_out(struct uart_api *huart, char *name, uint8_t *buffer, uint16_t length, uint32_t timeout)
 {
-	char *name = "GPABCD";
 	uint32_t tickstart = 0U;
 	
+	memset((char*)buffer, '\0', length);
 	while(1) {
-		if(uart_string_out(huart, 'G', buffer, length, 100)) {
+		huart->receive(&buffer[0], 1, 1);
+		if(buffer[0] == name[0]) {
+			huart->receive(&buffer[1], length, timeout);
+			return 0;
+		}
+		tickstart++;
+		if(tickstart > timeout) {
+			return 1;
+		}
+	}
+}
+
+uint16_t head_checkout(struct uart_api *huart, char *name, uint8_t *buffer, uint16_t length)
+{
+	uint16_t tickstart = 0U;
+	
+	while(1) {
+		if(uart_string_out(huart, name, buffer, length, 100)) {
 			printf("Timeout!\r\n");
 			tickstart++;
 			if(tickstart > 5) {
@@ -47,7 +45,7 @@ uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length)
 			}
 			continue;
 		}
-		if(buffer_cmp((uint8_t*)name, buffer, strlen(name))) {
+		if(buffer_cmp((uint8_t *)name, buffer, strlen(name))) {
 			printf("No compare!\r\n");
 			continue;
 		}
@@ -55,10 +53,11 @@ uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length)
 	}
 }
 
-uint16_t a_parser(uint8_t *buffer)
+
+struct_gps_data* a_parser(uint8_t *buffer)
 {
-	uint16_t length = strlen((char*)buffer);
-	struct receive_table_a *fmt = (struct receive_table_a*)buffer;
+	uint16_t length = strlen((char *)buffer);
+	struct_gps_data *fmt = (struct_gps_data *)buffer;
 	
 	*fmt->o1 = '\0'; *fmt->o2 = '\0'; *fmt->o3 = '\0'; *fmt->o4 = '\0';
 	*fmt->o5 = '\0'; *fmt->o6 = '\0'; *fmt->o7 = '\0'; *fmt->o8 = '\0';
@@ -71,35 +70,13 @@ uint16_t a_parser(uint8_t *buffer)
 	printf("Data6 = %s\r\n", fmt->data6);
 	printf("END = %s\r\n", fmt->end);	
 	
-	return 0;
-}
-/*---------------------------------------------------------------------------------------------------*/
-uint16_t receive_cmd_version(struct uart_api *huart, uint8_t *buffer, uint16_t length)
-{
-	char name[] = {0x0A,0x41};
-	uint32_t tickstart = 0U;
-	
-	while(1) {
-		if(uart_string_out(huart, 0x0A, buffer, length, 100)) {
-			printf("Timeout!\r\n");
-			tickstart++;
-			if(tickstart > 5) {
-				return 1;
-			}
-			continue;
-		}
-		if(buffer_cmp((uint8_t*)name, buffer, strlen(name))) {
-			printf("No compare!\r\n");
-			continue;
-		}
-		return 0;
-	}
+	return (struct_gps_data *)buffer;
 }
 
-uint16_t version_parser(uint8_t *buffer)
+struct_version_data* version_parser(uint8_t *buffer)
 {
-	uint16_t length = strlen((char*)buffer);
-	struct receive_table_version *fmt = (struct receive_table_version*)buffer;
+	uint16_t length = strlen((char *)buffer);
+	struct_version_data *fmt = (struct_version_data *)buffer;
 	
 	printf("START = %02X\r\n", *fmt->start);
 	printf("CMD = 0x%02x\r\n", *fmt->cmd);
@@ -109,6 +86,5 @@ uint16_t version_parser(uint8_t *buffer)
 	printf("Region = %.5s\r\n", fmt->region);
 	printf("END = %02X %02X\r\n", *fmt->end, *(fmt->end+1));
 	
-	return 0;
+	return (struct_version_data *)buffer;
 }
-/*---------------------------------------------------------------------------------------------------*/

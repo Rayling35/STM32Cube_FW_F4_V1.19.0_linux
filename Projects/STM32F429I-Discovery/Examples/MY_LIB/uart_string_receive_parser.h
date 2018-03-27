@@ -5,7 +5,7 @@
 #include "api_define.h"
 
 
-struct receive_table_a {
+typedef struct {
 	char start[6]; //GPABCD
 	char o1[1];    //,
 	char data1[1]; //T
@@ -22,9 +22,10 @@ struct receive_table_a {
 	char o7[1];    //,
 	char end[3];   //Off
 	char o8[1];    //,
-};//GPABCD,T,QW,Y22,56tr,S23_E,KK2341,Off
+}struct_gps_data;
+//GPABCD,T,QW,Y22,56tr,S23_E,KK2341,Off
 
-struct receive_table_version {
+typedef struct {
 	char start[1];  //0x0A
 	char cmd[1];    //0x41
 	char ver1[4];   //R001
@@ -32,12 +33,14 @@ struct receive_table_version {
 	char ver2[3];   //A01
 	char region[5]; //5D1F7
 	char end[2];    //0x0D 0x0A
-};//0A 41 52 30 30 31 61 31 62 32 63 33 64 34 65 35 66 36 67 37 68 38 41 30 31 35 44 31 46 37 0D 0A
+}struct_version_data;
+//0A 41 52 30 30 31 61 31 62 32 63 33 64 34 65 35 66 36 67 37 68 38 41 30 31 35 44 31 46 37 0D 0A
+//->.AR001a1b2c3d4e5f6g7h8A015D1F7.
 
 
-uint16_t receive_cmd_a(struct uart_api *huart, uint8_t *buffer, uint16_t length);
-uint16_t a_parser(uint8_t *buffer);
-uint16_t receive_cmd_version(struct uart_api *huart, uint8_t *buffer, uint16_t length);
-uint16_t version_parser(uint8_t *buffer);
+uint16_t head_checkout(struct uart_api *huart, char *name, uint8_t *buffer, uint16_t length);
+struct_gps_data* a_parser(uint8_t *buffer);
+struct_version_data* version_parser(uint8_t *buffer);
+
 
 #endif

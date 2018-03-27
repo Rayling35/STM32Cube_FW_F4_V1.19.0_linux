@@ -22,20 +22,16 @@ int main(void)
 #endif
 	uart->init();
 
-	uint8_t rx_buffer[50];
+	uint8_t buffer[50];
 	
-	struct receive_table_a *a;
-	a = (struct receive_table_a*)rx_buffer;
-	receive_cmd_a(uart, rx_buffer, 50);
-	a_parser(rx_buffer);
-	
-	printf("START = %s\r\n", a->start);
+	head_checkout(uart, "GPABCD", buffer, 50);
+	struct_gps_data *gps = a_parser(buffer);
+	printf("START = %s\r\n", gps->start);
 
 /*---------------------------------------------------------*/
-	struct receive_table_version *version;
-	version = (struct receive_table_version*)rx_buffer;
-	receive_cmd_version(uart, rx_buffer, 50);
-	version_parser(rx_buffer);
+	char name[] = {0x0A,0x41};
+	head_checkout(uart, name, buffer, 50);
+	struct_version_data *version = version_parser(buffer);
 	
 	char region[5];
 	int re;
