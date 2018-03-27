@@ -417,6 +417,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart7.c</FilePath>
             </File>
+            <File>
+              <FileName>uart_callback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart_callback.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
