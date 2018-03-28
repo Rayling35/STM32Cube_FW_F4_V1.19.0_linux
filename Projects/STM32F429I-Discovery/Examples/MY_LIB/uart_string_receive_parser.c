@@ -18,7 +18,7 @@ static uint16_t uart_string_out(struct uart_api *huart, char *name, uint8_t *buf
 {
 	uint32_t tickstart = 0U;
 	
-	memset((char*)buffer, '\0', length);
+	memset((char *)buffer, '\0', length);
 	while(1) {
 		huart->receive(&buffer[0], 1, 1);
 		if(buffer[0] == name[0]) {

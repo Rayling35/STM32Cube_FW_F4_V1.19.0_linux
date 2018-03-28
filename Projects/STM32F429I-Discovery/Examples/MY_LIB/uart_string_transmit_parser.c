@@ -13,6 +13,6 @@ int uart_at_command(struct uart_api *huart, struct_uat_data *data)
 	char buffer[] = "\0";
 	
 	sprintf(buffer, "%s+%s=%d,%d,%d", data->command, data->device, data->data1, data->data2, data->data3);
-	huart->transmit((uint8_t*)buffer, strlen(buffer), 1000);
+	huart->transmit((uint8_t *)buffer, strlen(buffer), 1000);
 	return 0;
 }

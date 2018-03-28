@@ -25,7 +25,7 @@ typedef struct {
 //GPABCD,T,QW,Y22,56tr,S23_E,KK2341,Off
 
 
-void uart_callback_string_parser(void); //for HAL_UART_RxCpltCallback() use in uart_callback.c
+void uart_callback_string_parser(void); //for HAL_UART_RxCpltCallback() in uart_callback.c
 struct_ble_cmd_data* get_data(void);
 
 

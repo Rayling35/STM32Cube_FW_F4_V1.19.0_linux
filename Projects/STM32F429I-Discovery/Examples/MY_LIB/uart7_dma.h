@@ -14,8 +14,9 @@
 #define DMA_UART7_RX_IRQHandler         DMA1_Stream3_IRQHandler
 
 
-void _DMA_UART7_MspInit(void);
-void _DMA_UART7_MspDeInit(void);
+void _DMA_UART7_MspInit(void); //for HAL_UART_MspInit() in uart_callback.c
+void _DMA_UART7_MspDeInit(void); //for HAL_UART_MspDeInit() in uart_callback.c
+
 void DMA_UART7_TX_IRQHandler(void);
 void DMA_UART7_RX_IRQHandler(void);
 
