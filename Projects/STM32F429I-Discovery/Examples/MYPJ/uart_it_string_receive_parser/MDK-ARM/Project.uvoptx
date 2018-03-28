@@ -281,8 +281,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\uart3.c</PathWithFileName>
-      <FilenameWithoutPath>uart3.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\uart7.c</PathWithFileName>
+      <FilenameWithoutPath>uart7.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -293,8 +293,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\uart6.c</PathWithFileName>
-      <FilenameWithoutPath>uart6.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\uart_callback.c</PathWithFileName>
+      <FilenameWithoutPath>uart_callback.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -305,8 +305,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\uart_string_receive_parser.c</PathWithFileName>
-      <FilenameWithoutPath>uart_string_receive_parser.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\uart_callback_string_parser.c</PathWithFileName>
+      <FilenameWithoutPath>uart_callback_string_parser.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

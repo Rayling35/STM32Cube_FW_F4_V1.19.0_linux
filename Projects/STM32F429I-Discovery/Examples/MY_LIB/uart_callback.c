@@ -4,20 +4,21 @@
 
 #ifdef UART3_IT
 #include "uart3.h"
-__IO FlagStatus uart3_rx_callbake_flag;
+__IO FlagStatus uart3_rx_callbake_flag = RESET;
 #endif
 
 #ifdef UART6_IT
 #include "uart6.h"
-__IO FlagStatus uart6_rx_callbake_flag;
+__IO FlagStatus uart6_rx_callbake_flag = RESET;
 #endif
 
 #ifdef UART7_IT
 #include "uart7.h"
+#include "uart_callback_string_parser.h"
 #ifdef UART7_DMA
 #include "uart7_dma.h"
 #endif
-__IO FlagStatus uart7_rx_callbake_flag;
+__IO FlagStatus uart7_rx_callbake_flag = RESET;
 #endif
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
@@ -61,6 +62,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	if(UartHandle == uart7->handle) {
 		uart7_rx_callbake_flag = RESET;
+		uart_callback_string_parser();
 	}
 	#endif
 }

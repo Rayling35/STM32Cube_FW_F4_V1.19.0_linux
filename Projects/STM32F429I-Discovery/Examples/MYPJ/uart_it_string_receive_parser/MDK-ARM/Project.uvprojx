@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, UART6</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, UART7_IT</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>
@@ -403,19 +403,19 @@
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
             </File>
             <File>
-              <FileName>uart3.c</FileName>
+              <FileName>uart7.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart3.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\uart7.c</FilePath>
             </File>
             <File>
-              <FileName>uart6.c</FileName>
+              <FileName>uart_callback.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart6.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\uart_callback.c</FilePath>
             </File>
             <File>
-              <FileName>uart_string_receive_parser.c</FileName>
+              <FileName>uart_callback_string_parser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart_string_receive_parser.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\uart_callback_string_parser.c</FilePath>
             </File>
           </Files>
         </Group>
