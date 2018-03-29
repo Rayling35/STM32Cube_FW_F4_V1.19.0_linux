@@ -5,6 +5,7 @@
 #include "uart7.h"
 
 
+#ifdef IT_CALLBACK_PARSER
 uint8_t uart_callback_string_byte;
 uint8_t buffer_flag;
 
@@ -36,3 +37,4 @@ struct_ble_cmd_data* get_data(void)
 	}
 	return NULL;
 }
+#endif

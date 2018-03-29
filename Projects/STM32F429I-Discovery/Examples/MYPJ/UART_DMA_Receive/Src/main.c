@@ -8,9 +8,6 @@
 #include "uart_callback.h"
 
 
-uint8_t RxData3;
-uint8_t RxData6;
-uint8_t RxData7;
 uint8_t buffer3[10];
 uint8_t buffer6[10];
 uint8_t buffer7[10];
@@ -35,13 +32,21 @@ static void EXTILine0_Config(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-  if(GPIO_Pin == GPIO_PIN_0) {
+	if(GPIO_Pin == GPIO_PIN_0) {
+		#ifdef UART3_IT
+		struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 		uart3->transmit_it(buffer3, 10);
+		#endif
+		
+		#ifdef UART6_IT
+		struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 		uart6->transmit_it(buffer6, 10);
+		#endif
+		
+		#ifdef UART7_IT
+		struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 		uart7->transmit_dma(buffer7, 10);
+		#endif
   }
 }
 
@@ -54,26 +59,38 @@ int main(void)
 {
 	system_initialization();
 	uart_printf_init();
-	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-	uart3->init();
-	uart6->init();
-	uart7->init();
 	EXTILine0_Config();
 	
+	#ifdef UART3_IT
+	uint8_t RxData3;
+	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
+	uart3->init();
 	uart3->receive_it(&RxData3, 1);
-	uart6->receive_it(&RxData6, 1);
-	uart7->receive_dma(&RxData7, 1);
 	uart3_rx_callbake_flag = SET;
-	uart6_rx_callbake_flag = SET;
-	uart7_rx_callbake_flag = SET;
-	
 	uint16_t u3 = 0;
+	#endif
+	
+	#ifdef UART6_IT
+	uint8_t RxData6;
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
+	uart6->init();
+	uart6->receive_it(&RxData6, 1);
+	uart6_rx_callbake_flag = SET;
 	uint16_t u6 = 0;
+	#endif
+	
+	#ifdef UART7_IT
+	uint8_t RxData7;
+	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
+	uart7->init();
+	uart7->receive_dma(&RxData7, 1);
+	uart7_rx_callbake_flag = SET;
 	uint16_t u7 = 0;
+	#endif
+	
 	
 	while(1) {
+		#ifdef UART3_IT
 		if(uart3_rx_callbake_flag == RESET) {
 			buffer3[u3] = RxData3;
 			u3++;
@@ -83,7 +100,9 @@ int main(void)
 			uart3->receive_it(&RxData3, 1);
 			uart3_rx_callbake_flag = SET;
 		}
+		#endif
 		
+		#ifdef UART6_IT
 		if(uart6_rx_callbake_flag == RESET) {
 			buffer6[u6] = RxData6;
 			u6++;
@@ -93,7 +112,9 @@ int main(void)
 			uart6->receive_it(&RxData6, 1);
 			uart6_rx_callbake_flag = SET;
 		}
+		#endif
 		
+		#ifdef UART7_IT
 		if(uart7_rx_callbake_flag == RESET) {
 			buffer7[u7] = RxData7;
 			u7++;
@@ -103,5 +124,6 @@ int main(void)
 			uart7->receive_dma(&RxData7, 1);
 			uart7_rx_callbake_flag = SET;
 		}
+		#endif
 	}
 }

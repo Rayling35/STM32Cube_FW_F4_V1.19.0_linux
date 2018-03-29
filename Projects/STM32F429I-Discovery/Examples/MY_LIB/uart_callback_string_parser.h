@@ -26,6 +26,7 @@ typedef struct {
 
 
 void uart_callback_string_parser(void); //for HAL_UART_RxCpltCallback() in uart_callback.c
+
 struct_ble_cmd_data* get_data(void);
 
 
