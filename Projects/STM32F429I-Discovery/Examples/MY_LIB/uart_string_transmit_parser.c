@@ -2,13 +2,13 @@
 #include "uart_string_transmit_parser.h"
 
 
-int pzem_data_send(struct uart_api *huart, struct_pzem004t_data *data)
+int pzem_data_send(struct uart_api *huart, pzem004t_data_t *data)
 {
 	huart->transmit((uint8_t *)data, 7, 1000);
 	return 0;
 }
 
-int uart_at_command(struct uart_api *huart, struct_uat_data *data)
+int uart_at_command(struct uart_api *huart, uat_data_t *data)
 {
 	char buffer[] = "\0";
 	

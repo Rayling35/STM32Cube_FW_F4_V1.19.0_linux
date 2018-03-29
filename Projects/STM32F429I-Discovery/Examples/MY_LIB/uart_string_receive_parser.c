@@ -54,10 +54,10 @@ uint16_t head_checkout(struct uart_api *huart, char *name, uint8_t *buffer, uint
 }
 
 
-struct_gps_data* a_parser(uint8_t *buffer)
+gps_data_t* a_parser(uint8_t *buffer)
 {
 	uint16_t length = strlen((char *)buffer);
-	struct_gps_data *fmt = (struct_gps_data *)buffer;
+	gps_data_t *fmt = (gps_data_t *)buffer;
 	
 	*fmt->o1 = '\0'; *fmt->o2 = '\0'; *fmt->o3 = '\0'; *fmt->o4 = '\0';
 	*fmt->o5 = '\0'; *fmt->o6 = '\0'; *fmt->o7 = '\0'; *fmt->o8 = '\0';
@@ -70,13 +70,13 @@ struct_gps_data* a_parser(uint8_t *buffer)
 	printf("Data6 = %s\r\n", fmt->data6);
 	printf("END = %s\r\n", fmt->end);	
 	
-	return (struct_gps_data *)buffer;
+	return (gps_data_t *)buffer;
 }
 
-struct_version_data* version_parser(uint8_t *buffer)
+version_data_t* version_parser(uint8_t *buffer)
 {
 	uint16_t length = strlen((char *)buffer);
-	struct_version_data *fmt = (struct_version_data *)buffer;
+	version_data_t *fmt = (version_data_t *)buffer;
 	
 	printf("START = %02X\r\n", *fmt->start);
 	printf("CMD = 0x%02x\r\n", *fmt->cmd);
@@ -86,5 +86,5 @@ struct_version_data* version_parser(uint8_t *buffer)
 	printf("Region = %.5s\r\n", fmt->region);
 	printf("END = %02X %02X\r\n", *fmt->end, *(fmt->end+1));
 	
-	return (struct_version_data *)buffer;
+	return (version_data_t *)buffer;
 }

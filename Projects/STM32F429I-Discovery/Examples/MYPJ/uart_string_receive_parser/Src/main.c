@@ -25,13 +25,13 @@ int main(void)
 	uint8_t buffer[50];
 	
 	head_checkout(uart, "GPABCD", buffer, 50);
-	struct_gps_data *gps = a_parser(buffer);
+	gps_data_t *gps = a_parser(buffer);
 	printf("START = %s\r\n", gps->start);
 
 /*---------------------------------------------------------*/
 	char name[] = {0x0A,0x41};
 	head_checkout(uart, name, buffer, 50);
-	struct_version_data *version = version_parser(buffer);
+	version_data_t *version = version_parser(buffer);
 	
 	char region[5];
 	int re;

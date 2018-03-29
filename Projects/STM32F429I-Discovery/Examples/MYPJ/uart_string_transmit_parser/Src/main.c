@@ -21,7 +21,7 @@ int main(void)
 #endif
 	uart->init();
 	
-	struct_pzem004t_data pzem004t = {
+	pzem004t_data_t pzem004t = {
 	.head = 0xB0,
 	.data1 = 0xC0,
 	.data2 = 0xA8,
@@ -35,7 +35,7 @@ int main(void)
 	pzem_data_send(uart, &pzem004t);
 	
 	/*---------------------------------------------------------*/
-	struct_uat_data uat = {
+	uat_data_t uat = {
 	.command = "AT",
 	.device = "UART",
 	.data1 = 115200,

@@ -13,7 +13,7 @@ typedef struct {
 	uint8_t data4;
 	uint8_t data5;
 	uint8_t sum;
-}struct_pzem004t_data;
+}pzem004t_data_t;
 
 typedef struct {
 	char *command;
@@ -21,11 +21,11 @@ typedef struct {
 	int data1;
 	int data2;
 	int data3;
-}struct_uat_data;
+}uat_data_t;
 
 
-int pzem_data_send(struct uart_api *huart, struct_pzem004t_data *data);
-int uart_at_command(struct uart_api *huart, struct_uat_data *data);
+int pzem_data_send(struct uart_api *huart, pzem004t_data_t *data);
+int uart_at_command(struct uart_api *huart, uat_data_t *data);
 
 
 #endif
