@@ -65,7 +65,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	if(UartHandle == uart7->handle) {
 		uart7_rx_callbake_flag = RESET;
 		#ifdef IT_CALLBACK_PARSER
-		uart_callback_string_parser();
+		uart_callback_parser();
 		#endif
 	}
 	#endif

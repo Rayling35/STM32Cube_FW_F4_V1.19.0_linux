@@ -52,11 +52,11 @@ int main(void)
 	uart7->receive_it(&uart_callback_string_byte, 1);
 	uart7_rx_callbake_flag = SET;
 	
-	struct_ble_cmd_data *cmd_data;
+	uint8_t *string_checkout;
 	while(1) {
-		cmd_data = get_data();
-		if(cmd_data != NULL) {
-			printf("%s\r\n", cmd_data->start);
+		string_checkout = uart_callback_string_out();
+		if(string_checkout != NULL) {
+			printf("%s", string_checkout);
 		}
 	}
 }
