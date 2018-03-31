@@ -4,7 +4,6 @@
 #include "api_define.h"
 
 
-#ifdef UART7_DMA
 static DMA_HandleTypeDef HdmaHandle_uart7_tx;
 static DMA_HandleTypeDef HdmaHandle_uart7_rx;
 
@@ -73,4 +72,3 @@ void DMA_UART7_RX_IRQHandler(void)
 {
 	HAL_DMA_IRQHandler(&HdmaHandle_uart7_rx);
 }
-#endif

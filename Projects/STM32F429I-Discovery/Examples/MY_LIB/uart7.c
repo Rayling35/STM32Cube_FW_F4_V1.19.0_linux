@@ -81,7 +81,7 @@ int uart7_receive_it(uint8_t *data, uint16_t length)
 	HAL_UART_Receive_IT(&UartHandle7, data, length);
 	return 0;
 }
-
+#ifdef UART7_DMA
 int uart7_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_DMA(&UartHandle7, data, length);
@@ -94,6 +94,7 @@ int uart7_receive_dma(uint8_t *data, uint16_t length)
 	return 0;
 }
 #endif
+#endif
 
 struct uart_api uart7_api = {
 	.handle = &UartHandle7,
@@ -103,8 +104,10 @@ struct uart_api uart7_api = {
 	#ifdef UART7_IT
 	.transmit_it = uart7_transmit_it,
 	.receive_it = uart7_receive_it,
+	#ifdef UART7_DMA
 	.transmit_dma = uart7_transmit_dma,
 	.receive_dma = uart7_receive_dma,
+	#endif
 	#endif
 };
 

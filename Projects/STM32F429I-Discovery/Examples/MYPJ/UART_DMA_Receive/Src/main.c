@@ -2,8 +2,6 @@
 #include "uart_printf.h"
 #include "main.h"
 #include "api_define.h"
-#include "uart3.h"
-#include "uart6.h"
 #include "uart7.h"
 #include "uart_callback.h"
 
@@ -43,7 +41,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		uart6->transmit_it(buffer6, 10);
 		#endif
 		
-		#ifdef UART7_IT
+		#ifdef UART7_DMA
 		struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 		uart7->transmit_dma(buffer7, 10);
 		#endif
@@ -79,7 +77,7 @@ int main(void)
 	uint16_t u6 = 0;
 	#endif
 	
-	#ifdef UART7_IT
+	#ifdef UART7_DMA
 	uint8_t RxData7;
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	uart7->init();
@@ -114,7 +112,7 @@ int main(void)
 		}
 		#endif
 		
-		#ifdef UART7_IT
+		#ifdef UART7_DMA
 		if(uart7_rx_callbake_flag == RESET) {
 			buffer7[u7] = RxData7;
 			u7++;
