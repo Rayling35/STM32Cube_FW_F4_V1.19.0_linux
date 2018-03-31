@@ -5,24 +5,24 @@
 #include "uart7.h"
 
 
-#ifdef IT_CALLBACK_PARSER
 uint8_t uart_callback_string_byte; //extern data
+
+static uint8_t string_out[string_out_buffer_length];
 static uint8_t buffer_flag;
-static uint8_t string_out[100];
 
 void uart_callback_parser(void)
 {
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-	static uint8_t buffer[100];
+	static uint8_t buffer[string_out_buffer_length];
 	static uint16_t i = 0;
 	
 	buffer[i] = uart_callback_string_byte;
 	i++;
-	if(uart_callback_string_byte == 0x0A) {
-		memcpy((char *)&string_out, buffer, 100);
-		memset((char *)buffer, '\0', 100);
-		i = 0;
+	if(uart_callback_string_byte == 0x0A  &&  buffer[i-2] == 0x0D) {
+		memset((char *)string_out, '\0', string_out_buffer_length);
+		memcpy((char *)string_out, buffer, i-1);
 		buffer_flag = 1;
+		i = 0;
 	}
 	uart7->receive_it(&uart_callback_string_byte, 1);
 	uart7_rx_callbake_flag = SET;
@@ -36,4 +36,3 @@ uint8_t* uart_callback_string_out(void)
 	}
 	return NULL;
 }
-#endif
