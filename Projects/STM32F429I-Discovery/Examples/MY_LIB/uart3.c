@@ -47,7 +47,7 @@ void uart3_init(void)
 	_UART3_MspDeInit();
 	_UART3_MspInit();
 	UartHandle3.Instance          = USART3;
-	UartHandle3.Init.BaudRate     = BAUDRATE;
+	UartHandle3.Init.BaudRate     = USART3_BAUDRATE;
 	UartHandle3.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle3.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle3.Init.Parity       = UART_PARITY_NONE;

@@ -47,7 +47,7 @@ void uart6_init(void)
 	_UART6_MspDeInit();
 	_UART6_MspInit();
 	UartHandle6.Instance          = USART6;
-	UartHandle6.Init.BaudRate     = BAUDRATE;
+	UartHandle6.Init.BaudRate     = USART6_BAUDRATE;
 	UartHandle6.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle6.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle6.Init.Parity       = UART_PARITY_NONE;

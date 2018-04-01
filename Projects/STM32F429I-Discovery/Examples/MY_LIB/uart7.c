@@ -47,7 +47,7 @@ void uart7_init(void)
 	_UART7_MspDeInit();
 	_UART7_MspInit();
 	UartHandle7.Instance          = UART7;
-	UartHandle7.Init.BaudRate     = BAUDRATE;
+	UartHandle7.Init.BaudRate     = UART7_BAUDRATE;
 	UartHandle7.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle7.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle7.Init.Parity       = UART_PARITY_NONE;

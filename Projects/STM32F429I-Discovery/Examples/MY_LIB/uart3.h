@@ -10,7 +10,7 @@
 #define USART3_FORCE_RESET()             __HAL_RCC_USART3_FORCE_RESET()
 #define USART3_RELEASE_RESET()           __HAL_RCC_USART3_RELEASE_RESET()
 
-#define BAUDRATE                         115200
+#define USART3_BAUDRATE                  115200
 
 #define USART3_TX_PIN                    GPIO_PIN_8
 #define USART3_TX_GPIO_PORT              GPIOD  
