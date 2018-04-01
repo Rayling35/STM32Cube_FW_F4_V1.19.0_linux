@@ -10,6 +10,8 @@
 #define USART6_FORCE_RESET()             __HAL_RCC_USART6_FORCE_RESET()
 #define USART6_RELEASE_RESET()           __HAL_RCC_USART6_RELEASE_RESET()
 
+#define BAUDRATE                         115200
+
 #define USART6_TX_PIN                    GPIO_PIN_6
 #define USART6_TX_GPIO_PORT              GPIOC  
 #define USART6_TX_AF                     GPIO_AF8_USART6
@@ -18,7 +20,7 @@
 #define USART6_RX_GPIO_PORT              GPIOC 
 #define USART6_RX_AF                     GPIO_AF8_USART6
 
-uint32_t uart6_binding(void);
+struct uart_api* uart6_binding(void);
 
 #ifdef UART6_IT
 void USART6_IRQHandler(void);

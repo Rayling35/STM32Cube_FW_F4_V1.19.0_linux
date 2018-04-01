@@ -2,6 +2,8 @@
 #include "uart_printf.h"
 #include "main.h"
 #include "api_define.h"
+#include "uart3.h"
+#include "uart6.h"
 #include "uart7.h"
 #include "uart_callback.h"
 
@@ -31,14 +33,14 @@ static void EXTILine0_Config(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if(GPIO_Pin == GPIO_PIN_0) {
-		#ifdef UART3_IT
+		#ifdef UART3_DMA
 		struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-		uart3->transmit_it(buffer3, 10);
+		uart3->transmit_dma(buffer3, 10);
 		#endif
 		
-		#ifdef UART6_IT
+		#ifdef UART6_DMA
 		struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-		uart6->transmit_it(buffer6, 10);
+		uart6->transmit_dma(buffer6, 10);
 		#endif
 		
 		#ifdef UART7_DMA
@@ -59,20 +61,20 @@ int main(void)
 	uart_printf_init();
 	EXTILine0_Config();
 	
-	#ifdef UART3_IT
+	#ifdef UART3_DMA
 	uint8_t RxData3;
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	uart3->init();
-	uart3->receive_it(&RxData3, 1);
+	uart3->receive_dma(&RxData3, 1);
 	uart3_rx_callbake_flag = SET;
 	uint16_t u3 = 0;
 	#endif
 	
-	#ifdef UART6_IT
+	#ifdef UART6_DMA
 	uint8_t RxData6;
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	uart6->init();
-	uart6->receive_it(&RxData6, 1);
+	uart6->receive_dma(&RxData6, 1);
 	uart6_rx_callbake_flag = SET;
 	uint16_t u6 = 0;
 	#endif
@@ -88,26 +90,26 @@ int main(void)
 	
 	
 	while(1) {
-		#ifdef UART3_IT
+		#ifdef UART3_DMA
 		if(uart3_rx_callbake_flag == RESET) {
 			buffer3[u3] = RxData3;
 			u3++;
 			if(u3 >= 10) {
 				u3 = 0;
 			}
-			uart3->receive_it(&RxData3, 1);
+			uart3->receive_dma(&RxData3, 1);
 			uart3_rx_callbake_flag = SET;
 		}
 		#endif
 		
-		#ifdef UART6_IT
+		#ifdef UART6_DMA
 		if(uart6_rx_callbake_flag == RESET) {
 			buffer6[u6] = RxData6;
 			u6++;
 			if(u6 >= 10) {
 				u6 = 0;
 			}
-			uart6->receive_it(&RxData6, 1);
+			uart6->receive_dma(&RxData6, 1);
 			uart6_rx_callbake_flag = SET;
 		}
 		#endif

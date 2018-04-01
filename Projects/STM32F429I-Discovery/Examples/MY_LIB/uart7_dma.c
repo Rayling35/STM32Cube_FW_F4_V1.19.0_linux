@@ -4,6 +4,7 @@
 #include "api_define.h"
 
 
+#ifdef UART7_DMA
 static DMA_HandleTypeDef HdmaHandle_uart7_tx;
 static DMA_HandleTypeDef HdmaHandle_uart7_rx;
 
@@ -37,7 +38,7 @@ void _DMA_UART7_MspInit(void)
 	HdmaHandle_uart7_rx.Init.MemInc              = DMA_MINC_ENABLE;
 	HdmaHandle_uart7_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
 	HdmaHandle_uart7_rx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
-	HdmaHandle_uart7_rx.Init.Mode                = DMA_CIRCULAR;
+	HdmaHandle_uart7_rx.Init.Mode                = DMA_NORMAL;
 	HdmaHandle_uart7_rx.Init.Priority            = DMA_PRIORITY_LOW;
 	HdmaHandle_uart7_rx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
 	HdmaHandle_uart7_rx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
@@ -72,3 +73,4 @@ void DMA_UART7_RX_IRQHandler(void)
 {
 	HAL_DMA_IRQHandler(&HdmaHandle_uart7_rx);
 }
+#endif

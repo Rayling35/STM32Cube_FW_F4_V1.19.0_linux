@@ -47,7 +47,7 @@ void uart7_init(void)
 	_UART7_MspDeInit();
 	_UART7_MspInit();
 	UartHandle7.Instance          = UART7;
-	UartHandle7.Init.BaudRate     = 115200;
+	UartHandle7.Init.BaudRate     = BAUDRATE;
 	UartHandle7.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle7.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle7.Init.Parity       = UART_PARITY_NONE;
@@ -111,9 +111,9 @@ struct uart_api uart7_api = {
 	#endif
 };
 
-uint32_t uart7_binding(void)
+struct uart_api* uart7_binding(void)
 {
-	return (uint32_t)&uart7_api; //傳遞位置 4Byte
+	return &uart7_api; //傳遞位置
 }
 
 #ifdef UART7_IT

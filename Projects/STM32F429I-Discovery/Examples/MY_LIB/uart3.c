@@ -47,7 +47,7 @@ void uart3_init(void)
 	_UART3_MspDeInit();
 	_UART3_MspInit();
 	UartHandle3.Instance          = USART3;
-	UartHandle3.Init.BaudRate     = 115200;
+	UartHandle3.Init.BaudRate     = BAUDRATE;
 	UartHandle3.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle3.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle3.Init.Parity       = UART_PARITY_NONE;
@@ -81,7 +81,7 @@ int uart3_receive_it(uint8_t *data, uint16_t length)
 	HAL_UART_Receive_IT(&UartHandle3, data, length);
 	return 0;
 }
-
+#ifdef UART3_DMA
 int uart3_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_DMA(&UartHandle3, data, length);
@@ -94,6 +94,7 @@ int uart3_receive_dma(uint8_t *data, uint16_t length)
 	return 0;
 }
 #endif
+#endif
 
 struct uart_api uart3_api = {
 	.handle = &UartHandle3,
@@ -103,14 +104,16 @@ struct uart_api uart3_api = {
 	#ifdef UART3_IT
 	.transmit_it = uart3_transmit_it,
 	.receive_it = uart3_receive_it,
+	#ifdef UART3_DMA
 	.transmit_dma = uart3_transmit_dma,
 	.receive_dma = uart3_receive_dma,
 	#endif
+	#endif
 };
 
-uint32_t uart3_binding(void)
+struct uart_api* uart3_binding(void)
 {
-	return (uint32_t)&uart3_api; //傳遞位置 4Byte
+	return &uart3_api; //傳遞位置
 }
 
 #ifdef UART3_IT

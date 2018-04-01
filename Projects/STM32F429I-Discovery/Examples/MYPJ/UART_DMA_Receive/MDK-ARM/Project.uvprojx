@@ -15,7 +15,7 @@
         <TargetCommonOption>
           <Device>STM32F429ZITx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.11.0</PackID>
+          <PackID>Keil.STM32F4xx_DFP.2.9.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000-0x2002FFFF) IRAM2(0x10000000-0x1000FFFF) IROM(0x8000000-0x81FFFFF) CLOCK(25000000) CPUTYPE("Cortex-M4") FPU2</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, UART7_IT, UART7_DMA</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, UART3_IT, UART3_DMA, UART6_IT, UART6_DMA</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>
@@ -403,19 +403,39 @@
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
             </File>
             <File>
+              <FileName>uart3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart3.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart3_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart3_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart6.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart6_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart6_dma.c</FilePath>
+            </File>
+            <File>
               <FileName>uart7.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart7.c</FilePath>
             </File>
             <File>
-              <FileName>uart_callback.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart_callback.c</FilePath>
-            </File>
-            <File>
               <FileName>uart7_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart7_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_callback.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\uart_callback.c</FilePath>
             </File>
           </Files>
         </Group>

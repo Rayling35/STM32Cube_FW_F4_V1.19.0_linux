@@ -47,7 +47,7 @@ void uart6_init(void)
 	_UART6_MspDeInit();
 	_UART6_MspInit();
 	UartHandle6.Instance          = USART6;
-	UartHandle6.Init.BaudRate     = 115200;
+	UartHandle6.Init.BaudRate     = BAUDRATE;
 	UartHandle6.Init.WordLength   = UART_WORDLENGTH_8B;
 	UartHandle6.Init.StopBits     = UART_STOPBITS_1;
 	UartHandle6.Init.Parity       = UART_PARITY_NONE;
@@ -81,7 +81,7 @@ int uart6_receive_it(uint8_t *data, uint16_t length)
 	HAL_UART_Receive_IT(&UartHandle6, data, length);
 	return 0;
 }
-
+#ifdef UART6_DMA
 int uart6_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_UART_Transmit_DMA(&UartHandle6, data, length);
@@ -94,6 +94,7 @@ int uart6_receive_dma(uint8_t *data, uint16_t length)
 	return 0;
 }
 #endif
+#endif
 
 struct uart_api uart6_api = {
 	.handle = &UartHandle6,
@@ -103,14 +104,16 @@ struct uart_api uart6_api = {
 	#ifdef UART6_IT
 	.transmit_it = uart6_transmit_it,
 	.receive_it = uart6_receive_it,
+	#ifdef UART6_DMA
 	.transmit_dma = uart6_transmit_dma,
 	.receive_dma = uart6_receive_dma,
 	#endif
+	#endif
 };
 
-uint32_t uart6_binding(void)
+struct uart_api* uart6_binding(void)
 {
-	return (uint32_t)&uart6_api; //傳遞位置 4Byte
+	return &uart6_api; //傳遞位置
 }
 
 #ifdef UART6_IT

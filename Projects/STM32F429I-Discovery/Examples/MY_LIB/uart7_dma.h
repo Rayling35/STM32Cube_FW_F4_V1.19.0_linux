@@ -1,6 +1,7 @@
 #ifndef __UART7_DMA_H
 #define __UART7_DMA_H
 
+#ifdef UART7_DMA
 #define DMA_UART7_CLK_ENABLE()          __HAL_RCC_DMA1_CLK_ENABLE()
 
 #define DMA_UART7_TX_STREAM             DMA1_Stream1
@@ -19,5 +20,6 @@ void _DMA_UART7_MspDeInit(void); //for HAL_UART_MspDeInit() use in uart_callback
 
 void DMA_UART7_TX_IRQHandler(void);
 void DMA_UART7_RX_IRQHandler(void);
+#endif
 
 #endif
