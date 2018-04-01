@@ -2,6 +2,8 @@
 #include "uart_callback_string_parser.h"
 #include "api_define.h"
 #include "uart_callback.h"
+#include "uart3.h"
+#include "uart6.h"
 #include "uart7.h"
 
 
@@ -12,7 +14,13 @@ static uint8_t buffer_flag;
 
 void uart_callback_parser(void)
 {
+#ifdef UART3_IT
+	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
+#elif UART6_IT
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
+#elif UART7_IT
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
+#endif
 	static uint8_t buffer[string_out_buffer_length];
 	static uint16_t i = 0;
 	
@@ -24,8 +32,16 @@ void uart_callback_parser(void)
 		buffer_flag = 1;
 		i = 0;
 	}
+#ifdef UART3_IT
+	uart3->receive_it(&uart_callback_string_byte, 1);
+	uart3_rx_callbake_flag = SET;
+#elif UART6_IT
+	uart6->receive_it(&uart_callback_string_byte, 1);
+	uart6_rx_callbake_flag = SET;
+#elif UART7_IT
 	uart7->receive_it(&uart_callback_string_byte, 1);
 	uart7_rx_callbake_flag = SET;
+#endif
 }
 
 uint8_t* uart_callback_string_out(void)
