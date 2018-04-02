@@ -6,7 +6,7 @@
 #include "uart6.h"
 #include "uart7.h"
 #include "uart_callback.h"
-#include "uart_callback_string_parser.h"
+#include "uart_it_callback_parser.h"
 
 
 uint8_t buffer3[10] = "Hi buf 3\r\n";
@@ -61,7 +61,7 @@ int main(void)
 #ifdef UART3_IT
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	uart3->init();
-	uart3->receive_it(&uart_callback_string_byte, 1);
+	uart3->receive_it(&uart_it_callback_string_byte, 1);
 	uart3_rx_callbake_flag = SET;
 #elif UART6_IT
 	struct uart_api *uart6 = (struct uart_api *)uart7_binding();
@@ -75,10 +75,9 @@ int main(void)
 	uart7_rx_callbake_flag = SET;
 #endif
 	
-	uint8_t *string_checkout;
+	uint8_t string_checkout[it_string_out_buffer_length];
 	while(1) {
-		string_checkout = uart_callback_string_out();
-		if(string_checkout != NULL) {
+		if(uart_it_callback_string_out(string_checkout) != NULL) {
 			printf("%s", string_checkout);
 		}
 	}

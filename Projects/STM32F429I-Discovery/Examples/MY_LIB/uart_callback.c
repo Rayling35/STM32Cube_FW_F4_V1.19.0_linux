@@ -6,9 +6,12 @@
 	#include "uart3.h"
 	#ifdef UART3_DMA
 		#include "uart3_dma.h"
+		#ifdef DMA_CALLBACK_PARSER_U3
+			#include "uart_dma_callback_parser.h"
+		#endif
 	#endif
-	#ifdef IT_CALLBACK_PARSER
-		#include "uart_callback_string_parser.h"
+	#ifdef IT_CALLBACK_PARSER_U3
+		#include "uart_it_callback_parser.h"
 	#endif
 __IO FlagStatus uart3_rx_callbake_flag = RESET;
 #endif
@@ -17,9 +20,12 @@ __IO FlagStatus uart3_rx_callbake_flag = RESET;
 	#include "uart6.h"
 	#ifdef UART6_DMA
 		#include "uart6_dma.h"
+		#ifdef DMA_CALLBACK_PARSER_U6
+			#include "uart_dma_callback_parser.h"
+		#endif
 	#endif
-	#ifdef IT_CALLBACK_PARSER
-		#include "uart_callback_string_parser.h"
+	#ifdef IT_CALLBACK_PARSER_U6
+		#include "uart_it_callback_parser.h"
 	#endif
 	__IO FlagStatus uart6_rx_callbake_flag = RESET;
 #endif
@@ -28,9 +34,12 @@ __IO FlagStatus uart3_rx_callbake_flag = RESET;
 	#include "uart7.h"
 	#ifdef UART7_DMA
 		#include "uart7_dma.h"
+		#ifdef DMA_CALLBACK_PARSER_U7
+			#include "uart_dma_callback_parser.h"
+		#endif
 	#endif
-	#ifdef IT_CALLBACK_PARSER
-		#include "uart_callback_string_parser.h"
+	#ifdef IT_CALLBACK_PARSER_U7
+		#include "uart_it_callback_parser.h"
 	#endif
 	__IO FlagStatus uart7_rx_callbake_flag = RESET;
 #endif
@@ -62,8 +71,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	if(UartHandle == uart3->handle) {
 		uart3_rx_callbake_flag = RESET;
-		#ifdef IT_CALLBACK_PARSER
-		uart_callback_parser();
+		#ifdef IT_CALLBACK_PARSER_U3
+		uart_it_callback_parser();
+		#endif
+		#ifdef DMA_CALLBACK_PARSER_U3
+		uart_dma1_callback_parser();
 		#endif
 	}
 	#endif
@@ -72,8 +84,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	if(UartHandle == uart6->handle) {
 		uart6_rx_callbake_flag = RESET;
-		#ifdef IT_CALLBACK_PARSER
-		uart_callback_parser();
+		#ifdef IT_CALLBACK_PARSER_U6
+		uart_it_callback_parser();
+		#endif
+		#ifdef DMA_CALLBACK_PARSER_U6
+		uart_dma2_callback_parser();
 		#endif
 	}
 	#endif
@@ -82,8 +97,11 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	if(UartHandle == uart7->handle) {
 		uart7_rx_callbake_flag = RESET;
-		#ifdef IT_CALLBACK_PARSER
-		uart_callback_parser();
+		#ifdef IT_CALLBACK_PARSER_U7
+		uart_it_callback_parser();
+		#endif
+		#ifdef DMA_CALLBACK_PARSER_U7
+		uart_dma3_callback_parser();
 		#endif
 	}
 	#endif

@@ -21,7 +21,7 @@ void _DMA_UART7_MspInit(void)
 	HdmaHandle_uart7_tx.Init.MemInc              = DMA_MINC_ENABLE;
 	HdmaHandle_uart7_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
 	HdmaHandle_uart7_tx.Init.MemDataAlignment    = DMA_MDATAALIGN_BYTE;
-	HdmaHandle_uart7_tx.Init.Mode                = DMA_NORMAL;
+	HdmaHandle_uart7_tx.Init.Mode                = DMA_CIRCULAR;
 	HdmaHandle_uart7_tx.Init.Priority            = DMA_PRIORITY_LOW;
 	HdmaHandle_uart7_tx.Init.FIFOMode            = DMA_FIFOMODE_DISABLE;
 	HdmaHandle_uart7_tx.Init.FIFOThreshold       = DMA_FIFO_THRESHOLD_FULL;
