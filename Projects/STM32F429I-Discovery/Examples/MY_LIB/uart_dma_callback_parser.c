@@ -7,7 +7,7 @@ uint8_t uart_dma1_callback_string_byte; //extern data
 static uint8_t string1_out[dma1_string_out_buffer_length];
 static uint8_t buffer1_flag = 0;
 
-void uart_dma1_callback_parser(void)
+void uart_dma1_callback_parser(struct uart_api *uart)
 {
 	static uint8_t buffer[dma1_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -20,18 +20,14 @@ void uart_dma1_callback_parser(void)
 		buffer1_flag = 1;
 		i = 0;
 	}
+	uart->receive_it(&uart_dma1_callback_string_byte, 1);
 }
 
-int uart_dma1_callback_string_out(uint8_t *out)
+uint8_t* uart_dma1_callback_string_out(void)
 {
 	if(buffer1_flag) {
 		buffer1_flag = 0;
-		memcpy((char *)out, string1_out, dma1_string_out_buffer_length);
-		if(buffer1_flag) {
-			return 1;
-		}else {
-			return 0;
-		}
+		return string1_out;
 	}
 	return NULL;
 }
@@ -42,7 +38,7 @@ uint8_t uart_dma2_callback_string_byte; //extern data
 static uint8_t string2_out[dma2_string_out_buffer_length];
 static uint8_t buffer2_flag = 0;
 
-void uart_dma2_callback_parser(void)
+void uart_dma2_callback_parser(struct uart_api *uart)
 {
 	static uint8_t buffer[dma2_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -55,18 +51,14 @@ void uart_dma2_callback_parser(void)
 		buffer2_flag = 1;
 		i = 0;
 	}
+	uart->receive_it(&uart_dma2_callback_string_byte, 1);
 }
 
-int uart_dma2_callback_string_out(uint8_t *out)
+uint8_t* uart_dma2_callback_string_out(void)
 {
 	if(buffer2_flag) {
 		buffer2_flag = 0;
-		memcpy((char *)out, string2_out, dma2_string_out_buffer_length);
-		if(buffer2_flag) {
-			return 1;
-		}else {
-			return 0;
-		}
+		return string2_out;
 	}
 	return NULL;
 }
@@ -77,7 +69,7 @@ uint8_t uart_dma3_callback_string_byte; //extern data
 static uint8_t string3_out[dma3_string_out_buffer_length];
 static uint8_t buffer3_flag = 0;
 
-void uart_dma3_callback_parser(void)
+void uart_dma3_callback_parser(struct uart_api *uart)
 {
 	static uint8_t buffer[dma3_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -90,18 +82,14 @@ void uart_dma3_callback_parser(void)
 		buffer3_flag = 1;
 		i = 0;
 	}
+	uart->receive_it(&uart_dma3_callback_string_byte, 1);
 }
 
-int uart_dma3_callback_string_out(uint8_t *out)
+uint8_t* uart_dma3_callback_string_out(void)
 {
 	if(buffer3_flag) {
 		buffer3_flag = 0;
-		memcpy((char *)out, string3_out, dma3_string_out_buffer_length);
-		if(buffer3_flag) {
-			return 1;
-		}else {
-			return 0;
-		}
+		return string3_out;
 	}
 	return NULL;
 }

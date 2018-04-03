@@ -75,7 +75,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 		uart_it_callback_parser();
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U3
-		uart_dma1_callback_parser();
+		uart_dma1_callback_parser(uart3);
 		#endif
 	}
 	#endif
@@ -88,7 +88,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 		uart_it_callback_parser();
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U6
-		uart_dma2_callback_parser();
+		uart_dma2_callback_parser(uart6);
 		#endif
 	}
 	#endif
@@ -101,7 +101,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 		uart_it_callback_parser();
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U7
-		uart_dma3_callback_parser();
+		uart_dma3_callback_parser(uart7);
 		#endif
 	}
 	#endif

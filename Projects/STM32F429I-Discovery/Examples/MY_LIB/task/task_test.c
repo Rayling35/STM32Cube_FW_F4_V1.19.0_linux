@@ -7,13 +7,13 @@
 static void uart_test(const void *argument)
 {
 	struct uart_api *uart7 = (struct uart_api *)argument;
+	uint8_t *dma3_string_checkout;
 	
 	uart7->receive_dma(&uart_dma3_callback_string_byte, 1);
-	
-	uint8_t dma_string_checkout[dma3_string_out_buffer_length];
 	while(1) {
-		if(uart_dma3_callback_string_out(dma_string_checkout) != NULL) {
-			printf("%s\r\n", dma_string_checkout);
+		dma3_string_checkout = uart_dma3_callback_string_out();
+		if(dma3_string_checkout != NULL) {
+			printf("%s\r\n", dma3_string_checkout);
 		}
 	}
 }
