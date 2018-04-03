@@ -10,10 +10,10 @@
 			#include "uart_dma_callback_parser.h"
 		#endif
 	#endif
+	
 	#ifdef IT_CALLBACK_PARSER_U3
 		#include "uart_it_callback_parser.h"
 	#endif
-__IO FlagStatus uart3_rx_callbake_flag = RESET;
 #endif
 
 #ifdef UART6_IT
@@ -24,10 +24,10 @@ __IO FlagStatus uart3_rx_callbake_flag = RESET;
 			#include "uart_dma_callback_parser.h"
 		#endif
 	#endif
+	
 	#ifdef IT_CALLBACK_PARSER_U6
 		#include "uart_it_callback_parser.h"
 	#endif
-	__IO FlagStatus uart6_rx_callbake_flag = RESET;
 #endif
 
 #ifdef UART7_IT
@@ -38,10 +38,10 @@ __IO FlagStatus uart3_rx_callbake_flag = RESET;
 			#include "uart_dma_callback_parser.h"
 		#endif
 	#endif
+	
 	#ifdef IT_CALLBACK_PARSER_U7
 		#include "uart_it_callback_parser.h"
 	#endif
-	__IO FlagStatus uart7_rx_callbake_flag = RESET;
 #endif
 
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
@@ -70,9 +70,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	#ifdef UART3_IT
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	if(UartHandle == uart3->handle) {
-		uart3_rx_callbake_flag = RESET;
 		#ifdef IT_CALLBACK_PARSER_U3
-		uart_it_callback_parser();
+		uart_it_callback_parser(uart3);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U3
 		uart_dma1_callback_parser(uart3);
@@ -83,9 +82,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	#ifdef UART6_IT
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	if(UartHandle == uart6->handle) {
-		uart6_rx_callbake_flag = RESET;
 		#ifdef IT_CALLBACK_PARSER_U6
-		uart_it_callback_parser();
+		uart_it_callback_parser(uart6);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U6
 		uart_dma2_callback_parser(uart6);
@@ -96,9 +94,8 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	#ifdef UART7_IT
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	if(UartHandle == uart7->handle) {
-		uart7_rx_callbake_flag = RESET;
 		#ifdef IT_CALLBACK_PARSER_U7
-		uart_it_callback_parser();
+		uart_it_callback_parser(uart7);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U7
 		uart_dma3_callback_parser(uart7);
