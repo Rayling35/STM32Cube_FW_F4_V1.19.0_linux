@@ -64,21 +64,23 @@ int main(void)
 	uart3->receive_it(&uart_it_callback_string_byte, 1);
 	uart3_rx_callbake_flag = SET;
 #elif UART6_IT
-	struct uart_api *uart6 = (struct uart_api *)uart7_binding();
+	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	uart6->init();
-	uart6->receive_it(&uart_callback_string_byte, 1);
+	uart6->receive_it(&uart_it_callback_string_byte, 1);
 	uart6_rx_callbake_flag = SET;
 #elif UART7_IT
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	uart7->init();
-	uart7->receive_it(&uart_callback_string_byte, 1);
+	uart7->receive_it(&uart_it_callback_string_byte, 1);
 	uart7_rx_callbake_flag = SET;
 #endif
 	
-	uint8_t string_checkout[it_string_out_buffer_length];
+	uint8_t *string_checkout;
+	
 	while(1) {
-		if(uart_it_callback_string_out(string_checkout) != NULL) {
-			printf("%s", string_checkout);
+		string_checkout = uart_it_callback_string_out();
+		if(string_checkout != NULL) {
+			printf("%s\r\n", string_checkout);
 		}
 	}
 }

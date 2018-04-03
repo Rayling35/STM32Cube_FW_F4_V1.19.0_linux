@@ -8,7 +8,7 @@ extern uint8_t uart_it_callback_string_byte; //for uart->receive_it() use betwee
 void uart_it_callback_parser(void);          //for HAL_UART_RxCpltCallback() use in uart_callback.c
 
 #define it_string_out_buffer_length 100
-int uart_it_callback_string_out(uint8_t *out);
+uint8_t* uart_it_callback_string_out(void);
 //Note: The length of once received packet cannot exceed 150 bytes
 
 

@@ -44,16 +44,11 @@ void uart_it_callback_parser(void)
 #endif
 }
 
-int uart_it_callback_string_out(uint8_t *out)
+uint8_t* uart_it_callback_string_out(void)
 {
 	if(buffer_flag) {
 		buffer_flag = 0;
-		memcpy((char *)out, string_out, it_string_out_buffer_length);
-		if(buffer_flag) {
-			return 1;
-		}else {
-			return 0;
-		}
+		return string_out;
 	}
 	return NULL;
 }
