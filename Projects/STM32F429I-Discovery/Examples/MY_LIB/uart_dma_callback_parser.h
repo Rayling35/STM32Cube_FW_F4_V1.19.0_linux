@@ -1,7 +1,6 @@
 #ifndef __UART_DMA_CALLBACK_PARSER_H
 #define __UART_DMA_CALLBACK_PARSER_H
 
-#include "stm32f4xx_hal.h"
 #include "api_define.h"
 
 

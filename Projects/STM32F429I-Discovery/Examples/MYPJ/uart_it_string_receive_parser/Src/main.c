@@ -36,10 +36,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		#ifdef UART3_IT
 		struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 		uart3->transmit_it(buffer3, 10);
-		#elif UART6_IT
+		#endif
+		#ifdef UART6_IT
 		struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 		uart6->transmit_it(buffer6, 10);
-		#elif UART7_IT
+		#endif
+		#ifdef UART7_IT
 		struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 		uart7->transmit_it(buffer7, 10);
 		#endif
@@ -60,23 +62,40 @@ int main(void)
 	#ifdef UART3_IT
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	uart3->init();
-	uart3->receive_it(&uart_it_callback_string_byte, 1);
-	#elif UART6_IT
+	uart3->receive_it(&uart_it1_callback_string_byte, 1);
+	uint8_t *uart3_string_checkout;	
+	#endif
+	#ifdef UART6_IT
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	uart6->init();
-	uart6->receive_it(&uart_it_callback_string_byte, 1);
-	#elif UART7_IT
+	uart6->receive_it(&uart_it2_callback_string_byte, 1);
+	uint8_t *uart6_string_checkout;	
+	#endif
+	#ifdef UART7_IT
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	uart7->init();
-	uart7->receive_it(&uart_it_callback_string_byte, 1);
+	uart7->receive_it(&uart_it3_callback_string_byte, 1);
+	uint8_t *uart7_string_checkout;	
 	#endif
-	
-	uint8_t *string_checkout;
-	
+		
 	while(1) {
-		string_checkout = uart_it_callback_string_out();
-		if(string_checkout != NULL) {
-			printf("%s\r\n", string_checkout);
+		#ifdef UART3_IT
+		uart3_string_checkout = uart_it1_callback_string_out();
+		if(uart3_string_checkout != NULL) {
+			printf("uart3:%s\r\n", uart3_string_checkout);
 		}
+		#endif
+		#ifdef UART6_IT
+		uart6_string_checkout = uart_it2_callback_string_out();
+		if(uart6_string_checkout != NULL) {
+			printf("uart6:%s\r\n", uart6_string_checkout);
+		}
+		#endif
+		#ifdef UART7_IT
+		uart7_string_checkout = uart_it3_callback_string_out();
+		if(uart7_string_checkout != NULL) {
+			printf("uart7:%s\r\n", uart7_string_checkout);
+		}
+		#endif
 	}
 }
