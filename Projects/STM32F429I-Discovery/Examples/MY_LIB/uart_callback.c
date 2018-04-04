@@ -71,10 +71,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	if(UartHandle == uart3->handle) {
 		#ifdef IT_CALLBACK_PARSER_U3
-		uart_it_callback_parser(uart3);
+		UART3_IT_CALLBACK_PARSER(uart3);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U3
-		uart_dma1_callback_parser(uart3);
+		UART3_DMA_CALLBACK_PARSER(uart3);
 		#endif
 	}
 	#endif
@@ -83,10 +83,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	if(UartHandle == uart6->handle) {
 		#ifdef IT_CALLBACK_PARSER_U6
-		uart_it_callback_parser(uart6);
+		UART6_IT_CALLBACK_PARSER(uart6);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U6
-		uart_dma2_callback_parser(uart6);
+		UART6_DMA_CALLBACK_PARSER(uart6);
 		#endif
 	}
 	#endif
@@ -95,10 +95,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	if(UartHandle == uart7->handle) {
 		#ifdef IT_CALLBACK_PARSER_U7
-		uart_it_callback_parser(uart7);
+		UART7_IT_CALLBACK_PARSER(uart7);
 		#endif
 		#ifdef DMA_CALLBACK_PARSER_U7
-		uart_dma3_callback_parser(uart7);
+		UART7_DMA_CALLBACK_PARSER(uart7);
 		#endif
 	}
 	#endif
