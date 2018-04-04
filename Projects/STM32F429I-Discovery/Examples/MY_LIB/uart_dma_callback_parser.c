@@ -20,7 +20,7 @@ void uart_dma1_callback_parser(struct uart_api *uart)
 		buffer1_flag = 1;
 		i = 0;
 	}
-	uart->receive_it(&uart_dma1_callback_string_byte, 1);
+	uart->receive_dma(&uart_dma1_callback_string_byte, 1);
 }
 
 uint8_t* uart_dma1_callback_string_out(void)
@@ -51,7 +51,7 @@ void uart_dma2_callback_parser(struct uart_api *uart)
 		buffer2_flag = 1;
 		i = 0;
 	}
-	uart->receive_it(&uart_dma2_callback_string_byte, 1);
+	uart->receive_dma(&uart_dma2_callback_string_byte, 1);
 }
 
 uint8_t* uart_dma2_callback_string_out(void)
@@ -116,7 +116,7 @@ void uart_dma3_callback_parser(struct uart_api *uart)
 			count = 0;
 		}
 	}
-	uart->receive_it(&uart_dma3_callback_string_byte, 1);
+	uart->receive_dma(&uart_dma3_callback_string_byte, 1);
 }
 
 uint8_t* uart_dma3_callback_string_out(void)

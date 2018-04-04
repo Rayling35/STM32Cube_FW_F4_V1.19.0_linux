@@ -408,29 +408,14 @@
               <FilePath>..\..\..\MY_LIB\uart3.c</FilePath>
             </File>
             <File>
-              <FileName>uart3_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart3_dma.c</FilePath>
-            </File>
-            <File>
               <FileName>uart6.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart6.c</FilePath>
             </File>
             <File>
-              <FileName>uart6_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart6_dma.c</FilePath>
-            </File>
-            <File>
               <FileName>uart7.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart7.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart7_dma.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart7_dma.c</FilePath>
             </File>
             <File>
               <FileName>uart_callback.c</FileName>
