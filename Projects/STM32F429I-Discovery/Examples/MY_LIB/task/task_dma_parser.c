@@ -20,6 +20,6 @@ static void dma_uart_string_parser(const void *argument)
 
 void task_dma_parser(struct uart_api *uart)
 {
-	osThreadDef(dma_parser_id, dma_uart_string_parser, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE);
+	osThreadDef(dma_parser_id, dma_uart_string_parser, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 	osThreadCreate(osThread(dma_parser_id), uart);
 }

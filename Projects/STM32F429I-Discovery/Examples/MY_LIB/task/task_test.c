@@ -20,6 +20,6 @@ static void uart_test(const void *argument)
 
 void task_test(struct uart_api *uart)
 {
-	osThreadDef(test_id, uart_test, osPriorityBelowNormal, 0, configMINIMAL_STACK_SIZE);
+	osThreadDef(test_id, uart_test, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
 	osThreadCreate(osThread(test_id), uart);
 }
