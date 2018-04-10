@@ -13,7 +13,7 @@ static void dma_uart_string_parser(const void *argument)
 	while(1) {
 		dma2_string_checkout = uart_dma2_callback_string_out();
 		if(dma2_string_checkout != NULL) {
-			printf("%s", dma2_string_checkout);
+			printf("tdp:%s", dma2_string_checkout);
 		}
 	}
 }

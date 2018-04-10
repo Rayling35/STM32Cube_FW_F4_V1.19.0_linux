@@ -13,7 +13,7 @@ static void uart_test(const void *argument)
 	while(1) {
 		dma3_string_checkout = uart_dma3_callback_string_out();
 		if(dma3_string_checkout != NULL) {
-			printf("%s", dma3_string_checkout);
+			printf("tt:%s", dma3_string_checkout);
 		}
 	}
 }

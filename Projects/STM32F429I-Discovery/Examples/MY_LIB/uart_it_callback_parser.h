@@ -8,7 +8,7 @@
 extern uint8_t uart_it1_callback_string_byte;         //for uart->receive_it() use between this.c and main.c
 void uart_it1_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback() use in uart_callback.c
 
-#define it1_string_out_buffer_length 100     //0x0D 0x0A
+#define it1_string_out_buffer_length 5
 uint8_t* uart_it1_callback_string_out(void);
 
 

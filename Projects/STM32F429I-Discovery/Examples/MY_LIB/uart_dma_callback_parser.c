@@ -14,9 +14,9 @@ void uart_dma1_callback_parser(struct uart_api *uart)
 	
 	buffer[i] = uart_dma1_callback_string_byte;
 	i++;
-	if(uart_dma1_callback_string_byte == 0x0A  &&  buffer[i-2] == 0x0D) {
+	if(i >= dma1_string_out_buffer_length) {
 		memset((char *)string1_out, '\0', dma1_string_out_buffer_length);
-		memcpy((char *)string1_out, buffer, i-1);
+		memcpy((char *)string1_out, buffer, i);
 		buffer1_flag = 1;
 		i = 0;
 	}
@@ -47,7 +47,7 @@ void uart_dma2_callback_parser(struct uart_api *uart)
 	i++;
 	if(uart_dma2_callback_string_byte == 0x0A  &&  buffer[i-2] == 0x0D) {
 		memset((char *)string2_out, '\0', dma2_string_out_buffer_length);
-		memcpy((char *)string2_out, buffer, i-1);
+		memcpy((char *)string2_out, buffer, i);
 		buffer2_flag = 1;
 		i = 0;
 	}
@@ -85,28 +85,28 @@ void uart_dma3_callback_parser(struct uart_api *uart)
 			case 0:
 				buffer3_flag1 = 0;
 				memset((char *)*(string3_out+0), '\0', dma3_string_out_buffer_length);
-				memcpy((char *)*(string3_out+0), buffer, i-1);
+				memcpy((char *)*(string3_out+0), buffer, i);
 				buffer3_flag1 = 1;
 				i = 0;
 				break;
 			case 1:
 				buffer3_flag2 = 0;
 				memset((char *)*(string3_out+1), '\0', dma3_string_out_buffer_length);
-				memcpy((char *)*(string3_out+1), buffer, i-1);
+				memcpy((char *)*(string3_out+1), buffer, i);
 				buffer3_flag2 = 1;
 				i = 0;
 				break;
 			case 2:
 				buffer3_flag3 = 0;
 				memset((char *)*(string3_out+2), '\0', dma3_string_out_buffer_length);
-				memcpy((char *)*(string3_out+2), buffer, i-1);
+				memcpy((char *)*(string3_out+2), buffer, i);
 				buffer3_flag3 = 1;
 				i = 0;
 				break;
 			case 3:
 				buffer3_flag4 = 0;
 				memset((char *)*(string3_out+3), '\0', dma3_string_out_buffer_length);
-				memcpy((char *)*(string3_out+3), buffer, i-1);
+				memcpy((char *)*(string3_out+3), buffer, i);
 				buffer3_flag4 = 1;
 				i = 0;
 				break;
