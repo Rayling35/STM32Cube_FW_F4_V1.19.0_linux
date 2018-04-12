@@ -77,24 +77,24 @@ int main(void)
 	uart7->receive_it(&uart_it3_callback_string_byte, 1);
 	uint8_t *uart7_string_checkout;	
 	#endif
-		
+	
 	while(1) {
 		#ifdef UART3_IT
 		uart3_string_checkout = uart_it1_callback_string_out();
 		if(uart3_string_checkout != NULL) {
-			printf("uart3:%s", uart3_string_checkout);
+			printf("U3:%s", uart3_string_checkout);
 		}
 		#endif
 		#ifdef UART6_IT
 		uart6_string_checkout = uart_it2_callback_string_out();
 		if(uart6_string_checkout != NULL) {
-			printf("uart6:%s", uart6_string_checkout);
+			printf("U6:%s", uart6_string_checkout);
 		}
 		#endif
 		#ifdef UART7_IT
 		uart7_string_checkout = uart_it3_callback_string_out();
 		if(uart7_string_checkout != NULL) {
-			printf("uart7:%s", uart7_string_checkout);
+			printf("U7:%s", uart7_string_checkout);
 		}
 		#endif
 	}
