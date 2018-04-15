@@ -4,28 +4,26 @@
 #include "api_define.h"
 
 
-/* UART3 */
-extern uint8_t uart_it1_callback_string_byte;         //for uart->receive_it() use between this.c and main.c
-void uart_it1_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback() use in uart_callback.c
+#define SEL_UART3_IT_CALLBACK_PARSER(x)         uart_it_1_callback_parser(x)
+#define SEL_UART6_IT_CALLBACK_PARSER(x)         uart_it_2_callback_parser(x)
+#define SEL_UART7_IT_CALLBACK_PARSER(x)         uart_it_3_callback_parser(x)
 
-#define it1_string_out_buffer_length 1
-uint8_t* uart_it1_callback_string_out(void);
-
-
-/* UART6 */
-extern uint8_t uart_it2_callback_string_byte;         //for uart->receive_it() use between this.c and main.c
-void uart_it2_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback() use in uart_callback.c
-
-#define it2_string_out_buffer_length 100     //0x0D 0x0A
-uint8_t* uart_it2_callback_string_out(void);
+void uart_it_1_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
+void uart_it_2_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
+void uart_it_3_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
 
 
-/* UART7 */
-extern uint8_t uart_it3_callback_string_byte;         //for uart->receive_it() use between this.c and main.c
-void uart_it3_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback() use in uart_callback.c
+extern uint8_t uart_it_1_callback_string_byte; //for uart->receive_it() use between this.c and main.c
+#define it_1_string_out_buffer_length 1        //one byte
+uint8_t* uart_it_1_callback_string_out(void);
 
-#define it3_string_out_buffer_length 100     //0x0D 0x0A
-uint8_t* uart_it3_callback_string_out(void);
+extern uint8_t uart_it_2_callback_string_byte; //for uart->receive_it() use between this.c and main.c
+#define it_2_string_out_buffer_length 100      //0x0D 0x0A end
+uint8_t* uart_it_2_callback_string_out(void);
+
+extern uint8_t uart_it_3_callback_string_byte; //for uart->receive_it() use between this.c and main.c
+#define it_3_string_out_buffer_length 100      //0x0D 0x0A end
+uint8_t* uart_it_3_callback_string_out(void);
 
 
 #endif

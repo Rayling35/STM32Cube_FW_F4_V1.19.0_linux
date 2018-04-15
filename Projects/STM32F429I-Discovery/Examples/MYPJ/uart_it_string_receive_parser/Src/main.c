@@ -62,37 +62,37 @@ int main(void)
 	#ifdef UART3_IT
 	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
 	uart3->init();
-	uart3->receive_it(&uart_it1_callback_string_byte, 1);
+	uart3->receive_it(&uart_it_1_callback_string_byte, 1);
 	uint8_t *uart3_string_checkout;	
 	#endif
 	#ifdef UART6_IT
 	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
 	uart6->init();
-	uart6->receive_it(&uart_it2_callback_string_byte, 1);
+	uart6->receive_it(&uart_it_2_callback_string_byte, 1);
 	uint8_t *uart6_string_checkout;	
 	#endif
 	#ifdef UART7_IT
 	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
 	uart7->init();
-	uart7->receive_it(&uart_it3_callback_string_byte, 1);
+	uart7->receive_it(&uart_it_3_callback_string_byte, 1);
 	uint8_t *uart7_string_checkout;	
 	#endif
 	
 	while(1) {
 		#ifdef UART3_IT
-		uart3_string_checkout = uart_it1_callback_string_out();
+		uart3_string_checkout = uart_it_1_callback_string_out();
 		if(uart3_string_checkout != NULL) {
 			printf("U3:%s", uart3_string_checkout);
 		}
 		#endif
 		#ifdef UART6_IT
-		uart6_string_checkout = uart_it2_callback_string_out();
+		uart6_string_checkout = uart_it_2_callback_string_out();
 		if(uart6_string_checkout != NULL) {
 			printf("U6:%s", uart6_string_checkout);
 		}
 		#endif
 		#ifdef UART7_IT
-		uart7_string_checkout = uart_it3_callback_string_out();
+		uart7_string_checkout = uart_it_3_callback_string_out();
 		if(uart7_string_checkout != NULL) {
 			printf("U7:%s", uart7_string_checkout);
 		}
