@@ -7,7 +7,7 @@ uint8_t uart_it_1_callback_string_byte; //extern data
 static uint8_t string1_out[it_1_string_out_buffer_length];
 static uint8_t buffer1_flag = 0;
 
-void uart_it_1_callback_parser(struct uart_api *uart)
+void uart_it_1_callback_parser(UART_HandleTypeDef *UartHandle)
 {
 	static uint8_t buffer[it_1_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -20,7 +20,7 @@ void uart_it_1_callback_parser(struct uart_api *uart)
 		buffer1_flag = 1;
 		i = 0;
 	}
-	uart->receive_it(&uart_it_1_callback_string_byte, 1);
+	HAL_UART_Receive_IT(UartHandle, &uart_it_1_callback_string_byte, 1);
 }
 
 uint8_t* uart_it_1_callback_string_out(void)
@@ -38,7 +38,7 @@ uint8_t uart_it_2_callback_string_byte; //extern data
 static uint8_t string2_out[it_2_string_out_buffer_length];
 static uint8_t buffer2_flag = 0;
 
-void uart_it_2_callback_parser(struct uart_api *uart)
+void uart_it_2_callback_parser(UART_HandleTypeDef *UartHandle)
 {
 	static uint8_t buffer[it_2_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -51,7 +51,7 @@ void uart_it_2_callback_parser(struct uart_api *uart)
 		buffer2_flag = 1;
 		i = 0;
 	}
-	uart->receive_it(&uart_it_2_callback_string_byte, 1);
+	HAL_UART_Receive_IT(UartHandle, &uart_it_2_callback_string_byte, 1);
 }
 
 uint8_t* uart_it_2_callback_string_out(void)
@@ -72,7 +72,7 @@ static uint8_t buffer3_flag2 = 0;
 static uint8_t buffer3_flag3 = 0;
 static uint8_t buffer3_flag4 = 0;
 
-void uart_it_3_callback_parser(struct uart_api *uart)
+void uart_it_3_callback_parser(UART_HandleTypeDef *UartHandle)
 {
 	static uint8_t buffer[it_3_string_out_buffer_length];
 	static uint16_t i = 0;
@@ -116,7 +116,7 @@ void uart_it_3_callback_parser(struct uart_api *uart)
 			count = 0;
 		}
 	}
-	uart->receive_it(&uart_it_3_callback_string_byte, 1);
+	HAL_UART_Receive_IT(UartHandle, &uart_it_3_callback_string_byte, 1);
 }
 
 uint8_t* uart_it_3_callback_string_out(void)

@@ -4,7 +4,7 @@
 
 #define USART6_CLK_ENABLE()              __HAL_RCC_USART6_CLK_ENABLE()
 #define USART6_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
-#define USART6_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE() 
+#define USART6_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
 
 #define USART6_FORCE_RESET()             __HAL_RCC_USART6_FORCE_RESET()
 #define USART6_RELEASE_RESET()           __HAL_RCC_USART6_RELEASE_RESET()
@@ -12,18 +12,16 @@
 #define USART6_BAUDRATE                  115200
 
 #define USART6_TX_PIN                    GPIO_PIN_6
-#define USART6_TX_GPIO_PORT              GPIOC  
+#define USART6_TX_GPIO_PORT              GPIOC
 #define USART6_TX_AF                     GPIO_AF8_USART6
 
 #define USART6_RX_PIN                    GPIO_PIN_7
-#define USART6_RX_GPIO_PORT              GPIOC 
+#define USART6_RX_GPIO_PORT              GPIOC
 #define USART6_RX_AF                     GPIO_AF8_USART6
 
-struct uart_api* uart6_binding(void);
 
 #ifdef UART6_IT
 void USART6_IRQHandler(void);
-#endif
 
 #ifdef UART6_DMA
 #define DMA_UART6_CLK_ENABLE()          __HAL_RCC_DMA2_CLK_ENABLE()
@@ -38,13 +36,12 @@ void USART6_IRQHandler(void);
 #define DMA_UART6_TX_IRQHandler         DMA2_Stream6_IRQHandler
 #define DMA_UART6_RX_IRQHandler         DMA2_Stream1_IRQHandler
 
-
-void _DMA_UART6_MspInit(void); //for HAL_UART_MspInit() use in uart_callback.c
-void _DMA_UART6_MspDeInit(void); //for HAL_UART_MspDeInit() use in uart_callback.c
-
 void DMA_UART6_TX_IRQHandler(void);
 void DMA_UART6_RX_IRQHandler(void);
 #endif
+#endif
+
+struct uart_api* uart6_binding(void);
 
 
 #endif

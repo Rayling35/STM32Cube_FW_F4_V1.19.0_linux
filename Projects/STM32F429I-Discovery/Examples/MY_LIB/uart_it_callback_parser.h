@@ -1,16 +1,16 @@
 #ifndef __UART_IT_CALLBACK_PARSER_H
 #define __UART_IT_CALLBACK_PARSER_H
 
-#include "api_define.h"
+#include "stm32f4xx_hal.h"
 
 
 #define SEL_UART3_IT_CALLBACK_PARSER(x)         uart_it_1_callback_parser(x)
 #define SEL_UART6_IT_CALLBACK_PARSER(x)         uart_it_2_callback_parser(x)
 #define SEL_UART7_IT_CALLBACK_PARSER(x)         uart_it_3_callback_parser(x)
 
-void uart_it_1_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
-void uart_it_2_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
-void uart_it_3_callback_parser(struct uart_api *uart); //for HAL_UART_RxCpltCallback()
+void uart_it_1_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_RxCpltCallback()
+void uart_it_2_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_RxCpltCallback()
+void uart_it_3_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_RxCpltCallback()
 
 
 extern uint8_t uart_it_1_callback_string_byte; //for uart->receive_it() use between this.c and main.c
