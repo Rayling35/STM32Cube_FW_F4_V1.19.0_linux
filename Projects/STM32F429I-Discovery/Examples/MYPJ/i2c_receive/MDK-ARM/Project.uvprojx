@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, I2C1_IT, I2C1_DMA, I2C3_IT, I2C3_DMA</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>
@@ -404,6 +404,11 @@
               <FileName>uart_printf.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\i2c1.c</FilePath>
             </File>
             <File>
               <FileName>i2c3.c</FileName>
