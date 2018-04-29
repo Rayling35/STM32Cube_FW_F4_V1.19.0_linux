@@ -193,15 +193,15 @@ int uart7_receive_dma(uint8_t *data, uint16_t length)
 #endif
 
 struct uart_api uart7_api = {
-	.init = uart7_init,
-	.transmit = uart7_transmit,
-	.receive = uart7_receive,
+	.init         = uart7_init,
+	.transmit     = uart7_transmit,
+	.receive      = uart7_receive,
 	#ifdef UART7_IT
-	.transmit_it = uart7_transmit_it,
-	.receive_it = uart7_receive_it,
+	.transmit_it  = uart7_transmit_it,
+	.receive_it   = uart7_receive_it,
 	#ifdef UART7_DMA
 	.transmit_dma = uart7_transmit_dma,
-	.receive_dma = uart7_receive_dma,
+	.receive_dma  = uart7_receive_dma,
 	#endif
 	#endif
 };

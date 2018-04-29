@@ -193,15 +193,15 @@ int uart6_receive_dma(uint8_t *data, uint16_t length)
 #endif
 
 struct uart_api uart6_api = {
-	.init = uart6_init,
-	.transmit = uart6_transmit,
-	.receive = uart6_receive,
+	.init         = uart6_init,
+	.transmit     = uart6_transmit,
+	.receive      = uart6_receive,
 	#ifdef UART6_IT
-	.transmit_it = uart6_transmit_it,
-	.receive_it = uart6_receive_it,
+	.transmit_it  = uart6_transmit_it,
+	.receive_it   = uart6_receive_it,
 	#ifdef UART6_DMA
 	.transmit_dma = uart6_transmit_dma,
-	.receive_dma = uart6_receive_dma,
+	.receive_dma  = uart6_receive_dma,
 	#endif
 	#endif
 };

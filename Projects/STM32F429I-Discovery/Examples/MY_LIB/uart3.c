@@ -193,15 +193,15 @@ int uart3_receive_dma(uint8_t *data, uint16_t length)
 #endif
 
 struct uart_api uart3_api = {
-	.init = uart3_init,
-	.transmit = uart3_transmit,
-	.receive = uart3_receive,
+	.init         = uart3_init,
+	.transmit     = uart3_transmit,
+	.receive      = uart3_receive,
 	#ifdef UART3_IT
-	.transmit_it = uart3_transmit_it,
-	.receive_it = uart3_receive_it,
+	.transmit_it  = uart3_transmit_it,
+	.receive_it   = uart3_receive_it,
 	#ifdef UART3_DMA
 	.transmit_dma = uart3_transmit_dma,
-	.receive_dma = uart3_receive_dma,
+	.receive_dma  = uart3_receive_dma,
 	#endif
 	#endif
 };
