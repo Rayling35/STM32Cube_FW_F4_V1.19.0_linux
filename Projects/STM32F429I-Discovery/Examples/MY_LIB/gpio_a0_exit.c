@@ -8,9 +8,9 @@ void gpio_a0_exit_init(void)
 	
 	PA0_EXIT_CLK_ENABLE();
 	
-	GPIO_InitStruct.Pin = PA0_EXIT_PIN;
-	GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING; 
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pin   = PA0_EXIT_PIN;
+	GPIO_InitStruct.Mode  = GPIO_MODE_IT_RISING;
+	GPIO_InitStruct.Pull  = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
 	
 	HAL_GPIO_Init(PA0_EXIT_PORT, &GPIO_InitStruct);
@@ -21,5 +21,5 @@ void gpio_a0_exit_init(void)
 
 void PA0_INT_EXTIHandler(void)
 {
-  HAL_GPIO_EXTI_IRQHandler(PA0_EXIT_PIN);
+	HAL_GPIO_EXTI_IRQHandler(PA0_EXIT_PIN);
 }
