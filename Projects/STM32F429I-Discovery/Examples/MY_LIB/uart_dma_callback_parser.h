@@ -22,7 +22,7 @@ extern uint8_t uart_dma_2_callback_string_byte; //for uart->receive_dma() use be
 uint8_t* uart_dma_2_callback_string_out(void);
 
 extern uint8_t uart_dma_3_callback_string_byte; //for uart->receive_dma() use between this.c and main.c
-#define dma_3_string_out_buffer_length 100      //0x55 0x0D end
+#define dma_3_string_out_buffer_length 100      //0x0D 0x0A end
 uint8_t* uart_dma_3_callback_string_out(void);
 
 
