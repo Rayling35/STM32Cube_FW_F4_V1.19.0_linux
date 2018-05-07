@@ -136,7 +136,7 @@ static void I2C3_Error(void)
 int i2c3_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Master_Transmit(&I2cHandle3, addr, data, length, timeout);
+	status = HAL_I2C_Master_Transmit(&I2cHandle3, (uint16_t)addr<<1, data, length, timeout);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -146,7 +146,7 @@ int i2c3_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t
 int i2c3_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Master_Receive(&I2cHandle3, addr, data, length, timeout);
+	status = HAL_I2C_Master_Receive(&I2cHandle3, (uint16_t)addr<<1, data, length, timeout);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -156,7 +156,7 @@ int i2c3_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t 
 int i2c3_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length, timeout);
+	status = HAL_I2C_Mem_Write(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length, timeout);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -166,7 +166,7 @@ int i2c3_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, 
 int i2c3_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length, timeout);
+	status = HAL_I2C_Mem_Read(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length, timeout);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -177,7 +177,7 @@ int i2c3_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, u
 int i2c3_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write_IT(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length);
+	status = HAL_I2C_Mem_Write_IT(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -187,7 +187,7 @@ int i2c3_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t lengt
 int i2c3_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read_IT(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length);
+	status = HAL_I2C_Mem_Read_IT(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -198,7 +198,7 @@ int i2c3_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length
 int i2c3_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write_DMA(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length);
+	status = HAL_I2C_Mem_Write_DMA(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}
@@ -208,7 +208,7 @@ int i2c3_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t leng
 int i2c3_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read_DMA(&I2cHandle3, addr, reg, I2C3_REG_BIT, data, length);
+	status = HAL_I2C_Mem_Read_DMA(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
 	if(status != HAL_OK) {
 		I2C3_Error();
 	}

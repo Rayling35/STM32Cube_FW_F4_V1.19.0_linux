@@ -7,25 +7,6 @@
 #include "i2c3.h"
 
 
-#define TS_I2C_ADDRESS          0x82
-#define STMPE811_ID             0x0811
-
-#define STMPE811_REG_CHP_ID_LSB         0x00
-#define STMPE811_REG_CHP_ID_MSB         0x01
-
-static uint8_t ReadData(struct i2c_api *hi2c, uint8_t Addr, uint8_t Reg)
-{
-	int status;
-	uint8_t value = 0;
-	
-	status = hi2c->mem_read(Addr, Reg, &value, 1, 0x3000);
-	if(status != 0) {
-		printf("read fail!\r\n");
-		printf("%d\r\n", status);
-	}
-	return value;
-}
-
 int main(void)
 {
 	system_initialization();
@@ -37,6 +18,40 @@ int main(void)
 	i2c3->init();
 	printf("I2C init\r\n");
 	
-	printf("0x0811 == %X\r\n", ((ReadData(i2c3, TS_I2C_ADDRESS, STMPE811_REG_CHP_ID_LSB) << 8) |\
-                              (ReadData(i2c3, TS_I2C_ADDRESS, STMPE811_REG_CHP_ID_MSB))));
+	#define BME280_ADDRESS           0x76
+	#define BME280_CHIPID            0xD0
+	
+	#define STMPE811_ADDRESS         0x41
+	#define STMPE811_REG_CHP_ID_LSB  0x00
+	#define STMPE811_REG_CHP_ID_MSB  0x01
+	
+	int status;
+	uint8_t value_bme280 = 0;
+	uint8_t value_lsb = 0;
+	uint8_t value_msb = 0;
+	
+	while(1) {
+		status = i2c3->mem_read(BME280_ADDRESS, BME280_CHIPID, &value_bme280, 1, 1);
+		if(status != HAL_OK) {
+			printf("BME280 mem_read fail! %d\r\n", status);
+		}
+		printf("BME280_0x60 == %X\r\n", value_bme280);
+		
+		
+		
+		status = i2c3->mem_read(STMPE811_ADDRESS, STMPE811_REG_CHP_ID_LSB, &value_lsb, 1, 1);
+		if(status != HAL_OK) {
+			printf("STMPE811_LSB mem_read fail! %d\r\n", status);
+		}
+		
+		status = i2c3->mem_read(STMPE811_ADDRESS, STMPE811_REG_CHP_ID_MSB, &value_msb, 1, 1);
+		if(status != HAL_OK) {
+			printf("STMPE811_MSB mem_read fail! %d\r\n", status);
+		}
+		printf("STMPE811_0x0811 == %X\r\n", (value_lsb << 8) | value_msb);
+		
+		
+		printf("\r\n");
+		HAL_Delay(2000);
+	}
 }
