@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>4100</DriverSelection>
+            <DriverSelection>4107</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>STLink\ST-LINKIII-KEIL_SWO.dll</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -334,9 +334,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, UART6</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, IO0</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\ARCH_define</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -393,6 +393,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>ARCH/Driver</GroupName>
+          <Files>
+            <File>
+              <FileName>io.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\ARCH_define\io.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>MY_LIB/API</GroupName>
           <Files>
             <File>
@@ -404,21 +414,6 @@
               <FileName>uart_printf.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart3.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart6.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart6.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart_string_receive_parser.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\uart_string_receive_parser.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -456,24 +451,14 @@
           <GroupName>Drivers/STM32F4xx_HAL_Driver</GroupName>
           <Files>
             <File>
-              <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
+              <FileName>stm32f4xx_hal.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_spi.c</FileName>
+              <FileName>stm32f4xx_hal_cortex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_dma.c</FileName>
@@ -481,14 +466,14 @@
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_pwr.c</FileName>
+              <FileName>stm32f4xx_hal_dma_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal.c</FileName>
+              <FileName>stm32f4xx_hal_flash.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_flash.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_flash_ex.c</FileName>
@@ -501,9 +486,14 @@
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_cortex.c</FileName>
+              <FileName>stm32f4xx_hal_pwr.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_rcc.c</FileName>
@@ -511,14 +501,9 @@
               <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_i2c.c</FileName>
+              <FileName>stm32f4xx_hal_rcc_ex.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_pwr_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</FilePath>
+              <FilePath>..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</FilePath>
             </File>
             <File>
               <FileName>stm32f4xx_hal_uart.c</FileName>
