@@ -21,8 +21,8 @@ static void _SPI5_MspInit(void)
 	
 	GPIO_InitStruct.Pin       = SPI5_SCK_PIN;
 	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull      = GPIO_PULLDOWN;
-	GPIO_InitStruct.Speed     = GPIO_SPEED_MEDIUM;
+	GPIO_InitStruct.Pull      = GPIO_NOPULL;
+	GPIO_InitStruct.Speed     = GPIO_SPEED_HIGH;
 	GPIO_InitStruct.Alternate = SPI5_SCK_AF;
 	HAL_GPIO_Init(SPI5_SCK_GPIO_PORT, &GPIO_InitStruct);
 	
@@ -96,12 +96,12 @@ void spi5_init(void)
 		SpiHandle5.Init.Mode              = SPI_MODE_MASTER;
 		SpiHandle5.Init.Direction         = SPI_DIRECTION_2LINES;
 		SpiHandle5.Init.DataSize          = SPI_DATASIZE_8BIT;
-		SpiHandle5.Init.CLKPolarity       = SPI_POLARITY_LOW;
-		SpiHandle5.Init.CLKPhase          = SPI_PHASE_1EDGE;
+		SpiHandle5.Init.CLKPolarity       = SPI5_CLKPOLARITY;
+		SpiHandle5.Init.CLKPhase          = SPI5_CLKPHASE;
 		SpiHandle5.Init.NSS               = SPI_NSS_SOFT;
+		SpiHandle5.Init.BaudRatePrescaler = SPI5_BAUDRATEPRESCALER;
 		SpiHandle5.Init.FirstBit          = SPI_FIRSTBIT_MSB;
 		SpiHandle5.Init.TIMode            = SPI_TIMODE_DISABLE;
-		SpiHandle5.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
 		SpiHandle5.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
 		SpiHandle5.Init.CRCPolynomial     = 7;
 		
@@ -110,7 +110,7 @@ void spi5_init(void)
 	}
 }
 
-static void _SPI5_MspDeInit(void)
+void _SPI5_MspDeInit(void)
 {
 	HAL_GPIO_DeInit(SPI5_SCK_GPIO_PORT, SPI5_SCK_PIN);
 	HAL_GPIO_DeInit(SPI5_MISO_GPIO_PORT, SPI5_MISO_PIN);
@@ -129,11 +129,6 @@ static void _SPI5_MspDeInit(void)
 	HAL_NVIC_DisableIRQ(DMA_SPI5_RX_IRQn);
 	#endif
 	#endif
-}
-
-void spi5_error(void)
-{
-	_SPI5_MspDeInit();
 }
 
 #ifdef SPI5_IT

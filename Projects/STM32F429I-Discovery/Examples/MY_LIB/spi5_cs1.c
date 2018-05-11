@@ -1,6 +1,5 @@
 #include "spi5.h"
 #include "spi5_cs1.h"
-
 #include "api_define.h"
 
 
@@ -24,7 +23,7 @@ void spi5_cs1_init(void)
 static void spi5_cs1_error(void)
 {
 	SPI5C1_OUTPUT_CLK_DISABLE();
-	spi5_error();
+	_SPI5_MspDeInit();
 	spi5_cs1_init();
 }
 

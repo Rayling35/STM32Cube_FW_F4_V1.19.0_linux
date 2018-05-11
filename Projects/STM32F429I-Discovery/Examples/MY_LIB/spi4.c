@@ -21,8 +21,8 @@ static void _SPI4_MspInit(void)
 	
 	GPIO_InitStruct.Pin       = SPI4_SCK_PIN;
 	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull      = GPIO_PULLDOWN;
-	GPIO_InitStruct.Speed     = GPIO_SPEED_MEDIUM;
+	GPIO_InitStruct.Pull      = GPIO_NOPULL;
+	GPIO_InitStruct.Speed     = GPIO_SPEED_HIGH;
 	GPIO_InitStruct.Alternate = SPI4_SCK_AF;
 	HAL_GPIO_Init(SPI4_SCK_GPIO_PORT, &GPIO_InitStruct);
 	
@@ -96,12 +96,12 @@ void spi4_init(void)
 		SpiHandle4.Init.Mode              = SPI_MODE_MASTER;
 		SpiHandle4.Init.Direction         = SPI_DIRECTION_2LINES;
 		SpiHandle4.Init.DataSize          = SPI_DATASIZE_8BIT;
-		SpiHandle4.Init.CLKPolarity       = SPI_POLARITY_LOW;
-		SpiHandle4.Init.CLKPhase          = SPI_PHASE_1EDGE;
+		SpiHandle4.Init.CLKPolarity       = SPI4_CLKPOLARITY;
+		SpiHandle4.Init.CLKPhase          = SPI4_CLKPHASE;
 		SpiHandle4.Init.NSS               = SPI_NSS_SOFT;
+		SpiHandle4.Init.BaudRatePrescaler = SPI4_BAUDRATEPRESCALER;
 		SpiHandle4.Init.FirstBit          = SPI_FIRSTBIT_MSB;
 		SpiHandle4.Init.TIMode            = SPI_TIMODE_DISABLE;
-		SpiHandle4.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
 		SpiHandle4.Init.CRCCalculation    = SPI_CRCCALCULATION_DISABLE;
 		SpiHandle4.Init.CRCPolynomial     = 7;
 		
@@ -110,7 +110,7 @@ void spi4_init(void)
 	}
 }
 
-static void _SPI4_MspDeInit(void)
+void _SPI4_MspDeInit(void)
 {
 	HAL_GPIO_DeInit(SPI4_SCK_GPIO_PORT, SPI4_SCK_PIN);
 	HAL_GPIO_DeInit(SPI4_MISO_GPIO_PORT, SPI4_MISO_PIN);
@@ -129,11 +129,6 @@ static void _SPI4_MspDeInit(void)
 	HAL_NVIC_DisableIRQ(DMA_SPI4_RX_IRQn);
 	#endif
 	#endif
-}
-
-void spi4_error(void)
-{
-	_SPI4_MspDeInit();
 }
 
 #ifdef SPI4_IT

@@ -14,6 +14,10 @@
 #define SPI5_FORCE_RESET()              __HAL_RCC_SPI5_FORCE_RESET()
 #define SPI5_RELEASE_RESET()            __HAL_RCC_SPI5_RELEASE_RESET()
 
+#define SPI5_CLKPOLARITY                SPI_POLARITY_LOW
+#define SPI5_CLKPHASE                   SPI_PHASE_1EDGE
+#define SPI5_BAUDRATEPRESCALER          SPI_BAUDRATEPRESCALER_32
+
 #define SPI5_SCK_PIN                    GPIO_PIN_7
 #define SPI5_SCK_GPIO_PORT              GPIOF
 #define SPI5_SCK_AF                     GPIO_AF5_SPI5
@@ -48,7 +52,7 @@ void DMA_SPI5_RX_IRQHandler(void);
 #endif
 
 void spi5_init(void);
-void spi5_error(void);
+void _SPI5_MspDeInit(void);
 
 
 #endif

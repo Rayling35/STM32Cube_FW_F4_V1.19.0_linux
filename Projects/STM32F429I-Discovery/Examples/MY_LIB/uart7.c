@@ -122,7 +122,7 @@ static void _UART7_MspDeInit(void)
 	#endif
 }
 
-static void UART7_Error(void)
+static void uart7_error(void)
 {
 	_UART7_MspDeInit();
 	uart7_init();
@@ -133,7 +133,7 @@ int uart7_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit(&UartHandle7, data, length, timeout);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }
@@ -143,7 +143,7 @@ int uart7_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive(&UartHandle7, data, length, timeout);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }
@@ -154,7 +154,7 @@ int uart7_transmit_it(uint8_t *data, uint16_t length)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_IT(&UartHandle7, data, length);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }
@@ -164,7 +164,7 @@ int uart7_receive_it(uint8_t *data, uint16_t length)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_IT(&UartHandle7, data, length);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }
@@ -175,7 +175,7 @@ int uart7_transmit_dma(uint8_t *data, uint16_t length)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_DMA(&UartHandle7, data, length);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }
@@ -185,7 +185,7 @@ int uart7_receive_dma(uint8_t *data, uint16_t length)
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_DMA(&UartHandle7, data, length);
 	if(status != HAL_OK) {
-		UART7_Error();
+		uart7_error();
 	}
 	return status;
 }

@@ -14,6 +14,10 @@
 #define SPI4_FORCE_RESET()              __HAL_RCC_SPI4_FORCE_RESET()
 #define SPI4_RELEASE_RESET()            __HAL_RCC_SPI4_RELEASE_RESET()
 
+#define SPI4_CLKPOLARITY                SPI_POLARITY_LOW
+#define SPI4_CLKPHASE                   SPI_PHASE_1EDGE
+#define SPI4_BAUDRATEPRESCALER          SPI_BAUDRATEPRESCALER_32
+
 #define SPI4_SCK_PIN                    GPIO_PIN_12
 #define SPI4_SCK_GPIO_PORT              GPIOE
 #define SPI4_SCK_AF                     GPIO_AF5_SPI4
@@ -48,7 +52,7 @@ void DMA_SPI4_RX_IRQHandler(void);
 #endif
 
 void spi4_init(void);
-void spi4_error(void);
+void _SPI4_MspDeInit(void);
 
 
 #endif

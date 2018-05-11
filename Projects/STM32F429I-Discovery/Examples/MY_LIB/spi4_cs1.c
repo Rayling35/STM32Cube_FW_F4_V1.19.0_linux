@@ -1,6 +1,5 @@
 #include "spi4.h"
 #include "spi4_cs1.h"
-
 #include "api_define.h"
 
 
@@ -24,7 +23,7 @@ void spi4_cs1_init(void)
 static void spi4_cs1_error(void)
 {
 	SPI4C1_OUTPUT_CLK_DISABLE();
-	spi4_error();
+	_SPI4_MspDeInit();
 	spi4_cs1_init();
 }
 
