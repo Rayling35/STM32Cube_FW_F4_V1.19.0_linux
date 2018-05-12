@@ -1,7 +1,8 @@
-#ifndef _dev_H_
-#define _dev_H_
+#ifndef __DEVICE_H
+#define __DEVICE_H
 
 #include "stm32f4xx_hal.h"
+
 
 struct device {
 	const void *api;
@@ -9,5 +10,6 @@ struct device {
 	const void *config;
 	int (*init)(struct device *dev);
 };
+
 
 #endif

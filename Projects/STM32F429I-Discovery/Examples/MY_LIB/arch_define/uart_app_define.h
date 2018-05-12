@@ -1,7 +1,8 @@
-#ifndef _UART_API_H_
-#define _UART_API_H_
+#ifndef __UART_API_DEFINE_H
+#define __UART_API_DEFINE_H
 
-#include <dev.h>
+#include "device.h"
+
 
                /*-----------API--------------*/
 typedef int (*uart_api_1)(struct device *dev, uint8_t *rxBuffer, uint16_t longth, uint16_t timeout);
@@ -25,5 +26,6 @@ static inline int uart_write(struct device *dev, uint8_t *txBuffer, uint16_t len
 	const struct uart_api *uart_api = dev->api;
 	return uart_api->write(dev, txBuffer, length, 100);
 }
+
 
 #endif

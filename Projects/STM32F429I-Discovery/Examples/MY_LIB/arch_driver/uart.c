@@ -1,4 +1,4 @@
-#include <uart_api.h>
+#include "uart_app_define.h"
 #include "uart.h"
 
 struct uart_data {
