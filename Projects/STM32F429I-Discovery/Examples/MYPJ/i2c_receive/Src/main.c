@@ -7,6 +7,13 @@
 #include "i2c3.h"
 
 
+#define BME280_ADDRESS           0x76
+#define BME280_CHIPID            0xD0
+
+#define STMPE811_ADDRESS         0x41
+#define STMPE811_REG_CHP_ID_LSB  0x00
+#define STMPE811_REG_CHP_ID_MSB  0x01
+
 int main(void)
 {
 	system_initialization();
@@ -17,13 +24,6 @@ int main(void)
 	i2c1->init();
 	i2c3->init();
 	printf("I2C init\r\n");
-	
-	#define BME280_ADDRESS           0x76
-	#define BME280_CHIPID            0xD0
-	
-	#define STMPE811_ADDRESS         0x41
-	#define STMPE811_REG_CHP_ID_LSB  0x00
-	#define STMPE811_REG_CHP_ID_MSB  0x01
 	
 	int status;
 	uint8_t value_bme280 = 0;
@@ -36,7 +36,6 @@ int main(void)
 			printf("BME280 mem_read fail! %d\r\n", status);
 		}
 		printf("BME280_0x60 == %X\r\n", value_bme280);
-		
 		
 		
 		status = i2c3->mem_read(STMPE811_ADDRESS, STMPE811_REG_CHP_ID_LSB, &value_lsb, 1, 1);
