@@ -1,5 +1,5 @@
-#include "io_app_define.h"
-#include "io.h"
+#include "io_common_api.h"
+#include "io_driver.h"
 
 struct io_data {
 	int mydata;
@@ -20,12 +20,12 @@ static int func_len(struct device *dev, int len)
 	return data->mydata;
 }
 
-/*-------IO0 definition-------*/
-#ifdef IO0
-static const struct io_api io0_api = {
+static const struct io_common_api io0_driver_api = {
 	.func = func_len,
 };
 
+
+#ifdef IO0
 static struct io_data io0_data;
 
 static const struct io_config io0_config = {
@@ -40,8 +40,8 @@ static int io0_init(struct device *dev)
 }
 
 struct device io_0 = {
+	.api     = &io0_driver_api,
 	.data   = &io0_data,
-	.api     = &io0_api,
 	.config = &io0_config,
 	.init     = io0_init,
 };
@@ -50,4 +50,4 @@ uint32_t io0_binding(void)
 {
 	return (uint32_t)&io_0;
 }
-#endif //IO0
+#endif

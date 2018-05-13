@@ -1,9 +1,10 @@
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "device.h"
-#include "uart_app_define.h"
-#include "uart.h"
 #include "main.h"
+
+#include "device.h"
+#include "uart_driver.h"
+#include "uart_common_api.h"
 
 
 int main(void)

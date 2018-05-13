@@ -1,9 +1,10 @@
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "device.h"
-#include "io_app_define.h"
-#include "io.h"
 #include "main.h"
+
+#include "device.h"
+#include "io_driver.h"
+#include "io_common_api.h"
 
 
 int main(void)

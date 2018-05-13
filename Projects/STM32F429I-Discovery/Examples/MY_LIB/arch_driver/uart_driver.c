@@ -1,5 +1,5 @@
-#include "uart_app_define.h"
-#include "uart.h"
+#include "uart_common_api.h"
+#include "uart_driver.h"
 
 struct uart_data {
 	uint32_t temp;
@@ -33,14 +33,13 @@ static int transmit_data(struct device *dev, uint8_t *txBuffer, uint16_t length,
 	return HAL_UART_Transmit(UartHandle, txBuffer, length, timeout);
 }
 
-
-/*-------UART3 definition-------*/
-#ifdef UART3
-static const struct uart_api uart3_api = {
+static const struct uart_common_api uart3_driver_api = {
 	.read = receive_data,
 	.write = transmit_data,
 };
 
+
+#ifdef UART3
 static struct uart_data uart3_data;
 
 static UART_HandleTypeDef UartHandle3;
@@ -112,7 +111,7 @@ static int uart3_init(struct device *dev)
 }
 
 struct device uart_3 = {
-	.api    = &uart3_api,
+	.api    = &uart3_driver_api,
 	.data   = &uart3_data,
 	.config = &uart3_config,
 	.init   = uart3_init,
@@ -129,4 +128,4 @@ uint32_t uart3_binding(void)
 {
 	return (uint32_t)&uart_3;
 }
-#endif //UART3
+#endif

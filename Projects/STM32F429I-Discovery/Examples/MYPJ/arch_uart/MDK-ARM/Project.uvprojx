@@ -396,9 +396,9 @@
           <GroupName>ARCH/Driver</GroupName>
           <Files>
             <File>
-              <FileName>uart.c</FileName>
+              <FileName>uart_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\uart.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\uart_driver.c</FilePath>
             </File>
           </Files>
         </Group>
