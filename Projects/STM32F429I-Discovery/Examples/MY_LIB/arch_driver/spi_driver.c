@@ -72,7 +72,7 @@ struct device spi_4_cs1 = {
 	.init   = spi4_cs1_init,
 };
 
-struct device* spi4_binding(void)
+struct device* spi4_cs1_device_binding(void)
 {
 	return &spi_4_cs1;
 }
@@ -102,7 +102,7 @@ struct device spi_5_cs1 = {
 	.init   = spi5_cs1_init,
 };
 
-struct device* spi5_binding(void)
+struct device* spi5_cs1_device_binding(void)
 {
 	return &spi_5_cs1;
 }

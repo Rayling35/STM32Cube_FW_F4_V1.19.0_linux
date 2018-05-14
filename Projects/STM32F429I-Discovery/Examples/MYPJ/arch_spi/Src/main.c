@@ -18,8 +18,8 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct device *spi4 = spi4_binding();
-	struct device *spi5 = spi5_binding();
+	struct device *spi4 = spi4_cs1_device_binding();
+	struct device *spi5 = spi5_cs1_device_binding();
 	spi_init(spi4);
 	spi_init(spi5);
 	printf("SPI device init\r\n");

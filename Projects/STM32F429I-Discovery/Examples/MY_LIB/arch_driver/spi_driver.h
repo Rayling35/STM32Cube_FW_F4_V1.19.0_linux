@@ -3,11 +3,11 @@
 
 
 #ifdef SPI4_CS1
-struct device* spi4_binding(void);
+struct device* spi4_cs1_device_binding(void);
 #endif
 
 #ifdef SPI5_CS1
-struct device* spi5_binding(void);
+struct device* spi5_cs1_device_binding(void);
 #endif
 
 
