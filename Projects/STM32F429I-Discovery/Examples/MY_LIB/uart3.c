@@ -84,7 +84,7 @@ static void _UART3_MspInit(void)
 	#endif
 }
 
-void uart3_init(void)
+static void uart3_init(void)
 {
 	if(HAL_UART_GetState(&UartHandle3) == HAL_UART_STATE_RESET)
 	{
@@ -128,7 +128,7 @@ static void uart3_error(void)
 	uart3_init();
 }
 
-int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
+static int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit(&UartHandle3, data, length, timeout);
@@ -138,7 +138,7 @@ int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
-int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
+static int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive(&UartHandle3, data, length, timeout);
@@ -149,7 +149,7 @@ int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 }
 
 #ifdef UART3_IT
-int uart3_transmit_it(uint8_t *data, uint16_t length)
+static int uart3_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_IT(&UartHandle3, data, length);
@@ -159,7 +159,7 @@ int uart3_transmit_it(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int uart3_receive_it(uint8_t *data, uint16_t length)
+static int uart3_receive_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_IT(&UartHandle3, data, length);
@@ -170,7 +170,7 @@ int uart3_receive_it(uint8_t *data, uint16_t length)
 }
 
 #ifdef UART3_DMA
-int uart3_transmit_dma(uint8_t *data, uint16_t length)
+static int uart3_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_DMA(&UartHandle3, data, length);
@@ -180,7 +180,7 @@ int uart3_transmit_dma(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int uart3_receive_dma(uint8_t *data, uint16_t length)
+static int uart3_receive_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_DMA(&UartHandle3, data, length);
@@ -192,7 +192,7 @@ int uart3_receive_dma(uint8_t *data, uint16_t length)
 #endif
 #endif
 
-struct uart_api uart3_api = {
+static struct uart_api uart3_api = {
 	.init         = uart3_init,
 	.transmit     = uart3_transmit,
 	.receive      = uart3_receive,

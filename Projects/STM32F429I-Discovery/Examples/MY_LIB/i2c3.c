@@ -87,7 +87,7 @@ static void _I2C3_MspInit(void)
 	#endif
 }
 
-void i2c3_init(void)
+static void i2c3_init(void)
 {
 	if(HAL_I2C_GetState(&I2cHandle3) == HAL_I2C_STATE_RESET)
 	{
@@ -133,7 +133,7 @@ static void i2c3_error(void)
 	i2c3_init();
 }
 
-int i2c3_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
+static int i2c3_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Master_Transmit(&I2cHandle3, (uint16_t)addr<<1, data, length, timeout);
@@ -143,7 +143,7 @@ int i2c3_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t
 	return status;
 }
 
-int i2c3_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
+static int i2c3_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Master_Receive(&I2cHandle3, (uint16_t)addr<<1, data, length, timeout);
@@ -153,7 +153,7 @@ int i2c3_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t 
 	return status;
 }
 
-int i2c3_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
+static int i2c3_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Write(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length, timeout);
@@ -163,7 +163,7 @@ int i2c3_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, 
 	return status;
 }
 
-int i2c3_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
+static int i2c3_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Read(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length, timeout);
@@ -174,7 +174,7 @@ int i2c3_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, u
 }
 
 #ifdef I2C3_IT
-int i2c3_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
+static int i2c3_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Write_IT(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
@@ -184,7 +184,7 @@ int i2c3_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t lengt
 	return status;
 }
 
-int i2c3_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
+static int i2c3_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Read_IT(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
@@ -195,7 +195,7 @@ int i2c3_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length
 }
 
 #ifdef I2C3_DMA
-int i2c3_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
+static int i2c3_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Write_DMA(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
@@ -205,7 +205,7 @@ int i2c3_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t leng
 	return status;
 }
 
-int i2c3_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
+static int i2c3_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_I2C_Mem_Read_DMA(&I2cHandle3, (uint16_t)addr<<1, reg, I2C3_REG_BIT, data, length);
@@ -217,7 +217,7 @@ int i2c3_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t lengt
 #endif
 #endif
 
-struct i2c_api i2c3_api = {
+static struct i2c_api i2c3_api = {
 	.init            = i2c3_init,
 	.master_transmit = i2c3_master_transmit,
 	.master_receive  = i2c3_master_receive,
@@ -232,11 +232,6 @@ struct i2c_api i2c3_api = {
 	#endif
 	#endif
 };
-
-struct i2c_api* i2c3_binding(void)
-{
-	return &i2c3_api; //傳遞位置
-}
 
 #ifdef I2C3_IT
 void I2C3_EV_IRQHandler(void)
@@ -261,3 +256,8 @@ void DMA_I2C3_RX_IRQHandler(void)
 }
 #endif
 #endif
+
+struct i2c_api* i2c3_binding(void)
+{
+	return &i2c3_api; //傳遞位置
+}

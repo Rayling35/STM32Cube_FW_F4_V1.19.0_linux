@@ -5,7 +5,7 @@
 
 extern SPI_HandleTypeDef SpiHandle4;
 
-void spi4_cs1_init(void)
+static void spi4_cs1_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
@@ -27,7 +27,7 @@ static void spi4_cs1_error(void)
 	spi4_cs1_init();
 }
 
-int spi4_cs1_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
+static int spi4_cs1_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -39,7 +39,7 @@ int spi4_cs1_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
-int spi4_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
+static int spi4_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -51,7 +51,7 @@ int spi4_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
-int spi4_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
+static int spi4_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -64,7 +64,7 @@ int spi4_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t lengt
 }
 
 #ifdef SPI4C1_IT
-int spi4_cs1_transmit_it(uint8_t *data, uint16_t length)
+static int spi4_cs1_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -76,7 +76,7 @@ int spi4_cs1_transmit_it(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int spi4_cs1_receive_it(uint8_t *data, uint16_t length)
+static int spi4_cs1_receive_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -88,7 +88,7 @@ int spi4_cs1_receive_it(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int spi4_cs1_transmit_receive_it(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
+static int spi4_cs1_transmit_receive_it(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -101,7 +101,7 @@ int spi4_cs1_transmit_receive_it(uint8_t *tx_data, uint8_t *rx_data, uint16_t le
 }
 
 #ifdef SPI4C1_DMA
-int spi4_cs1_transmit_dma(uint8_t *data, uint16_t length)
+static int spi4_cs1_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -113,7 +113,7 @@ int spi4_cs1_transmit_dma(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int spi4_cs1_receive_dma(uint8_t *data, uint16_t length)
+static int spi4_cs1_receive_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -125,7 +125,7 @@ int spi4_cs1_receive_dma(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int spi4_cs1_transmit_receive_dma(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
+static int spi4_cs1_transmit_receive_dma(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	SPI4C1_LOW();
@@ -139,7 +139,7 @@ int spi4_cs1_transmit_receive_dma(uint8_t *tx_data, uint8_t *rx_data, uint16_t l
 #endif
 #endif
 
-struct spi_api spi4_cs1_api = {
+static struct spi_api spi4_cs1_api = {
 	.init                 = spi4_cs1_init,
 	.transmit             = spi4_cs1_transmit,
 	.receive              = spi4_cs1_receive,

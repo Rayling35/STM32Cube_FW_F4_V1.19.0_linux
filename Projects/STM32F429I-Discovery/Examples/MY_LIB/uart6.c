@@ -84,7 +84,7 @@ static void _UART6_MspInit(void)
 	#endif
 }
 
-void uart6_init(void)
+static void uart6_init(void)
 {
 	if(HAL_UART_GetState(&UartHandle6) == HAL_UART_STATE_RESET)
 	{
@@ -128,7 +128,7 @@ static void uart6_error(void)
 	uart6_init();
 }
 
-int uart6_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
+static int uart6_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit(&UartHandle6, data, length, timeout);
@@ -138,7 +138,7 @@ int uart6_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
-int uart6_receive(uint8_t *data, uint16_t length, uint32_t timeout)
+static int uart6_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive(&UartHandle6, data, length, timeout);
@@ -149,7 +149,7 @@ int uart6_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 }
 
 #ifdef UART6_IT
-int uart6_transmit_it(uint8_t *data, uint16_t length)
+static int uart6_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_IT(&UartHandle6, data, length);
@@ -159,7 +159,7 @@ int uart6_transmit_it(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int uart6_receive_it(uint8_t *data, uint16_t length)
+static int uart6_receive_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_IT(&UartHandle6, data, length);
@@ -170,7 +170,7 @@ int uart6_receive_it(uint8_t *data, uint16_t length)
 }
 
 #ifdef UART6_DMA
-int uart6_transmit_dma(uint8_t *data, uint16_t length)
+static int uart6_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_DMA(&UartHandle6, data, length);
@@ -180,7 +180,7 @@ int uart6_transmit_dma(uint8_t *data, uint16_t length)
 	return status;
 }
 
-int uart6_receive_dma(uint8_t *data, uint16_t length)
+static int uart6_receive_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_DMA(&UartHandle6, data, length);
@@ -192,7 +192,7 @@ int uart6_receive_dma(uint8_t *data, uint16_t length)
 #endif
 #endif
 
-struct uart_api uart6_api = {
+static struct uart_api uart6_api = {
 	.init         = uart6_init,
 	.transmit     = uart6_transmit,
 	.receive      = uart6_receive,
