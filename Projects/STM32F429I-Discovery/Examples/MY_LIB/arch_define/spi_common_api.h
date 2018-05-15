@@ -5,8 +5,8 @@
 
 
                /*-----------API--------------*/
-typedef int (*spi_api_1)(struct device *dev, uint8_t *data, uint16_t longth);
-typedef int (*spi_api_2)(struct device *dev, uint8_t *data, uint16_t longth);
+typedef int (*spi_api_1)(struct device *dev, uint8_t *data, uint16_t length);
+typedef int (*spi_api_2)(struct device *dev, uint8_t *data, uint16_t length);
 typedef int (*spi_api_3)(struct device *dev, uint8_t *tx_data, uint8_t *rx_data, uint16_t length);
 
 struct spi_common_api {
@@ -23,20 +23,20 @@ static inline int spi_init(struct device *dev)
 
 static inline int spi_transmit(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct spi_common_api *spi_driver_api = dev->api;
-	return spi_driver_api->transmit(dev, data, length);
+	const struct spi_common_api *spi_common_api = dev->api;
+	return spi_common_api->transmit(dev, data, length);
 }
 
 static inline int spi_receive(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct spi_common_api *spi_driver_api = dev->api;
-	return spi_driver_api->receive(dev, data, length);
+	const struct spi_common_api *spi_common_api = dev->api;
+	return spi_common_api->receive(dev, data, length);
 }
 
 static inline int spi_transmit_receive(struct device *dev, uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	const struct spi_common_api *spi_driver_api = dev->api;
-	return spi_driver_api->transmit_receive(dev, tx_data, rx_data, length);
+	const struct spi_common_api *spi_common_api = dev->api;
+	return spi_common_api->transmit_receive(dev, tx_data, rx_data, length);
 }
 
 

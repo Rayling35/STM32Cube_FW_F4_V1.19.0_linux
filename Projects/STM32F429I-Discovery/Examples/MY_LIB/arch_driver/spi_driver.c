@@ -1,5 +1,5 @@
-#include "spi_common_api.h"
 #include "api_define.h"
+#include "spi_common_api.h"
 #include "spi_driver.h"
 
 
@@ -8,8 +8,8 @@ struct spi_data {
 };
 
 struct spi_config {
-	uint32_t rx_timeout;
 	uint32_t tx_timeout;
+	uint32_t rx_timeout;
 	uint32_t tx_rx_timeout;
 };
 
@@ -41,14 +41,14 @@ static int transmit_receive_data(struct device *dev, uint8_t *tx_data, uint8_t *
 	return spi_cs_api->transmit_receive(tx_data, rx_data, length, config->tx_rx_timeout);
 }
 
-static const struct spi_common_api spi_driver_api = {
+static const struct spi_common_api spi_common_api = {
 	.transmit         = transmit_data,
 	.receive          = receive_data,
 	.transmit_receive = transmit_receive_data
 };
 
 
-#ifdef SPI4_CS1
+#ifdef SPI4_CS1_DEV
 #include "spi4_cs1.h"
 static struct spi_data spi4_cs1_data;
 static const struct spi_config spi4_cs1_config = {
@@ -66,7 +66,7 @@ static int spi4_cs1_init(struct device *dev)
 }
 
 struct device spi_4_cs1 = {
-	.api    = &spi_driver_api,
+	.api    = &spi_common_api,
 	.data   = &spi4_cs1_data,
 	.config = &spi4_cs1_config,
 	.init   = spi4_cs1_init,
@@ -78,7 +78,7 @@ struct device* spi4_cs1_device_binding(void)
 }
 #endif
 
-#ifdef SPI5_CS1
+#ifdef SPI5_CS1_DEV
 #include "spi5_cs1.h"
 static struct spi_data spi5_cs1_data;
 static const struct spi_config spi5_cs1_config = {
@@ -96,7 +96,7 @@ static int spi5_cs1_init(struct device *dev)
 }
 
 struct device spi_5_cs1 = {
-	.api    = &spi_driver_api,
+	.api    = &spi_common_api,
 	.data   = &spi5_cs1_data,
 	.config = &spi5_cs1_config,
 	.init   = spi5_cs1_init,

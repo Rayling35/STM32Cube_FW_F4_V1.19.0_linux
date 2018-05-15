@@ -1,10 +1,9 @@
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "main.h"
-
 #include "device.h"
 #include "spi_driver.h"
 #include "spi_common_api.h"
+#include "main.h"
 
 
 #define BME280_REG_ID               0xD0
