@@ -2,12 +2,8 @@
 #include "uart_printf.h"
 #include "main.h"
 
-#include "gpio_g13_output.h"
-#ifdef A0_EXIT
-	#include "gpio_a0_exit.h"
-#else
-	#include "gpio_a0_input.h"
-#endif
+#include "gpio_g13.h"
+#include "gpio_a0.h"
 
 
 int main(void)
@@ -16,23 +12,22 @@ int main(void)
 	uart_printf_init();
 	
 	gpio_g13_output_init();
-		
-	#ifdef A0_EXIT
+#ifdef A0_EXIT
 	gpio_a0_exit_init();
 	while(1) {
 	}
-	#else
+#else
 	gpio_a0_input_init();
 	while(1) {
-		if(PA0_GetState()) {
+		if(PA0_GET_STATE()) {
 			PG13_OUTPUT_HIGH();
-			printf("OUTPUT_HIGH %d\n\r", (uint16_t)PA0_GetState());
+			printf("PA0 STATE %d\n\r", PA0_GET_STATE());
 			HAL_Delay(100);
 		}else {
 			PG13_OUTPUT_LOW();
-			printf("OUTPUT_LOW %d\n\r", (uint16_t)PA0_GetState());
+			printf("PA0 STATE %d\n\r", PA0_GET_STATE());
 			HAL_Delay(100);
 		}
 	}
-	#endif
+#endif
 }

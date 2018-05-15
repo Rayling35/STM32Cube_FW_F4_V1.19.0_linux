@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx, A0_EXIT,</Define>
+              <Define>USE_HAL_DRIVER,STM32F429xx, A0_EXIT</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>
@@ -406,19 +406,14 @@
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
             </File>
             <File>
-              <FileName>gpio_g13_output.c</FileName>
+              <FileName>gpio_a0.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\gpio_g13_output.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\gpio_a0.c</FilePath>
             </File>
             <File>
-              <FileName>gpio_a0_input.c</FileName>
+              <FileName>gpio_g13.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\gpio_a0_input.c</FilePath>
-            </File>
-            <File>
-              <FileName>gpio_a0_exit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\gpio_a0_exit.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\gpio_g13.c</FilePath>
             </File>
             <File>
               <FileName>gpio_callback.c</FileName>
