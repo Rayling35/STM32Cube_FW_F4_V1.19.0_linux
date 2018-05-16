@@ -4,6 +4,19 @@
 #include "stm32f4xx_hal.h"
 
 
+#ifdef HAL_GPIO_MODULE_ENABLED
+struct gpio_api {
+	void (*output_init) (void);
+	void (*input_init)  (void);
+	void (*exit_init)   (void);
+
+	int  (*read)        (void);
+	void (*write)       (uint16_t state);
+	void (*toggle_write)(void);
+	int  (*lock)        (void);
+};
+#endif
+
 #ifdef HAL_UART_MODULE_ENABLED
 struct uart_api {
 	void (*init)       (void);

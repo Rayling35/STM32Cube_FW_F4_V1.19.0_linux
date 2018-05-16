@@ -1,8 +1,8 @@
-#include "stm32f4xx_hal.h"
 #include "gpio_g13.h"
+#include "api_define.h"
 
 
-void gpio_g13_output_init(void)
+static void gpio_g13_output_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
@@ -16,7 +16,7 @@ void gpio_g13_output_init(void)
 	HAL_GPIO_Init(PG13_PORT, &GPIO_InitStruct);
 }
 
-void gpio_g13_input_init(void)
+static void gpio_g13_input_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -30,8 +30,7 @@ void gpio_g13_input_init(void)
 	HAL_GPIO_Init(PG13_PORT, &GPIO_InitStruct);
 }
 
-#ifdef G13_EXIT
-void gpio_g13_exit_init(void)
+static void gpio_g13_exit_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -52,4 +51,43 @@ void EXTI1_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(PG13_PIN);
 }
-#endif
+
+static int gpio_g13_read(void)
+{
+	return HAL_GPIO_ReadPin(PG13_PORT, PG13_PIN);
+}
+
+static void gpio_g13_write(uint16_t state)
+{
+	if(state == 0) {
+		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN,  GPIO_PIN_RESET);
+	}
+	if(state == 1) {
+		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN,  GPIO_PIN_SET);
+	}
+}
+
+static void gpio_g13_toggle_write(void)
+{
+	HAL_GPIO_TogglePin(PG13_PORT, PG13_PIN);
+}
+
+static int gpio_g13_lock(void)
+{
+	return HAL_GPIO_LockPin(PG13_PORT, PG13_PIN);
+}
+
+static struct gpio_api gpio_g13_api = {
+	.output_init  = gpio_g13_output_init,
+	.input_init   = gpio_g13_input_init,
+	.exit_init    = gpio_g13_exit_init,
+	.read         = gpio_g13_read,
+	.write        = gpio_g13_write,
+	.toggle_write = gpio_g13_toggle_write,
+	.lock         = gpio_g13_lock
+};
+
+struct gpio_api* gpio_g13_binding(void)
+{
+	return &gpio_g13_api;
+}

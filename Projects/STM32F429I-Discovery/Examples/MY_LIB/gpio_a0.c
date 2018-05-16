@@ -1,8 +1,8 @@
-#include "stm32f4xx_hal.h"
 #include "gpio_a0.h"
+#include "api_define.h"
 
 
-void gpio_a0_output_init(void)
+static void gpio_a0_output_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	
@@ -16,7 +16,7 @@ void gpio_a0_output_init(void)
 	HAL_GPIO_Init(PA0_PORT, &GPIO_InitStruct);
 }
 
-void gpio_a0_input_init(void)
+static void gpio_a0_input_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -30,8 +30,7 @@ void gpio_a0_input_init(void)
 	HAL_GPIO_Init(PA0_PORT, &GPIO_InitStruct);
 }
 
-#ifdef A0_EXIT
-void gpio_a0_exit_init(void)
+static void gpio_a0_exit_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -52,4 +51,43 @@ void EXTI0_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(PA0_PIN);
 }
-#endif
+
+static int gpio_a0_read(void)
+{
+	return HAL_GPIO_ReadPin(PA0_PORT, PA0_PIN);
+}
+
+static void gpio_a0_write(uint16_t state)
+{
+	if(state == 0) {
+		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN,  GPIO_PIN_RESET);
+	}
+	if(state == 1) {
+		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN,  GPIO_PIN_SET);
+	}
+}
+
+static void gpio_a0_toggle_write(void)
+{
+	HAL_GPIO_TogglePin(PA0_PORT, PA0_PIN);
+}
+
+static int gpio_a0_lock(void)
+{
+	return HAL_GPIO_LockPin(PA0_PORT, PA0_PIN);
+}
+
+static struct gpio_api gpio_a0_api = {
+	.output_init  = gpio_a0_output_init,
+	.input_init   = gpio_a0_input_init,
+	.exit_init    = gpio_a0_exit_init,
+	.read         = gpio_a0_read,
+	.write        = gpio_a0_write,
+	.toggle_write = gpio_a0_toggle_write,
+	.lock         = gpio_a0_lock
+};
+
+struct gpio_api* gpio_a0_binding(void)
+{
+	return &gpio_a0_api;
+}
