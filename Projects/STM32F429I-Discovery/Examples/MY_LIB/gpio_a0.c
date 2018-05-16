@@ -79,10 +79,10 @@ static int gpio_a0_read(void)
 static void gpio_a0_write(uint16_t state)
 {
 	if(state == 0) {
-		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN,  GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN, GPIO_PIN_RESET);
 	}
 	if(state == 1) {
-		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN,  GPIO_PIN_SET);
+		HAL_GPIO_WritePin(PA0_PORT, PA0_PIN, GPIO_PIN_SET);
 	}
 }
 

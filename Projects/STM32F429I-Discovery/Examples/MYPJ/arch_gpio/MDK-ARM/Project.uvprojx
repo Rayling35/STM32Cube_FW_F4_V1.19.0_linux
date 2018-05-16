@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, IO0</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, GPIO_A0_DEV, GPIO_G13_DEV, A0_INPUT, G13_OUTPUT</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_driver</IncludePath>
             </VariousControls>
@@ -396,9 +396,9 @@
           <GroupName>ARCH/Driver</GroupName>
           <Files>
             <File>
-              <FileName>io_driver.c</FileName>
+              <FileName>gpio_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\io_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\gpio_driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -414,6 +414,16 @@
               <FileName>uart_printf.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\uart_printf.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_a0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\gpio_a0.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_g13.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\gpio_g13.c</FilePath>
             </File>
           </Files>
         </Group>

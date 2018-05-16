@@ -79,10 +79,10 @@ static int gpio_g13_read(void)
 static void gpio_g13_write(uint16_t state)
 {
 	if(state == 0) {
-		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN,  GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN, GPIO_PIN_RESET);
 	}
 	if(state == 1) {
-		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN,  GPIO_PIN_SET);
+		HAL_GPIO_WritePin(PG13_PORT, PG13_PIN, GPIO_PIN_SET);
 	}
 }
 
