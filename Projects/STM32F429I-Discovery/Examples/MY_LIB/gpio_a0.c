@@ -2,6 +2,7 @@
 #include "api_define.h"
 
 
+#ifdef A0_OUTPUT
 static void gpio_a0_output_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -15,7 +16,9 @@ static void gpio_a0_output_init(void)
 	
 	HAL_GPIO_Init(PA0_PORT, &GPIO_InitStruct);
 }
+#endif
 
+#ifdef A0_INPUT
 static void gpio_a0_input_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
@@ -29,7 +32,9 @@ static void gpio_a0_input_init(void)
 	
 	HAL_GPIO_Init(PA0_PORT, &GPIO_InitStruct);
 }
+#endif
 
+#ifdef A0_EXIT
 static void gpio_a0_exit_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
@@ -50,6 +55,20 @@ static void gpio_a0_exit_init(void)
 void EXTI0_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(PA0_PIN);
+}
+#endif
+
+static void gpio_a0_init(void)
+{
+	#ifdef A0_OUTPUT
+	gpio_a0_output_init();
+	#endif
+	#ifdef A0_INPUT
+	gpio_a0_input_init();
+	#endif
+	#ifdef A0_EXIT
+	gpio_a0_exit_init();
+	#endif
 }
 
 static int gpio_a0_read(void)
@@ -78,9 +97,7 @@ static int gpio_a0_lock(void)
 }
 
 static struct gpio_api gpio_a0_api = {
-	.output_init  = gpio_a0_output_init,
-	.input_init   = gpio_a0_input_init,
-	.exit_init    = gpio_a0_exit_init,
+	.init         = gpio_a0_init,
 	.read         = gpio_a0_read,
 	.write        = gpio_a0_write,
 	.toggle_write = gpio_a0_toggle_write,

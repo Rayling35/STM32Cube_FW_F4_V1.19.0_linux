@@ -14,14 +14,13 @@ int main(void)
 	
 	struct gpio_api *gpio_a0  = gpio_a0_binding();
 	struct gpio_api *gpio_g13 = gpio_g13_binding();
+	gpio_a0->init();
+	gpio_g13->init();
 	
-	gpio_g13->output_init();
-#ifdef A0_EXIT
-	gpio_a0->exit_init();
+	#ifdef A0_EXIT
 	while(1) {
 	}
-#else
-	gpio_a0->input_init();
+	#elif A0_INPUT
 	while(1) {
 		if(gpio_a0->read()) {
 			gpio_g13->write(1);
@@ -33,5 +32,5 @@ int main(void)
 			HAL_Delay(100);
 		}
 	}
-#endif
+	#endif
 }

@@ -2,6 +2,7 @@
 #include "api_define.h"
 
 
+#ifdef G13_OUTPUT
 static void gpio_g13_output_init(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -15,7 +16,9 @@ static void gpio_g13_output_init(void)
 	
 	HAL_GPIO_Init(PG13_PORT, &GPIO_InitStruct);
 }
+#endif
 
+#ifdef G13_INPUT
 static void gpio_g13_input_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
@@ -29,7 +32,9 @@ static void gpio_g13_input_init(void)
 	
 	HAL_GPIO_Init(PG13_PORT, &GPIO_InitStruct);
 }
+#endif
 
+#ifdef G13_EXIT
 static void gpio_g13_exit_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
@@ -50,6 +55,20 @@ static void gpio_g13_exit_init(void)
 void EXTI1_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(PG13_PIN);
+}
+#endif
+
+static void gpio_g13_init(void)
+{
+	#ifdef G13_OUTPUT
+	gpio_g13_output_init();
+	#endif
+	#ifdef G13_INPUT
+	gpio_g13_input_init();
+	#endif
+	#ifdef G13_EXIT
+	gpio_g13_exit_init();
+	#endif
 }
 
 static int gpio_g13_read(void)
@@ -78,9 +97,7 @@ static int gpio_g13_lock(void)
 }
 
 static struct gpio_api gpio_g13_api = {
-	.output_init  = gpio_g13_output_init,
-	.input_init   = gpio_g13_input_init,
-	.exit_init    = gpio_g13_exit_init,
+	.init         = gpio_g13_init,
 	.read         = gpio_g13_read,
 	.write        = gpio_g13_write,
 	.toggle_write = gpio_g13_toggle_write,
