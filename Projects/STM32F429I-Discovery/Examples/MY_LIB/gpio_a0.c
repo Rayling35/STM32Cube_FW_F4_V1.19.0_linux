@@ -101,7 +101,7 @@ static struct gpio_api gpio_a0_api = {
 	.read         = gpio_a0_read,
 	.write        = gpio_a0_write,
 	.toggle_write = gpio_a0_toggle_write,
-	.lock         = gpio_a0_lock
+	.lock         = gpio_a0_lock,
 };
 
 struct gpio_api* gpio_a0_binding(void)

@@ -34,3 +34,9 @@ int main(void)
 	}
 	#endif
 }
+
+void a0_exit_handel(void)
+{
+	struct device *gpio_g13 = gpio_g13_device_binding();
+	gpio_toggle_write(gpio_g13);
+}

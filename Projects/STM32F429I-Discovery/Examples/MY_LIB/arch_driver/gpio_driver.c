@@ -4,7 +4,7 @@
 
 
 struct gpio_data {
-	struct gpio_api *gpio_api;
+	struct gpio_api *gpio_hal;
 };
 
 struct gpio_config {
@@ -15,22 +15,31 @@ struct gpio_config {
 static int read_data(struct device *dev)
 {
 	struct gpio_data *data    = dev->data;
-	struct gpio_api *gpio_api = data->gpio_api;
+	struct gpio_api *gpio_hal = data->gpio_hal;
 	
-	return gpio_api->read();
+	return gpio_hal->read();
 }
 
 static void write_data(struct device *dev, uint16_t state)
 {
 	struct gpio_data *data    = dev->data;
-	struct gpio_api *gpio_api = data->gpio_api;
+	struct gpio_api *gpio_hal = data->gpio_hal;
 	
-	gpio_api->write(state);
+	gpio_hal->write(state);
+}
+
+static void toggle_write_data(struct device *dev)
+{
+	struct gpio_data *data    = dev->data;
+	struct gpio_api *gpio_hal = data->gpio_hal;
+	
+	gpio_hal->toggle_write();
 }
 
 static const struct gpio_common_api gpio_common_api = {
 	.read  = read_data,
 	.write = write_data,
+	.toggle_write = toggle_write_data,
 };
 
 
@@ -43,8 +52,8 @@ static int gpio_a0_init(struct device *dev)
 {
 	struct gpio_data *data = dev->data;
 	
-	data->gpio_api = gpio_a0_binding();
-	data->gpio_api->init();
+	data->gpio_hal = gpio_a0_binding();
+	data->gpio_hal->init();
 
 	return 0;
 }
@@ -71,8 +80,8 @@ static int gpio_g13_init(struct device *dev)
 {
 	struct gpio_data *data = dev->data;
 	
-	data->gpio_api = gpio_g13_binding();
-	data->gpio_api->init();
+	data->gpio_hal = gpio_g13_binding();
+	data->gpio_hal->init();
 
 	return 0;
 }
@@ -89,3 +98,17 @@ struct device* gpio_g13_device_binding(void)
 	return &gpio_g13;
 }
 #endif
+
+
+__weak void a0_exit_handel(void)
+{
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	#ifdef A0_EXIT
+	if(GPIO_Pin == GPIO_PIN_0) {
+		a0_exit_handel();
+	}
+	#endif
+}
