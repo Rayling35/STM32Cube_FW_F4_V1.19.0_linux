@@ -18,6 +18,7 @@ static void spi4_cs1_init(void)
 	
 	HAL_GPIO_Init(SPI4C1_OUTPUT_PORT, &GPIO_InitStruct);
 	spi4_init();
+	printf("SPI4_CS1 HAL init\r\n");
 }
 
 static void spi4_cs1_error(void)

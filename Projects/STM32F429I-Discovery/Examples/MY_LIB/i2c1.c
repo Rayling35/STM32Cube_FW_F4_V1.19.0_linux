@@ -103,6 +103,7 @@ static void i2c1_init(void)
 		
 		_I2C1_MspInit();
 		HAL_I2C_Init(&I2cHandle1);
+		printf("I2C1 HAL init\r\n");
 	}
 }
 

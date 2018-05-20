@@ -99,6 +99,7 @@ static void uart6_init(void)
 		
 		_UART6_MspInit();
 		HAL_UART_Init(&UartHandle6);
+		printf("UART6 HAL init\r\n");
 	}
 }
 

@@ -63,6 +63,7 @@ static int spi4_cs1_init(struct device *dev)
 	
 	data->spi_cs_hal = spi4_cs1_binding();
 	data->spi_cs_hal->init();
+	printf("SPI4_CS1 device init\r\n");
 	
 	return 0;
 }
@@ -95,6 +96,7 @@ static int spi5_cs1_init(struct device *dev)
 	
 	data->spi_cs_hal = spi5_cs1_binding();
 	data->spi_cs_hal->init();
+	printf("SPI5_CS1 device init\r\n");
 	
 	return 0;
 }

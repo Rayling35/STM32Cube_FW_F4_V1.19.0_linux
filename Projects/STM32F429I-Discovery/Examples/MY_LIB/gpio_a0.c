@@ -69,6 +69,7 @@ static void gpio_a0_init(void)
 	#ifdef A0_EXIT
 	gpio_a0_exit_init();
 	#endif
+	printf("GPIO_A0 HAL init\r\n");
 }
 
 static int gpio_a0_read(void)

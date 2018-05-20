@@ -99,6 +99,7 @@ static void uart7_init(void)
 		
 		_UART7_MspInit();
 		HAL_UART_Init(&UartHandle7);
+		printf("UART7 HAL init\r\n");
 	}
 }
 

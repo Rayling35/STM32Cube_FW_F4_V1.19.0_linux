@@ -51,6 +51,7 @@ static int uart3_init(struct device *dev)
 	
 	data->uart_hal = uart3_binding();
 	data->uart_hal->init();
+	printf("UART3 device init\r\n");
 	
 	return 0;
 }
@@ -82,6 +83,7 @@ static int uart6_init(struct device *dev)
 	
 	data->uart_hal = uart6_binding();
 	data->uart_hal->init();
+	printf("UART6 device init\r\n");
 	
 	return 0;
 }
@@ -113,6 +115,7 @@ static int uart7_init(struct device *dev)
 	
 	data->uart_hal = uart7_binding();
 	data->uart_hal->init();
+	printf("UART7 device init\r\n");
 	
 	return 0;
 }

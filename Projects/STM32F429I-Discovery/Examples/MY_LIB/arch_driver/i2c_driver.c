@@ -51,6 +51,7 @@ static int i2c1_init(struct device *dev)
 	
 	data->i2c_hal = i2c1_binding();
 	data->i2c_hal->init();
+	printf("I2C1 device init\r\n");
 	
 	return 0;
 }
@@ -82,6 +83,7 @@ static int i2c3_init(struct device *dev)
 	
 	data->i2c_hal = i2c3_binding();
 	data->i2c_hal->init();
+	printf("I2C3 device init\r\n");
 	
 	return 0;
 }

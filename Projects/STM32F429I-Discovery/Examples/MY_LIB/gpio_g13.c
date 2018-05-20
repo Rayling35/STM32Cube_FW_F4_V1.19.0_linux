@@ -69,6 +69,7 @@ static void gpio_g13_init(void)
 	#ifdef G13_EXIT
 	gpio_g13_exit_init();
 	#endif
+	printf("GPIO_G13 HAL init\r\n");
 }
 
 static int gpio_g13_read(void)

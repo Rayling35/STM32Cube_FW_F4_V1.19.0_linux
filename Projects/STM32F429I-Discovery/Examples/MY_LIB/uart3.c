@@ -99,6 +99,7 @@ static void uart3_init(void)
 		
 		_UART3_MspInit();
 		HAL_UART_Init(&UartHandle3);
+		printf("UART3 HAL init\r\n");
 	}
 }
 

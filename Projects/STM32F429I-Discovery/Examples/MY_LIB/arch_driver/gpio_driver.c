@@ -54,6 +54,7 @@ static int gpio_a0_init(struct device *dev)
 	
 	data->gpio_hal = gpio_a0_binding();
 	data->gpio_hal->init();
+	printf("GPIO_A0 device init\r\n");
 
 	return 0;
 }
@@ -69,6 +70,10 @@ struct device* gpio_a0_device_binding(void)
 {
 	return &gpio_a0;
 }
+
+__weak void a0_exit_handel(void)
+{
+}
 #endif
 
 #ifdef GPIO_G13_DEV
@@ -82,6 +87,7 @@ static int gpio_g13_init(struct device *dev)
 	
 	data->gpio_hal = gpio_g13_binding();
 	data->gpio_hal->init();
+	printf("GPIO_G13 device init\r\n");
 
 	return 0;
 }
@@ -97,18 +103,24 @@ struct device* gpio_g13_device_binding(void)
 {
 	return &gpio_g13;
 }
-#endif
 
-
-__weak void a0_exit_handel(void)
+__weak void g13_exit_handel(void)
 {
 }
+#endif
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	#ifdef A0_EXIT
 	if(GPIO_Pin == GPIO_PIN_0) {
 		a0_exit_handel();
+	}
+	#endif
+	
+	#ifdef G13_EXIT
+	if(GPIO_Pin == GPIO_PIN_13) {
+		g13_exit_handel();
 	}
 	#endif
 }
