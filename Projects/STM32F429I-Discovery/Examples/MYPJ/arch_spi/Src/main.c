@@ -64,28 +64,32 @@ int adxl362_register_read_fifo(struct device *spi, uint8_t reg, uint8_t *data, u
 	return 0;
 }
 
-#define BME280
+#define BME280 //SPI_POLARITY_LOW,SPI_PHASE_1EDGE
 #define BME280_REG_ID               0xD0
 
-#define L3GD20
+#define L3GD20 //SPI_POLARITY_LOW,SPI_PHASE_1EDGE
 #define L3GD20_R                    0x80
 #define L3GD20_W                    0x00
 #define L3GD20_MS                   0x00
 #define L3GD20_WHO_AM_I_ADDR        0x0F
 #define L3GD20_CTRL_REG1            0x20
 
-//#define NRF24L01
+//#define NRF24L01 //SPI_POLARITY_LOW,SPI_PHASE_1EDGE
 #define NRF24L01_R                  0x00
 #define NRF24L01_W                  0x20
 #define NRF24L01_TX_ADDR            0x10
 
-//#define MAX31855
+//#define MAX31855 //SPI_POLARITY_LOW,SPI_PHASE_1EDGE
 
-#define ADXL362
+//#define ADXL362 //SPI_POLARITY_LOW,SPI_PHASE_1EDGE
 #define ADXL362_DEVID_AD            0x00
 #define ADXL362_DEVID_MST           0x01
 #define ADXL362_PARTID              0x02
 
+#define RN8209G //SPI_POLARITY_LOW,SPI_PHASE_2EDGE
+#define RN8209G_R                   0x00
+#define RN8209G_W                   0x80
+#define RN8209G_DEVICEID            0x7F
 
 int main(void)
 {
@@ -115,6 +119,9 @@ int main(void)
 	#endif
 	#ifdef ADXL362
 	uint8_t adxl362_rx;
+	#endif
+	#ifdef RN8209G
+	uint8_t rn8209g_rx[3];
 	#endif
 	
 	while(1) {
@@ -156,6 +163,11 @@ int main(void)
 		printf("ADXL362_0x1D = %X\r\n", adxl362_rx);
 		adxl362_register_read(spi4_cs1, ADXL362_PARTID, &adxl362_rx, 1);
 		printf("ADXL362_0xF2 = %X\r\n", adxl362_rx);
+		#endif
+		
+		#ifdef RN8209G
+		sample_register_read(spi4_cs1, RN8209G_DEVICEID | RN8209G_R, rn8209g_rx, 3);
+		printf("RN8209G_0x820900 = %02X%02X%02X\r\n", rn8209g_rx[0],rn8209g_rx[1],rn8209g_rx[2]);
 		#endif
 		
 		
