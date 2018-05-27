@@ -32,6 +32,15 @@ static int receive_data(struct device *dev, uint8_t *rx_data, uint16_t length)
 	return spi_cs_hal->receive(rx_data, length, config->rx_timeout);
 }
 
+static int receive_data32(struct device *dev, uint32_t *rx_data, uint16_t length)
+{
+	struct spi_data *data           = dev->data;
+	const struct spi_config *config = dev->config;
+	struct spi_api *spi_cs_hal      = data->spi_cs_hal;
+	
+	return spi_cs_hal->receive32(rx_data, length, config->rx_timeout);
+}
+
 static int transmit_receive_data(struct device *dev, uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
 	struct spi_data *data           = dev->data;
@@ -44,6 +53,7 @@ static int transmit_receive_data(struct device *dev, uint8_t *tx_data, uint8_t *
 static const struct spi_common_api spi_common_api = {
 	.transmit         = transmit_data,
 	.receive          = receive_data,
+	.receive32        = receive_data32,
 	.transmit_receive = transmit_receive_data,
 };
 
@@ -52,9 +62,9 @@ static const struct spi_common_api spi_common_api = {
 #include "spi4_cs1.h"
 static struct spi_data spi4_cs1_data;
 static const struct spi_config spi4_cs1_config = {
-	.tx_timeout    = 1,
-	.rx_timeout    = 1,
-	.tx_rx_timeout = 1,
+	.tx_timeout    = 100,
+	.rx_timeout    = 100,
+	.tx_rx_timeout = 100,
 };
 
 static int spi4_cs1_init(struct device *dev)
@@ -85,9 +95,9 @@ struct device* spi4_cs1_device_binding(void)
 #include "spi5_cs1.h"
 static struct spi_data spi5_cs1_data;
 static const struct spi_config spi5_cs1_config = {
-	.tx_timeout    = 1,
-	.rx_timeout    = 1,
-	.tx_rx_timeout = 1,
+	.tx_timeout    = 100,
+	.rx_timeout    = 100,
+	.tx_rx_timeout = 100,
 };
 
 static int spi5_cs1_init(struct device *dev)

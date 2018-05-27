@@ -76,6 +76,7 @@ struct spi_api {
 	void (*init)               (void);
 	int (*transmit)            (uint8_t *data, uint16_t length, uint32_t timeout);
 	int (*receive)             (uint8_t *data, uint16_t length, uint32_t timeout);
+	int (*receive32)           (uint32_t *data, uint16_t length, uint32_t timeout);
 	int (*transmit_receive)    (uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout);
 
 	int (*transmit_it)         (uint8_t *data, uint16_t length);

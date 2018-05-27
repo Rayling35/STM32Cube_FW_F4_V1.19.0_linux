@@ -17,21 +17,60 @@ struct nrf24l01_config {
 };
 
 
+static int spi_register_write(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
+{
+	uint8_t status;
+	uint8_t uint8_t_ctr;
+	
+	status = spi_transmit_receive(spi, reg);
+	
+	for(uint8_t_ctr = 0; uint8_t_ctr < length; uint8_t_ctr++) {
+		spi_transmit_receive(spi, *data++);
+	}
+	return status;
+}
+
+static int spi_register_read(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
+{
+	uint8_t status;
+	uint8_t uint8_t_ctr;
+	
+	status = spi_transmit_receive(spi, reg);
+	
+	for(uint8_t_ctr = 0; uint8_t_ctr < length; uint8_t_ctr++) {
+		data[uint8_t_ctr] = spi_transmit_receive(spi, 0XFF);
+	}
+	return status;
+}
+
 /*-----------API--------------*/
 static int send_data(struct device *dev)
 {
 	struct nrf24l01_data *data = dev->data;
 	//const struct nrf24l01_config *config = dev->config;
 	struct device *spi         = data->spi;
-	uint8_t tx[3];
-	uint8_t rx[3];
+	uint8_t tx[6];
+	uint8_t rx[6];
 	int status;
 	
-	tx[0] = READ_REG_NRF24L01;
-	tx[1] = STATUS;
-	status = spi_transmit_receive(spi, tx, rx, 3);
-	printf("spi_transmit_receive Status %d\r\n", status);
-	printf("%X %X %X\r\n", rx[0], rx[1], rx[2]);
+	tx[0] = WRITE_REG_NRF24L01 + TX_ADDR;
+	tx[1] = 0xA5;
+	tx[2] = 0xA5;
+	tx[3] = 0xA5;
+	tx[4] = 0xA5;
+	tx[5] = 0xA5;
+	status = spi_transmit_receive(spi, tx, rx, 1);
+	printf("%d\r\n", status);
+	status = spi_transmit_receive(spi, tx+1, rx, 5);
+	printf("%d\r\n", status);
+	printf("%X\r\n", rx[0]);
+	
+	tx[0] = READ_REG_NRF24L01 + TX_ADDR;
+	status = spi_transmit_receive(spi, tx, rx, 1);
+	printf("%d\r\n", status);
+	status = spi_transmit_receive(spi, tx, rx, 5);
+	printf("%d\r\n", status);
+	printf("%X %X %X %X %X\r\n", rx[1], rx[2], rx[3], rx[4], rx[5]);
 	
 	return 0;
 }

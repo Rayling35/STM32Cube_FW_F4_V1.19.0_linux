@@ -23,49 +23,141 @@ int sample_register_write(struct device *spi, uint8_t reg, uint8_t *data, uint16
 int sample_register_read(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
 {
 	int status;
+	uint8_t rx_data[length+1];
 	uint16_t i;
 	
-	status = spi_transmit_receive(spi, &reg, data, length+1);
+	status = spi_transmit_receive(spi, &reg, rx_data, length+1);
 	for(i = 0; i < length; i++) {
-		data[i] = data[i+1];
+		data[i] = rx_data[i+1];
 	}
 	return status;
 }
 
+int max31855_register_read(struct device *spi, uint32_t *data, uint16_t length)
+{
+	return spi_receive32(spi, data, length);
+}
+
+int adxl362_register_write(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
+{
+	//uint8_t write = 0x0A;
+	return 0;
+}
+
+int adxl362_register_read(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
+{
+	uint8_t tx_data[2] = {0x0B, reg};
+	int status;
+	uint8_t rx_data[length+2];
+	uint16_t i;
+	
+	status = spi_transmit_receive(spi, tx_data, rx_data, length+2);
+	for(i = 0; i < length; i++) {
+		data[i] = rx_data[i+2];
+	}
+	return status;
+}
+
+int adxl362_register_read_fifo(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
+{
+	//uint8_t read_fifo = 0x0D;
+	return 0;
+}
+
+#define BME280
 #define BME280_REG_ID               0xD0
 
+#define L3GD20
 #define L3GD20_R                    0x80
 #define L3GD20_W                    0x00
 #define L3GD20_MS                   0x00
 #define L3GD20_WHO_AM_I_ADDR        0x0F
 #define L3GD20_CTRL_REG1            0x20
 
+//#define NRF24L01
+#define NRF24L01_R                  0x00
+#define NRF24L01_W                  0x20
+#define NRF24L01_TX_ADDR            0x10
+
+//#define MAX31855
+
+#define ADXL362
+#define ADXL362_DEVID_AD            0x00
+#define ADXL362_DEVID_MST           0x01
+#define ADXL362_PARTID              0x02
+
+
 int main(void)
 {
 	system_initialization();
 	uart_printf_init();
 	
-	struct device *spi4 = spi4_cs1_device_binding();
-	struct device *spi5 = spi5_cs1_device_binding();
-	spi_init(spi4);
-	spi_init(spi5);
+	struct device *spi4_cs1 = spi4_cs1_device_binding();
+	struct device *spi5_cs1 = spi5_cs1_device_binding();
+	spi_init(spi4_cs1);
+	spi_init(spi5_cs1);
 	printf("SPI device init\r\n");
 	
+	#ifdef BME280
 	uint8_t bme280_rx;
-	
+	#endif
+	#ifdef L3GD20
 	uint8_t l3gd20_tx = 0x09;
 	uint8_t l3gd20_rx;
+	#endif
+	#ifdef NRF24L01
+	uint8_t nrf24l01_tx[5] = {0xA5,0xA5,0xA5,0xA5,0xA5};
+	uint8_t nrf24l01_tx1[5] = {0xE8,0xE8,0xE8,0xE8,0xE8};
+	uint8_t nrf24l01_rx[5];
+	#endif
+	#ifdef MAX31855
+	uint32_t max31855_rx;
+	#endif
+	#ifdef ADXL362
+	uint8_t adxl362_rx;
+	#endif
 	
 	while(1) {
-		sample_register_read(spi4, BME280_REG_ID, &bme280_rx, 1);
+		#ifdef BME280
+		sample_register_read(spi4_cs1, BME280_REG_ID, &bme280_rx, 1);
 		printf("BME280_0x60 = %X\r\n", bme280_rx);
+		#endif
 		
-		sample_register_read(spi5, L3GD20_WHO_AM_I_ADDR|L3GD20_R|L3GD20_MS, &l3gd20_rx, 1);
+		#ifdef L3GD20
+		sample_register_read(spi5_cs1, L3GD20_WHO_AM_I_ADDR | L3GD20_R | L3GD20_MS, &l3gd20_rx, 1);
 		printf("L3GD20_0xD4 = %X\r\n", l3gd20_rx);
 		
-		sample_register_write(spi5, L3GD20_CTRL_REG1|L3GD20_W|L3GD20_MS, &l3gd20_tx, 1);
-		sample_register_read(spi5, L3GD20_CTRL_REG1|L3GD20_R|L3GD20_MS, &l3gd20_rx, 1);
+		sample_register_write(spi5_cs1, L3GD20_CTRL_REG1 | L3GD20_W | L3GD20_MS, &l3gd20_tx, 1);
+		sample_register_read(spi5_cs1, L3GD20_CTRL_REG1 | L3GD20_R | L3GD20_MS, &l3gd20_rx, 1);
 		printf("CTRL_REG1 = %X\r\n", l3gd20_rx);
+		#endif
+		
+		#ifdef NRF24L01
+		sample_register_read(spi4_cs1, NRF24L01_TX_ADDR | NRF24L01_R, nrf24l01_rx, 5);
+		printf("NRF24L01 = %X %X %X %X %X\r\n", nrf24l01_rx[0],nrf24l01_rx[1],nrf24l01_rx[2],
+		                                                       nrf24l01_rx[3],nrf24l01_rx[4]);
+		sample_register_write(spi4_cs1, NRF24L01_TX_ADDR | NRF24L01_W, nrf24l01_tx, 5);
+		
+		sample_register_read(spi4_cs1, NRF24L01_TX_ADDR | NRF24L01_R, nrf24l01_rx, 5);
+		printf("NRF24L01 = %X %X %X %X %X\r\n", nrf24l01_rx[0],nrf24l01_rx[1],nrf24l01_rx[2],
+		                                                       nrf24l01_rx[3],nrf24l01_rx[4]);
+		sample_register_write(spi4_cs1, NRF24L01_TX_ADDR | NRF24L01_W, nrf24l01_tx1, 5);
+		#endif
+		
+		#ifdef MAX31855
+		max31855_register_read(spi4_cs1, &max31855_rx, 1);
+		printf("MAX31855 = %X\r\n", max31855_rx);
+		#endif
+		
+		#ifdef ADXL362
+		adxl362_register_read(spi4_cs1, ADXL362_DEVID_AD, &adxl362_rx, 1);
+		printf("ADXL362_0xAD = %X\r\n", adxl362_rx);
+		adxl362_register_read(spi4_cs1, ADXL362_DEVID_MST, &adxl362_rx, 1);
+		printf("ADXL362_0x1D = %X\r\n", adxl362_rx);
+		adxl362_register_read(spi4_cs1, ADXL362_PARTID, &adxl362_rx, 1);
+		printf("ADXL362_0xF2 = %X\r\n", adxl362_rx);
+		#endif
+		
 		
 		printf("\r\n");
 		HAL_Delay(2000);

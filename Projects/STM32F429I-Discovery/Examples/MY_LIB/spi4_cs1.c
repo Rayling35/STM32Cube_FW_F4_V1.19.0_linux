@@ -52,6 +52,25 @@ static int spi4_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
+static int spi4_cs1_receive32(uint32_t *data, uint16_t length, uint32_t timeout)
+{
+	int status;
+	uint8_t rx_data[4];
+	uint16_t i;
+	
+	for(i = 0; i < length; i++) {
+		SPI4C1_LOW();
+		status = HAL_SPI_Receive(&SpiHandle4, rx_data, 4, timeout);
+		SPI4C1_HIGH();
+		data[i] = (rx_data[0] << 24) | (rx_data[1] << 16) | (rx_data[2] << 8) | rx_data[3];
+		if(status != HAL_OK) {
+			spi4_cs1_error();
+			return status;
+		}
+	}
+	return status;
+}
+
 static int spi4_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
@@ -144,6 +163,7 @@ static struct spi_api spi4_cs1_api = {
 	.init                 = spi4_cs1_init,
 	.transmit             = spi4_cs1_transmit,
 	.receive              = spi4_cs1_receive,
+	.receive32            = spi4_cs1_receive32,
 	.transmit_receive     = spi4_cs1_transmit_receive,
 	#ifdef SPI4C1_IT
 	.transmit_it          = spi4_cs1_transmit_it,
