@@ -7,72 +7,64 @@
 struct nrf24l01_data {
 	struct device *spi;
 	struct device *gpio;
-	int data1;
-	int data2;
+	uint8_t rx_data[5];
 };
 
 struct nrf24l01_config {
-	uint32_t this_config_1;
-	uint32_t this_config_2;
+	uint8_t tx_config[5];
 };
 
 
 static int spi_register_write(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
 {
-	uint8_t status;
-	uint8_t uint8_t_ctr;
+	uint8_t tx_data[length+1];
+	uint8_t dummy;
+	uint16_t i;
 	
-	status = spi_transmit_receive(spi, reg);
-	
-	for(uint8_t_ctr = 0; uint8_t_ctr < length; uint8_t_ctr++) {
-		spi_transmit_receive(spi, *data++);
+	tx_data[0] = reg;
+	for(i = 1; i <= length; i++) {
+		tx_data[i] = *data;
+		data++;
 	}
-	return status;
+	return spi_transmit_receive(spi, tx_data, &dummy, length+1);
 }
 
 static int spi_register_read(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
 {
-	uint8_t status;
-	uint8_t uint8_t_ctr;
+	int status;
+	uint8_t rx_data[length+1];
+	uint16_t i;
 	
-	status = spi_transmit_receive(spi, reg);
-	
-	for(uint8_t_ctr = 0; uint8_t_ctr < length; uint8_t_ctr++) {
-		data[uint8_t_ctr] = spi_transmit_receive(spi, 0XFF);
+	status = spi_transmit_receive(spi, &reg, rx_data, length+1);
+	for(i = 0; i < length; i++) {
+		data[i] = rx_data[i+1];
 	}
 	return status;
 }
 
 /*-----------API--------------*/
-static int send_data(struct device *dev)
+static int tx_addr_data_test(struct device *dev)
 {
 	struct nrf24l01_data *data = dev->data;
-	//const struct nrf24l01_config *config = dev->config;
-	struct device *spi         = data->spi;
-	uint8_t tx[6];
-	uint8_t rx[6];
+	const struct nrf24l01_config *config = dev->config;
+	struct device *spi = data->spi;
+	uint8_t *rx = data->rx_data;
+	uint8_t tx[5];
 	int status;
 	
-	tx[0] = WRITE_REG_NRF24L01 + TX_ADDR;
-	tx[1] = 0xA5;
-	tx[2] = 0xA5;
-	tx[3] = 0xA5;
-	tx[4] = 0xA5;
-	tx[5] = 0xA5;
-	status = spi_transmit_receive(spi, tx, rx, 1);
-	printf("%d\r\n", status);
-	status = spi_transmit_receive(spi, tx+1, rx, 5);
-	printf("%d\r\n", status);
-	printf("%X\r\n", rx[0]);
+	status = spi_register_read(spi, NRF24L01_READ_REG | NRF24L01_TX_ADDR, rx, 5);
+	printf("%X%X%X%X%X\r\n", rx[0],rx[1],rx[2],rx[3],rx[4]);
 	
-	tx[0] = READ_REG_NRF24L01 + TX_ADDR;
-	status = spi_transmit_receive(spi, tx, rx, 1);
-	printf("%d\r\n", status);
-	status = spi_transmit_receive(spi, tx, rx, 5);
-	printf("%d\r\n", status);
-	printf("%X %X %X %X %X\r\n", rx[1], rx[2], rx[3], rx[4], rx[5]);
+	tx[0] = config->tx_config[0];
+	tx[1] = config->tx_config[1];
+	tx[2] = config->tx_config[2];
+	tx[3] = config->tx_config[3];
+	tx[4] = config->tx_config[4];
+	status = spi_register_write(spi, NRF24L01_WRITE_REG | NRF24L01_TX_ADDR, tx, 5);
+	status = spi_register_read(spi, NRF24L01_READ_REG | NRF24L01_TX_ADDR, rx, 5);
+	printf("%X%X%X%X%X\r\n", rx[0],rx[1],rx[2],rx[3],rx[4]);
 	
-	return 0;
+	return status;
 }
 
 static int get_data(struct device *dev)
@@ -81,7 +73,7 @@ static int get_data(struct device *dev)
 }
 
 static const struct rf_common_api nrf24l01_api = {
-	.send = send_data,
+	.device_test = tx_addr_data_test,
 	.get  = get_data,
 };
 
@@ -90,8 +82,7 @@ static const struct rf_common_api nrf24l01_api = {
 static struct nrf24l01_data nrf24l01_data;
 
 static const struct nrf24l01_config nrf24l01_config = {
-	.this_config_1 = 100,
-	.this_config_2 = 100,
+	.tx_config = {0xA5,0xA5,0xA5,0xA5,0xA5},
 };
 
 static int nrf24l01_init(struct device *dev)

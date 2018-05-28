@@ -223,8 +223,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\arch_driver\spi_driver.c</PathWithFileName>
-      <FilenameWithoutPath>spi_driver.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\arch_driver\nrf24l01_driver.c</PathWithFileName>
+      <FilenameWithoutPath>nrf24l01_driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -235,8 +235,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\arch_driver\gpio_driver.c</PathWithFileName>
-      <FilenameWithoutPath>gpio_driver.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\arch_driver\spi_driver.c</PathWithFileName>
+      <FilenameWithoutPath>spi_driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -247,8 +247,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\arch_driver\nrf24l01_driver.c</PathWithFileName>
-      <FilenameWithoutPath>nrf24l01_driver.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\MY_LIB\arch_driver\gpio_driver.c</PathWithFileName>
+      <FilenameWithoutPath>gpio_driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

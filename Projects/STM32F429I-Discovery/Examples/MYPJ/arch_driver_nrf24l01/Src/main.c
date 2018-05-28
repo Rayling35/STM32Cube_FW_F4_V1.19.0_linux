@@ -15,7 +15,7 @@ int main(void)
 	rf_init(nrf24l01);
 	printf("All device init finish\r\n");
 	
-	rf_send(nrf24l01);
+	rf_device_test(nrf24l01);
 	
 	while(1) {
 	}

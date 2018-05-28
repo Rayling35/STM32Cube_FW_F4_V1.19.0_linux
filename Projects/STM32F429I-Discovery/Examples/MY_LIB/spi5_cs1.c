@@ -52,6 +52,25 @@ static int spi5_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 	return status;
 }
 
+static int spi5_cs1_receive32(uint32_t *data, uint16_t length, uint32_t timeout)
+{
+	int status;
+	uint8_t rx_data[4];
+	uint16_t i;
+	
+	for(i = 0; i < length; i++) {
+		SPI5C1_LOW();
+		status = HAL_SPI_Receive(&SpiHandle5, rx_data, 4, timeout);
+		SPI5C1_HIGH();
+		data[i] = (rx_data[0] << 24) | (rx_data[1] << 16) | (rx_data[2] << 8) | rx_data[3];
+		if(status != HAL_OK) {
+			spi5_cs1_error();
+			return status;
+		}
+	}
+	return status;
+}
+
 static int spi5_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
@@ -144,6 +163,7 @@ static struct spi_api spi5_cs1_api = {
 	.init                 = spi5_cs1_init,
 	.transmit             = spi5_cs1_transmit,
 	.receive              = spi5_cs1_receive,
+	.receive32            = spi5_cs1_receive32,
 	.transmit_receive     = spi5_cs1_transmit_receive,
 	#ifdef SPI5C1_IT
 	.transmit_it          = spi5_cs1_transmit_it,
