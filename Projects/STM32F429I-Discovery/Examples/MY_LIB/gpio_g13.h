@@ -8,7 +8,12 @@
 #define PG13_PIN                  GPIO_PIN_13
 #define PG13_PORT                 GPIOG
 
+#ifdef G13_OUTPUT
+#define G13_OUTPUT_LOW()      HAL_GPIO_WritePin(PG13_PORT, PG13_PIN, GPIO_PIN_RESET)
+#define G13_OUTPUT_HIGH()     HAL_GPIO_WritePin(PG13_PORT, PG13_PIN, GPIO_PIN_SET)
+#endif
 
 struct gpio_api* gpio_g13_binding(void);
+
 
 #endif

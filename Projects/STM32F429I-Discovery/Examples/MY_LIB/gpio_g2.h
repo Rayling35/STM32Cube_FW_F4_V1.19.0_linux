@@ -8,7 +8,12 @@
 #define PG2_PIN                   GPIO_PIN_2
 #define PG2_PORT                  GPIOG
 
+#ifdef G2_OUTPUT
+#define G2_OUTPUT_LOW()       HAL_GPIO_WritePin(PG2_PORT, PG2_PIN, GPIO_PIN_RESET)
+#define G2_OUTPUT_HIGH()      HAL_GPIO_WritePin(PG2_PORT, PG2_PIN, GPIO_PIN_SET)
+#endif
 
 struct gpio_api* gpio_g2_binding(void);
+
 
 #endif

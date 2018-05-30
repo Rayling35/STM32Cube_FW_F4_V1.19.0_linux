@@ -8,7 +8,12 @@
 #define PG3_PIN                   GPIO_PIN_3
 #define PG3_PORT                  GPIOG
 
+#ifdef G3_OUTPUT
+#define G3_OUTPUT_LOW()       HAL_GPIO_WritePin(PG3_PORT, PG3_PIN, GPIO_PIN_RESET)
+#define G3_OUTPUT_HIGH()      HAL_GPIO_WritePin(PG3_PORT, PG3_PIN, GPIO_PIN_SET)
+#endif
 
 struct gpio_api* gpio_g3_binding(void);
+
 
 #endif

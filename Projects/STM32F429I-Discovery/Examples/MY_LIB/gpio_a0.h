@@ -8,7 +8,12 @@
 #define PA0_PIN                   GPIO_PIN_0
 #define PA0_PORT                  GPIOA
 
+#ifdef A0_OUTPUT
+#define A0_OUTPUT_LOW()       HAL_GPIO_WritePin(PA0_PORT, PA0_PIN, GPIO_PIN_RESET)
+#define A0_OUTPUT_HIGH()      HAL_GPIO_WritePin(PA0_PORT, PA0_PIN, GPIO_PIN_SET)
+#endif
 
 struct gpio_api* gpio_a0_binding(void);
+
 
 #endif

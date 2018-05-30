@@ -8,7 +8,12 @@
 #define PC1_PIN                   GPIO_PIN_1
 #define PC1_PORT                  GPIOC
 
+#ifdef C1_OUTPUT
+#define C1_OUTPUT_LOW()       HAL_GPIO_WritePin(PC1_PORT, PC1_PIN, GPIO_PIN_RESET)
+#define C1_OUTPUT_HIGH()      HAL_GPIO_WritePin(PC1_PORT, PC1_PIN, GPIO_PIN_SET)
+#endif
 
 struct gpio_api* gpio_c1_binding(void);
+
 
 #endif

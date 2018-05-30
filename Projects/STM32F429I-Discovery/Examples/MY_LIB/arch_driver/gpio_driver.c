@@ -44,7 +44,6 @@ static const struct gpio_common_api gpio_common_api = {
 
 
 #ifdef GPIO_A0_DEV
-#include "gpio_a0.h"
 static struct gpio_data gpio_a0_data;
 static const struct gpio_config gpio_a0_config;
 
@@ -78,7 +77,6 @@ __weak void a0_exit_handel(void)
 
 
 #ifdef GPIO_A5_DEV
-#include "gpio_a5.h"
 static struct gpio_data gpio_a5_data;
 static const struct gpio_config gpio_a5_config;
 
@@ -112,7 +110,6 @@ __weak void a5_exit_handel(void)
 
 
 #ifdef GPIO_C1_DEV
-#include "gpio_c1.h"
 static struct gpio_data gpio_c1_data;
 static const struct gpio_config gpio_c1_config;
 
@@ -146,7 +143,6 @@ __weak void c1_exit_handel(void)
 
 
 #ifdef GPIO_G2_DEV
-#include "gpio_g2.h"
 static struct gpio_data gpio_g2_data;
 static const struct gpio_config gpio_g2_config;
 
@@ -180,7 +176,6 @@ __weak void g2_exit_handel(void)
 
 
 #ifdef GPIO_G3_DEV
-#include "gpio_g3.h"
 static struct gpio_data gpio_g3_data;
 static const struct gpio_config gpio_g3_config;
 
@@ -214,7 +209,6 @@ __weak void g3_exit_handel(void)
 
 
 #ifdef GPIO_G13_DEV
-#include "gpio_g13.h"
 static struct gpio_data gpio_g13_data;
 static const struct gpio_config gpio_g13_config;
 
