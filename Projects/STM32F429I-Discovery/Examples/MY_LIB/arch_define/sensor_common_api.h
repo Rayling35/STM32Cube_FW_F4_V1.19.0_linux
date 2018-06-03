@@ -21,14 +21,14 @@ static inline int sensor_init(struct device *dev)
 
 static inline int sensor_send(struct device *dev)
 {
-	const struct sensor_common_api *sensor_common_api = dev->api;
-	return sensor_common_api->send(dev);
+	const struct sensor_common_api *d_api = dev->api;
+	return d_api->send(dev);
 }
 
 static inline int sensor_get(struct device *dev)
 {
-	const struct sensor_common_api *sensor_common_api = dev->api;
-	return sensor_common_api->get(dev);
+	const struct sensor_common_api *d_api = dev->api;
+	return d_api->get(dev);
 }
 
 

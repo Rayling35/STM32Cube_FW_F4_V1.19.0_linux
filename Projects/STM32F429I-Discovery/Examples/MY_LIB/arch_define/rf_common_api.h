@@ -21,14 +21,14 @@ static inline int rf_init(struct device *dev)
 
 static inline int rf_device_test(struct device *dev)
 {
-	const struct rf_common_api *rf_common_api = dev->api;
-	return rf_common_api->device_test(dev);
+	const struct rf_common_api *d_api = dev->api;
+	return d_api->device_test(dev);
 }
 
 static inline int rf_get(struct device *dev)
 {
-	const struct rf_common_api *rf_common_api = dev->api;
-	return rf_common_api->get(dev);
+	const struct rf_common_api *d_api = dev->api;
+	return d_api->get(dev);
 }
 
 

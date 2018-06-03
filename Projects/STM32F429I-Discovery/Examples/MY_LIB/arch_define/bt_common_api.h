@@ -21,14 +21,14 @@ static inline int bt_init(struct device *dev)
 
 static inline int bt_send(struct device *dev)
 {
-	const struct bt_common_api *bt_common_api = dev->api;
-	return bt_common_api->send(dev);
+	const struct bt_common_api *d_api = dev->api;
+	return d_api->send(dev);
 }
 
 static inline int bt_get(struct device *dev)
 {
-	const struct bt_common_api *bt_common_api = dev->api;
-	return bt_common_api->get(dev);
+	const struct bt_common_api *d_api = dev->api;
+	return d_api->get(dev);
 }
 
 

@@ -21,14 +21,14 @@ static inline int uart_init(struct device *dev)
 
 static inline int uart_transmit(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct uart_common_api *uart_common_api = dev->api;
-	return uart_common_api->transmit(dev, data, length);
+	const struct uart_common_api *d_api = dev->api;
+	return d_api->transmit(dev, data, length);
 }
 
 static inline int uart_receive(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct uart_common_api *uart_common_api = dev->api;
-	return uart_common_api->receive(dev, data, length);
+	const struct uart_common_api *d_api = dev->api;
+	return d_api->receive(dev, data, length);
 }
 
 

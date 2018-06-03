@@ -21,14 +21,14 @@ static inline int i2c_init(struct device *dev)
 
 static inline int i2c_mem_write(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	const struct i2c_common_api *i2c_common_api = dev->api;
-	return i2c_common_api->mem_write(dev, addr, reg, data, length);
+	const struct i2c_common_api *d_api = dev->api;
+	return d_api->mem_write(dev, addr, reg, data, length);
 }
 
 static inline int i2c_mem_read(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	const struct i2c_common_api *i2c_common_api = dev->api;
-	return i2c_common_api->mem_read(dev, addr, reg, data, length);
+	const struct i2c_common_api *d_api = dev->api;
+	return d_api->mem_read(dev, addr, reg, data, length);
 }
 
 

@@ -21,14 +21,14 @@ static inline int standard_init(struct device *dev)
 
 static inline int standard_app1(struct device *dev)
 {
-	const struct standard_common_api *standard_common_api = dev->api;
-	return standard_common_api->send(dev);
+	const struct standard_common_api *d_api = dev->api;
+	return d_api->send(dev);
 }
 
 static inline int standard_app2(struct device *dev)
 {
-	const struct standard_common_api *standard_common_api = dev->api;
-	return standard_common_api->get(dev);
+	const struct standard_common_api *d_api = dev->api;
+	return d_api->get(dev);
 }
 
 

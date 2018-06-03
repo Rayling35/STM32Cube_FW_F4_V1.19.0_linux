@@ -21,14 +21,14 @@ static inline int wifi_init(struct device *dev)
 
 static inline int wifi_send(struct device *dev)
 {
-	const struct wifi_common_api *wifi_common_api = dev->api;
-	return wifi_common_api->send(dev);
+	const struct wifi_common_api *d_api = dev->api;
+	return d_api->send(dev);
 }
 
 static inline int wifi_get(struct device *dev)
 {
-	const struct wifi_common_api *wifi_common_api = dev->api;
-	return wifi_common_api->get(dev);
+	const struct wifi_common_api *d_api = dev->api;
+	return d_api->get(dev);
 }
 
 

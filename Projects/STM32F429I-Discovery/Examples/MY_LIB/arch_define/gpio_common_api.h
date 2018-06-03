@@ -23,20 +23,20 @@ static inline int gpio_init(struct device *dev)
 
 static inline int gpio_read(struct device *dev)
 {
-	const struct gpio_common_api *gpio_common_api = dev->api;
-	return gpio_common_api->read(dev);
+	const struct gpio_common_api *d_api = dev->api;
+	return d_api->read(dev);
 }
 
 static inline void gpio_write(struct device *dev, uint16_t state)
 {
-	const struct gpio_common_api *gpio_common_api = dev->api;
-	gpio_common_api->write(dev, state);
+	const struct gpio_common_api *d_api = dev->api;
+	d_api->write(dev, state);
 }
 
 static inline void gpio_toggle_write(struct device *dev)
 {
-	const struct gpio_common_api *gpio_common_api = dev->api;
-	gpio_common_api->toggle_write(dev);
+	const struct gpio_common_api *d_api = dev->api;
+	d_api->toggle_write(dev);
 }
 
 

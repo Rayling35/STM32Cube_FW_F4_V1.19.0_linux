@@ -25,26 +25,26 @@ static inline int spi_init(struct device *dev)
 
 static inline int spi_transmit(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct spi_common_api *spi_common_api = dev->api;
-	return spi_common_api->transmit(dev, data, length);
+	const struct spi_common_api *d_api = dev->api;
+	return d_api->transmit(dev, data, length);
 }
 
 static inline int spi_receive(struct device *dev, uint8_t *data, uint16_t length)
 {
-	const struct spi_common_api *spi_common_api = dev->api;
-	return spi_common_api->receive(dev, data, length);
+	const struct spi_common_api *d_api = dev->api;
+	return d_api->receive(dev, data, length);
 }
 
 static inline int spi_receive32(struct device *dev, uint32_t *data, uint16_t length)
 {
-	const struct spi_common_api *spi_common_api = dev->api;
-	return spi_common_api->receive32(dev, data, length);
+	const struct spi_common_api *d_api = dev->api;
+	return d_api->receive32(dev, data, length);
 }
 
 static inline int spi_transmit_receive(struct device *dev, uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	const struct spi_common_api *spi_common_api = dev->api;
-	return spi_common_api->transmit_receive(dev, tx_data, rx_data, length);
+	const struct spi_common_api *d_api = dev->api;
+	return d_api->transmit_receive(dev, tx_data, rx_data, length);
 }
 
 
