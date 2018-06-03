@@ -12,23 +12,24 @@ struct i2c_config {
 	uint32_t read_timeout;
 };
 
+
 /*-----------API--------------*/
 static int mem_write_data(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *w_data, uint16_t length)
 {
-	struct i2c_data *data           = dev->data;
-	const struct i2c_config *config = dev->config;
-	struct i2c_api *i2c_hal         = data->i2c_hal;
+	struct i2c_data *d_data           = dev->data;
+	const struct i2c_config *d_config = dev->config;
+	struct i2c_api *i2c_hal           = d_data->i2c_hal;
 	
-	return i2c_hal->mem_write(addr, reg, w_data, length, config->write_timeout);
+	return i2c_hal->mem_write(addr, reg, w_data, length, d_config->write_timeout);
 }
 
 static int mem_read_data(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *r_data, uint16_t length)
 {
-	struct i2c_data *data           = dev->data;
-	const struct i2c_config *config = dev->config;
-	struct i2c_api *i2c_hal         = data->i2c_hal;
+	struct i2c_data *d_data           = dev->data;
+	const struct i2c_config *d_config = dev->config;
+	struct i2c_api *i2c_hal           = d_data->i2c_hal;
 	
-	return i2c_hal->mem_read(addr, reg, r_data, length, config->read_timeout);
+	return i2c_hal->mem_read(addr, reg, r_data, length, d_config->read_timeout);
 }
 
 static const struct i2c_common_api i2c_common_api = {
@@ -40,17 +41,18 @@ static const struct i2c_common_api i2c_common_api = {
 #ifdef I2C1_DEV
 #include "i2c1.h"
 static struct i2c_data i2c1_data;
+
 static const struct i2c_config i2c1_config = {
 	.write_timeout = 1,
 	.read_timeout  = 1,
 };
 
-static int i2c1_init(struct device *dev)
+static int i2c1_dev_init(struct device *dev)
 {
-	struct i2c_data *data = dev->data;
+	struct i2c_data *d_data = dev->data;
 	
-	data->i2c_hal = i2c1_binding();
-	data->i2c_hal->init();
+	d_data->i2c_hal = i2c1_binding();
+	d_data->i2c_hal->init();
 	printf("I2C1 device init\r\n");
 	
 	return 0;
@@ -60,7 +62,7 @@ struct device i2c_1 = {
 	.api    = &i2c_common_api,
 	.data   = &i2c1_data,
 	.config = &i2c1_config,
-	.init   = i2c1_init,
+	.init   = i2c1_dev_init,
 };
 
 struct device* i2c1_device_binding(void)
@@ -72,17 +74,18 @@ struct device* i2c1_device_binding(void)
 #ifdef I2C3_DEV
 #include "i2c3.h"
 static struct i2c_data i2c3_data;
+
 static const struct i2c_config i2c3_config = {
 	.write_timeout = 1,
 	.read_timeout  = 1,
 };
 
-static int i2c3_init(struct device *dev)
+static int i2c3_dev_init(struct device *dev)
 {
-	struct i2c_data *data = dev->data;
+	struct i2c_data *d_data = dev->data;
 	
-	data->i2c_hal = i2c3_binding();
-	data->i2c_hal->init();
+	d_data->i2c_hal = i2c3_binding();
+	d_data->i2c_hal->init();
 	printf("I2C3 device init\r\n");
 	
 	return 0;
@@ -92,7 +95,7 @@ struct device i2c_3 = {
 	.api    = &i2c_common_api,
 	.data   = &i2c3_data,
 	.config = &i2c3_config,
-	.init   = i2c3_init,
+	.init   = i2c3_dev_init,
 };
 
 struct device* i2c3_device_binding(void)
