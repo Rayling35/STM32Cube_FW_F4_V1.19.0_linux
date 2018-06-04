@@ -13,6 +13,7 @@ struct gpio_config {
 
 
 /*-----------API--------------*/
+
 static int read_data(struct device *dev)
 {
 	struct gpio_data *d_data  = dev->data;

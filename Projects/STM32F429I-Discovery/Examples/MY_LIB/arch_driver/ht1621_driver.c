@@ -15,6 +15,7 @@ struct ht1621_config {
 
 
 /*-----------API--------------*/
+
 static void command(struct device *dev, uint8_t cmd)
 {
 	send_command(cmd);

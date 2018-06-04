@@ -45,6 +45,7 @@ static int spi_register_read(struct device *spi, uint8_t reg, uint8_t *data, uin
 }
 
 /*-----------API--------------*/
+
 static int tx_addr_data_test(struct device *dev)
 {
 	struct nrf24l01_data *d_data           = dev->data;

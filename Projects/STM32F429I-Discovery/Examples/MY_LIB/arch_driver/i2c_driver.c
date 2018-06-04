@@ -14,6 +14,7 @@ struct i2c_config {
 
 
 /*-----------API--------------*/
+
 static int mem_write_data(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *w_data, uint16_t length)
 {
 	struct i2c_data *d_data           = dev->data;

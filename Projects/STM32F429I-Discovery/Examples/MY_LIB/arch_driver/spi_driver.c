@@ -15,6 +15,7 @@ struct spi_config {
 
 
 /*-----------API--------------*/
+
 static int transmit_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 {
 	struct spi_data *d_data           = dev->data;

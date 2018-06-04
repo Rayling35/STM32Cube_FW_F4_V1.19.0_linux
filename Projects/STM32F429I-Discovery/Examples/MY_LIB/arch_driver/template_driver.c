@@ -18,6 +18,7 @@ struct template_config {
 
 
 /*-----------API--------------*/
+
 static int send_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 {
 	struct template_data *d_data           = dev->data;
