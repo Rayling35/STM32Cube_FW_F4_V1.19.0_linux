@@ -74,9 +74,11 @@ struct device* gpio_a0_device_binding(void)
 	return &gpio_a0;
 }
 
+#ifdef A0_EXIT
 __weak void a0_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -109,9 +111,11 @@ struct device* gpio_a5_device_binding(void)
 	return &gpio_a5;
 }
 
+#ifdef A5_EXIT
 __weak void a5_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -144,9 +148,11 @@ struct device* gpio_c1_device_binding(void)
 	return &gpio_c1;
 }
 
+#ifdef C1_EXIT
 __weak void c1_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -179,9 +185,11 @@ struct device* gpio_g2_device_binding(void)
 	return &gpio_g2;
 }
 
+#ifdef G2_EXIT
 __weak void g2_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -214,9 +222,11 @@ struct device* gpio_g3_device_binding(void)
 	return &gpio_g3;
 }
 
+#ifdef G3_EXIT
 __weak void g3_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -249,9 +259,11 @@ struct device* gpio_g13_device_binding(void)
 	return &gpio_g13;
 }
 
+#ifdef G13_EXIT
 __weak void g13_exit_handel(void)
 {
 }
+#endif
 #endif
 
 
@@ -265,7 +277,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	
 	#ifdef A5_EXIT
 	if(GPIO_Pin == GPIO_PIN_5) {
-		a0_exit_handel();
+		a5_exit_handel();
 	}
 	#endif
 	
