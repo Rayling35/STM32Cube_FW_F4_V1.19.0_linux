@@ -133,7 +133,7 @@ static int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit(&UartHandle3, data, length, timeout);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;
@@ -143,7 +143,7 @@ static int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive(&UartHandle3, data, length, timeout);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;
@@ -154,7 +154,7 @@ static int uart3_transmit_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_IT(&UartHandle3, data, length);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;
@@ -164,7 +164,7 @@ static int uart3_receive_it(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_IT(&UartHandle3, data, length);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;
@@ -175,7 +175,7 @@ static int uart3_transmit_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Transmit_DMA(&UartHandle3, data, length);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;
@@ -185,7 +185,7 @@ static int uart3_receive_dma(uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 	status = HAL_UART_Receive_DMA(&UartHandle3, data, length);
-	if(status != HAL_OK) {
+	if(status == HAL_ERROR) {
 		uart3_error();
 	}
 	return status;

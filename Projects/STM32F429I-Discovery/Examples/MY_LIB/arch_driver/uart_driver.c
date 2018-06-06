@@ -3,6 +3,12 @@
 #include "uart_driver.h"
 
 
+typedef enum {
+	polling,
+	it,
+	dma,
+}uart_mode;
+
 struct uart_data {
 	struct uart_api *uart_hal;
 };
@@ -10,6 +16,7 @@ struct uart_data {
 struct uart_config {
 	uint32_t tx_timeout;
 	uint32_t rx_timeout;
+	uart_mode mode;
 };
 
 
@@ -20,8 +27,20 @@ static int transmit_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 	struct uart_data *d_data           = dev->data;
 	const struct uart_config *d_config = dev->config;
 	struct uart_api *uart_hal          = d_data->uart_hal;
+	int status;
 	
-	return uart_hal->transmit(tx_data, length, d_config->tx_timeout);
+	switch(d_config->mode) {
+		case polling:
+			status = uart_hal->transmit(tx_data, length, d_config->tx_timeout);
+			break;
+		case it:
+			status = uart_hal->transmit_it(tx_data, length);
+			break;
+		case dma:
+			status = uart_hal->transmit_dma(tx_data, length);
+			break;
+	}
+	return status;
 }
 
 static int receive_data(struct device *dev, uint8_t *rx_data, uint16_t length)
@@ -29,8 +48,20 @@ static int receive_data(struct device *dev, uint8_t *rx_data, uint16_t length)
 	struct uart_data *d_data           = dev->data;
 	const struct uart_config *d_config = dev->config;
 	struct uart_api *uart_hal          = d_data->uart_hal;
+	int status;
 	
-	return uart_hal->receive(rx_data, length, d_config->rx_timeout);
+	switch(d_config->mode) {
+		case polling:
+			status = uart_hal->receive(rx_data, length, d_config->rx_timeout);
+			break;
+		case it:
+			status = uart_hal->receive_it(rx_data, length);
+			break;
+		case dma:
+			status = uart_hal->receive_dma(rx_data, length);
+			break;
+	}
+	return status;
 }
 
 static const struct uart_common_api uart_common_api = {
@@ -46,6 +77,7 @@ static struct uart_data uart3_data;
 static const struct uart_config uart3_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
+	.mode = dma,
 };
 
 static int uart3_dev_init(struct device *dev)
@@ -70,6 +102,18 @@ struct device* uart3_device_binding(void)
 {
 	return &uart_3;
 }
+
+#ifdef UART3_IT
+__weak void uart3_tx_callback_handel(struct device *dev)
+{
+}
+__weak void uart3_rx_callback_handel(struct device *dev)
+{
+}
+__weak void uart3_error_callback_handel(struct device *dev)
+{
+}
+#endif
 #endif
 
 #ifdef UART6_DEV
@@ -79,6 +123,7 @@ static struct uart_data uart6_data;
 static const struct uart_config uart6_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
+	.mode = polling,
 };
 
 static int uart6_dev_init(struct device *dev)
@@ -103,6 +148,18 @@ struct device* uart6_device_binding(void)
 {
 	return &uart_6;
 }
+
+#ifdef UART6_IT
+__weak void uart6_tx_callback_handel(struct device *dev)
+{
+}
+__weak void uart6_rx_callback_handel(struct device *dev)
+{
+}
+__weak void uart6_error_callback_handel(struct device *dev)
+{
+}
+#endif
 #endif
 
 #ifdef UART7_DEV
@@ -112,6 +169,7 @@ static struct uart_data uart7_data;
 static const struct uart_config uart7_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
+	.mode = polling,
 };
 
 static int uart7_dev_init(struct device *dev)
@@ -136,4 +194,80 @@ struct device* uart7_device_binding(void)
 {
 	return &uart_7;
 }
+
+#ifdef UART7_IT
+__weak void uart7_tx_callback_handel(struct device *dev)
+{
+}
+__weak void uart7_rx_callback_handel(struct device *dev)
+{
+}
+__weak void uart7_error_callback_handel(struct device *dev)
+{
+}
 #endif
+#endif
+
+
+void HAL_UART_TxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+	#ifdef UART3_IT
+	if(UartHandle->Instance == USART3) {
+		uart3_tx_callback_handel(&uart_3);
+	}
+	#endif
+	
+	#ifdef UART6_IT
+	if(UartHandle->Instance == USART6) {
+		uart6_tx_callback_handel(&uart_6);
+	}
+	#endif
+	
+	#ifdef UART7_IT
+	if(UartHandle->Instance == UART7) {
+		uart7_tx_callback_handel(&uart_7);
+	}
+	#endif
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *UartHandle)
+{
+	#ifdef UART3_IT
+	if(UartHandle->Instance == USART3) {
+		uart3_rx_callback_handel(&uart_3);
+	}
+	#endif
+	
+	#ifdef UART6_IT
+	if(UartHandle->Instance == USART6) {
+		uart6_rx_callback_handel(&uart_6);
+	}
+	#endif
+	
+	#ifdef UART7_IT
+	if(UartHandle->Instance == UART7) {
+		uart7_rx_callback_handel(&uart_7);
+	}
+	#endif
+}
+
+void HAL_UART_ErrorCallback(UART_HandleTypeDef *UartHandle)
+{
+	#ifdef UART3_IT
+	if(UartHandle->Instance == USART3) {
+		uart3_error_callback_handel(&uart_3);
+	}
+	#endif
+	
+	#ifdef UART6_IT
+	if(UartHandle->Instance == USART6) {
+		uart6_error_callback_handel(&uart_6);
+	}
+	#endif
+	
+	#ifdef UART7_IT
+	if(UartHandle->Instance == UART7) {
+		uart7_error_callback_handel(&uart_7);
+	}
+	#endif
+}

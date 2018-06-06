@@ -6,8 +6,12 @@
 #include "main.h"
 
 
-uint8_t Buffer[1];
-uint8_t ok[] = "ok";
+uint8_t u3_rx[1];
+uint8_t u6_rx[1];
+uint8_t u7_rx[1];
+uint8_t u3[] = "u3";
+uint8_t u6[] = "u6";
+uint8_t u7[] = "u7";
 
 int main(void)
 {
@@ -22,15 +26,25 @@ int main(void)
 	uart_init(uart7);
 	printf("UART device init\r\n");
 	
+	uart_receive(uart3, u3_rx, 1);
+	
 	while(1) {
-		uart_receive(uart3, Buffer, 1);
-		uart_receive(uart6, Buffer, 1);
-		uart_receive(uart7, Buffer, 1);
-		if(Buffer[0] == 0x66) {
-			printf("Hi fff\r\n");
-			uart_transmit(uart3, ok, 2);
-			uart_transmit(uart6, ok, 2);
-			uart_transmit(uart7, ok, 2);
+		uart_receive(uart6, u6_rx, 1);
+		if(u6_rx[0] == 0x66) {
+			printf("Hi u6fff\r\n");
+			uart_transmit(uart6, u6, 2);
+		}
+		
+		uart_receive(uart7, u7_rx, 1);
+		if(u7_rx[0] == 0x66) {
+			printf("Hi u7fff\r\n");
+			uart_transmit(uart7, u7, 2);
 		}
   }
+}
+
+void uart3_rx_callback_handel(struct device *uart3)
+{
+	uart_transmit(uart3, u3_rx, 1);
+	uart_receive(uart3, u3_rx, 1);
 }
