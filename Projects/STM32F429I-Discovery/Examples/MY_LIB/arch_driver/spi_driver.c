@@ -1,20 +1,10 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #include "api_define.h"
 #include "spi_common_api.h"
 #include "spi_driver.h"
 
-
-struct spi_data {
-	struct spi_api *spi_cs_hal;
-};
-
-struct spi_config {
-	uint32_t tx_timeout;
-	uint32_t rx_timeout;
-	uint32_t tx_rx_timeout;
-};
-
-
-/*-----------API--------------*/
 
 static int transmit_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 {

@@ -5,17 +5,6 @@
 #include "seg7_common_api.h"
 
 
-struct ht1621_data {
-	uint8_t data;
-};
-
-struct ht1621_config {
-	uint8_t config;
-};
-
-
-/*-----------API--------------*/
-
 static void command(struct device *dev, uint8_t cmd)
 {
 	send_command(cmd);
@@ -39,13 +28,11 @@ static void write_data_bit_4(struct device *dev, uint8_t seg_addr, uint8_t d3, u
 static const struct seg7_common_api ht1621_api = {
 	.write_command    = command,
 	.write_data_4     = write_data_4,
-	.write_data_44    = write_data_44,
+	.write_data_8     = write_data_44,
 	.write_data_bit_4 = write_data_bit_4,
 };
 
 static struct ht1621_data ht1621_data;
-
-static const struct ht1621_config ht1621_config;
 
 static int ht1621_dev_init(struct device *dev)
 {
@@ -65,7 +52,6 @@ static int ht1621_dev_init(struct device *dev)
 struct device ht1621 = {
 	.api    = &ht1621_api,
 	.data   = &ht1621_data,
-	.config = &ht1621_config,
 	.init   = ht1621_dev_init,
 };
 

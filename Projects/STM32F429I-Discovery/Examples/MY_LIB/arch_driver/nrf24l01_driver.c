@@ -6,17 +6,6 @@
 #include "rf_common_api.h"
 
 
-struct nrf24l01_data {
-	struct device *spi;
-	struct device *gpio;
-	uint8_t rx_data[5];
-};
-
-struct nrf24l01_config {
-	uint8_t tx_config[5];
-};
-
-
 static int spi_register_write(struct device *spi, uint8_t reg, uint8_t *data, uint16_t length)
 {
 	uint8_t tx_data[length+1];
@@ -43,8 +32,6 @@ static int spi_register_read(struct device *spi, uint8_t reg, uint8_t *data, uin
 	}
 	return status;
 }
-
-/*-----------API--------------*/
 
 static int tx_addr_data_test(struct device *dev)
 {

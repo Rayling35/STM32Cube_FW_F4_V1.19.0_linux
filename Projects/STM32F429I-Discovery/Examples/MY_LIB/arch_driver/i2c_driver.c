@@ -3,18 +3,6 @@
 #include "i2c_driver.h"
 
 
-struct i2c_data {
-	struct i2c_api *i2c_hal;
-};
-
-struct i2c_config {
-	uint32_t write_timeout;
-	uint32_t read_timeout;
-};
-
-
-/*-----------API--------------*/
-
 static int mem_write_data(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *w_data, uint16_t length)
 {
 	struct i2c_data *d_data           = dev->data;

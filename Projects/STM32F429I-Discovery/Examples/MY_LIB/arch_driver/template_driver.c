@@ -4,21 +4,6 @@
 #include "device_1_common_api.h"
 
 
-struct template_data {
-	struct device *binding_device_1;
-	struct device *binding_device_2;
-	int data1;
-	int data2;
-};
-
-struct template_config {
-	uint32_t this_config_1;
-	uint32_t this_config_2;
-};
-
-
-/*-----------API--------------*/
-
 static int send_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 {
 	struct template_data *d_data           = dev->data;

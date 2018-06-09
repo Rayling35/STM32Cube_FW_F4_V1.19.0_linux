@@ -2,6 +2,22 @@
 #define __UART_DRIVER_H
 
 
+enum uart_mode{
+	POLLING,
+	IT,
+	DMA,
+};
+
+struct uart_data {
+	struct uart_api *uart_hal;
+};
+
+struct uart_config {
+	uint32_t tx_timeout;
+	uint32_t rx_timeout;
+	enum uart_mode mode;
+};
+
 #ifdef UART3_DEV
 struct device* uart3_device_binding(void);
 #endif

@@ -2,6 +2,16 @@
 #define __NRF24L01_DRIVER_H
 
 
+struct nrf24l01_data {
+	struct device *spi;
+	struct device *gpio;
+	uint8_t rx_data[5];
+};
+
+struct nrf24l01_config {
+	uint8_t tx_config[5];
+};
+
 //commands
 #define NRF24L01_READ_REG          0x00     //read register
 #define NRF24L01_WRITE_REG         0x20     //write register

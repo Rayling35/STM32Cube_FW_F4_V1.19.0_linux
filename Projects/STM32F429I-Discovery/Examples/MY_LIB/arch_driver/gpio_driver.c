@@ -3,17 +3,6 @@
 #include "gpio_driver.h"
 
 
-struct gpio_data {
-	struct gpio_api *gpio_hal;
-};
-
-struct gpio_config {
-	int config;
-};
-
-
-/*-----------API--------------*/
-
 static int read_data(struct device *dev)
 {
 	struct gpio_data *d_data  = dev->data;
@@ -49,8 +38,6 @@ static const struct gpio_common_api gpio_common_api = {
 #include "gpio_a0.h"
 static struct gpio_data gpio_a0_data;
 
-static const struct gpio_config gpio_a0_config;
-
 static int gpio_a0_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -65,7 +52,6 @@ static int gpio_a0_dev_init(struct device *dev)
 struct device gpio_a0 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_a0_data,
-	.config = &gpio_a0_config,
 	.init   = gpio_a0_dev_init,
 };
 
@@ -86,8 +72,6 @@ __weak void a0_exit_handel(void)
 #include "gpio_a5.h"
 static struct gpio_data gpio_a5_data;
 
-static const struct gpio_config gpio_a5_config;
-
 static int gpio_a5_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -102,7 +86,6 @@ static int gpio_a5_dev_init(struct device *dev)
 struct device gpio_a5 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_a5_data,
-	.config = &gpio_a5_config,
 	.init   = gpio_a5_dev_init,
 };
 
@@ -123,8 +106,6 @@ __weak void a5_exit_handel(void)
 #include "gpio_c1.h"
 static struct gpio_data gpio_c1_data;
 
-static const struct gpio_config gpio_c1_config;
-
 static int gpio_c1_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -139,7 +120,6 @@ static int gpio_c1_dev_init(struct device *dev)
 struct device gpio_c1 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_c1_data,
-	.config = &gpio_c1_config,
 	.init   = gpio_c1_dev_init,
 };
 
@@ -160,8 +140,6 @@ __weak void c1_exit_handel(void)
 #include "gpio_g2.h"
 static struct gpio_data gpio_g2_data;
 
-static const struct gpio_config gpio_g2_config;
-
 static int gpio_g2_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -176,7 +154,6 @@ static int gpio_g2_dev_init(struct device *dev)
 struct device gpio_g2 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_g2_data,
-	.config = &gpio_g2_config,
 	.init   = gpio_g2_dev_init,
 };
 
@@ -197,8 +174,6 @@ __weak void g2_exit_handel(void)
 #include "gpio_g3.h"
 static struct gpio_data gpio_g3_data;
 
-static const struct gpio_config gpio_g3_config;
-
 static int gpio_g3_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -213,7 +188,6 @@ static int gpio_g3_dev_init(struct device *dev)
 struct device gpio_g3 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_g3_data,
-	.config = &gpio_g3_config,
 	.init   = gpio_g3_dev_init,
 };
 
@@ -234,8 +208,6 @@ __weak void g3_exit_handel(void)
 #include "gpio_g13.h"
 static struct gpio_data gpio_g13_data;
 
-static const struct gpio_config gpio_g13_config;
-
 static int gpio_g13_dev_init(struct device *dev)
 {
 	struct gpio_data *d_data = dev->data;
@@ -250,7 +222,6 @@ static int gpio_g13_dev_init(struct device *dev)
 struct device gpio_g13 = {
 	.api    = &gpio_common_api,
 	.data   = &gpio_g13_data,
-	.config = &gpio_g13_config,
 	.init   = gpio_g13_dev_init,
 };
 

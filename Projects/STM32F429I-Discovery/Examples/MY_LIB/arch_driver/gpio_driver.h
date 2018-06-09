@@ -2,6 +2,10 @@
 #define __GPIO_DRIVER_H
 
 
+struct gpio_data {
+	struct gpio_api *gpio_hal;
+};
+
 #ifdef GPIO_A0_DEV
 struct device* gpio_a0_device_binding(void);
 #endif

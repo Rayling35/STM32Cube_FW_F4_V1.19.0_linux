@@ -2,6 +2,10 @@
 #define __PZ_LCD_DRIVER_H
 
 
+struct pz_lcd_data {
+	struct device *ht1621;
+};
+
 struct device* pz_lcd_device_binding(void);
 
 

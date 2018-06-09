@@ -3,25 +3,6 @@
 #include "uart_driver.h"
 
 
-typedef enum {
-	polling,
-	it,
-	dma,
-}uart_mode;
-
-struct uart_data {
-	struct uart_api *uart_hal;
-};
-
-struct uart_config {
-	uint32_t tx_timeout;
-	uint32_t rx_timeout;
-	uart_mode mode;
-};
-
-
-/*-----------API--------------*/
-
 static int transmit_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 {
 	struct uart_data *d_data           = dev->data;
@@ -29,16 +10,18 @@ static int transmit_data(struct device *dev, uint8_t *tx_data, uint16_t length)
 	struct uart_api *uart_hal          = d_data->uart_hal;
 	int status;
 	
-	switch(d_config->mode) {
-		case polling:
+	switch (d_config->mode) {
+		case POLLING:
 			status = uart_hal->transmit(tx_data, length, d_config->tx_timeout);
 			break;
-		case it:
+		case IT:
 			status = uart_hal->transmit_it(tx_data, length);
 			break;
-		case dma:
+		case DMA:
 			status = uart_hal->transmit_dma(tx_data, length);
 			break;
+		default:
+			return -1;
 	}
 	return status;
 }
@@ -50,16 +33,18 @@ static int receive_data(struct device *dev, uint8_t *rx_data, uint16_t length)
 	struct uart_api *uart_hal          = d_data->uart_hal;
 	int status;
 	
-	switch(d_config->mode) {
-		case polling:
+	switch (d_config->mode) {
+		case POLLING:
 			status = uart_hal->receive(rx_data, length, d_config->rx_timeout);
 			break;
-		case it:
+		case IT:
 			status = uart_hal->receive_it(rx_data, length);
 			break;
-		case dma:
+		case DMA:
 			status = uart_hal->receive_dma(rx_data, length);
 			break;
+		default:
+			return -1;
 	}
 	return status;
 }
@@ -77,7 +62,7 @@ static struct uart_data uart3_data;
 static const struct uart_config uart3_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
-	.mode = dma,
+	.mode = DMA,
 };
 
 static int uart3_dev_init(struct device *dev)
@@ -123,7 +108,7 @@ static struct uart_data uart6_data;
 static const struct uart_config uart6_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
-	.mode = polling,
+	.mode = POLLING,
 };
 
 static int uart6_dev_init(struct device *dev)
@@ -169,7 +154,7 @@ static struct uart_data uart7_data;
 static const struct uart_config uart7_config = {
 	.tx_timeout = 100,
 	.rx_timeout = 100,
-	.mode = polling,
+	.mode = POLLING,
 };
 
 static int uart7_dev_init(struct device *dev)

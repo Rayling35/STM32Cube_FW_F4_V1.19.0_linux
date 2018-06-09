@@ -18,15 +18,6 @@ const uint8_t seg_no[10][7] = {
 	{1,1,1,1,0,1,1}, //9   data[9]+0,   data[9]+1, ....
 };
 
-struct pz_lcd_data {
-	struct device *ht1621;
-};
-
-struct pz_lcd_config {
-	uint8_t config;
-};
-
-
 static void seg7(struct device *dev, uint16_t select, uint8_t a, uint8_t b, uint8_t c,
 	               uint8_t d, uint8_t e, uint8_t f, uint8_t g, uint16_t function)
 {
@@ -50,8 +41,6 @@ static void seg_show(struct device *dev, uint16_t select, uint8_t *number, uint1
 {
 	seg7(dev,select,number[0],number[1],number[2],number[3],number[4],number[5],number[6],function);
 }
-
-/*-----------API--------------*/
 
 static void consumption_display(struct device *dev, uint32_t value)
 {
@@ -138,8 +127,6 @@ static const struct lcd_common_api pz_lcd_api = {
 
 static struct pz_lcd_data pz_lcd_data;
 
-static const struct pz_lcd_config pz_lcd_config;
-
 static int pz_lcd_dev_init(struct device *dev)
 {
 	struct pz_lcd_data *d_data = dev->data;
@@ -154,7 +141,6 @@ static int pz_lcd_dev_init(struct device *dev)
 struct device pz_lcd = {
 	.api    = &pz_lcd_api,
 	.data   = &pz_lcd_data,
-	.config = &pz_lcd_config,
 	.init   = pz_lcd_dev_init,
 };
 
