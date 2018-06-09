@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __SEG7_COMMON_API_H
 #define __SEG7_COMMON_API_H
 
@@ -13,7 +16,7 @@ typedef void (*seg7_api_4)(struct device *dev, uint8_t seg_addr, uint8_t d3, uin
 struct seg7_common_api {
 	seg7_api_1 write_command;
 	seg7_api_2 write_data_4;
-	seg7_api_3 write_data_44;
+	seg7_api_3 write_data_8;
 	seg7_api_4 write_data_bit_4;
 };
 
@@ -38,7 +41,7 @@ static inline void seg7_write_data_4(struct device *dev, uint8_t seg_addr, uint8
 static inline void seg7_write_data_44(struct device *dev, uint8_t seg_addr, uint8_t *com_data, uint16_t count)
 {
 	const struct seg7_common_api *d_api = dev->api;
-	d_api->write_data_44(dev, seg_addr, com_data, count);
+	d_api->write_data_8(dev, seg_addr, com_data, count);
 }
 
 static inline void seg7_write_data_bit_4(struct device *dev, uint8_t seg_addr, uint8_t d3, uint8_t d2, uint8_t d1, uint8_t d0)

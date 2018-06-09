@@ -1,8 +1,12 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __UART_PRINTF_H
 #define __UART_PRINTF_H
 
 #include "stm32f4xx_hal.h"
 #include <stdio.h>
+
 
 /* Definition for USARTxPrintf clock resources */
 #define USARTxPrintf                           USART1
@@ -25,5 +29,6 @@
 
 void uart_printf_init(void);
 //Note: Remember enable the "#define HAL_UART_MODULE_ENABLED" in stm32f4xx_hal_conf.h
+
 
 #endif

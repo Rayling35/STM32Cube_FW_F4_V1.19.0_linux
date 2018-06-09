@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __UART_DMA_CALLBACK_PARSER_H
 #define __UART_DMA_CALLBACK_PARSER_H
 

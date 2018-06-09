@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __TEMPLATE_STANDARD_COMMON_API_H
 #define __TEMPLATE_STANDARD_COMMON_API_H
 

@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __THREAD2_H
 #define __THREAD2_H
 

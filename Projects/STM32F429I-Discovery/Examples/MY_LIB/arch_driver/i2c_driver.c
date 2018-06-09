@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #include "api_define.h"
 #include "i2c_common_api.h"
 #include "i2c_driver.h"

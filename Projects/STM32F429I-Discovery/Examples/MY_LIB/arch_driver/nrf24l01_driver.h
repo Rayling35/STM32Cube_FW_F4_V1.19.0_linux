@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #ifndef __NRF24L01_DRIVER_H
 #define __NRF24L01_DRIVER_H
 

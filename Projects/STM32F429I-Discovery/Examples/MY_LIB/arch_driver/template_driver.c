@@ -1,3 +1,6 @@
+/* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
+ * SPDX-License-Identifier: MIT
+ */
 #include "standard_driver.h"
 #include "standard_common_api.h"
 #include "template_driver.h"
