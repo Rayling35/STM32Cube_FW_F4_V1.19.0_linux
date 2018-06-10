@@ -25,7 +25,6 @@ typedef struct {
 	int data3;
 }uat_data_t;
 
-
 int pzem_data_send(struct uart_api *huart, pzem004t_data_t *data);
 int uart_at_command(struct uart_api *huart, uat_data_t *data);
 

@@ -22,7 +22,6 @@
 #define UART7_RX_GPIO_PORT              GPIOF
 #define UART7_RX_AF                     GPIO_AF8_UART7
 
-
 #ifdef UART7_IT
 void UART7_IRQHandler(void);
 

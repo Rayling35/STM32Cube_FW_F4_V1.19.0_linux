@@ -39,7 +39,6 @@ typedef struct {
 //0A 41 52 30 30 31 61 31 62 32 63 33 64 34 65 35 66 36 67 37 68 38 41 30 31 35 44 31 46 37 0D 0A
 //->.AR001a1b2c3d4e5f6g7h8A015D1F7.
 
-
 uint16_t head_checkout(struct uart_api *huart, char *name, uint8_t *buffer, uint16_t length);
 gps_data_t* a_parser(uint8_t *buffer);
 version_data_t* version_parser(uint8_t *buffer);

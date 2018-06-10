@@ -15,7 +15,6 @@ void uart_it_1_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_R
 void uart_it_2_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_RxCpltCallback()
 void uart_it_3_callback_parser(UART_HandleTypeDef *UartHandle); //for HAL_UART_RxCpltCallback()
 
-
 extern uint8_t uart_it_1_callback_string_byte; //for uart->receive_it() use between this.c and main.c
 #define it_1_string_out_buffer_length 1        //one byte
 uint8_t* uart_it_1_callback_string_out(void);

@@ -22,7 +22,6 @@
 #define USART6_RX_GPIO_PORT              GPIOC
 #define USART6_RX_AF                     GPIO_AF8_USART6
 
-
 #ifdef UART6_IT
 void USART6_IRQHandler(void);
 

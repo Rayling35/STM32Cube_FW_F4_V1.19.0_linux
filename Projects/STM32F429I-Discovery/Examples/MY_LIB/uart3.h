@@ -22,7 +22,6 @@
 #define USART3_RX_GPIO_PORT              GPIOD
 #define USART3_RX_AF                     GPIO_AF7_USART3
 
-
 #ifdef UART3_IT
 void USART3_IRQHandler(void);
 
