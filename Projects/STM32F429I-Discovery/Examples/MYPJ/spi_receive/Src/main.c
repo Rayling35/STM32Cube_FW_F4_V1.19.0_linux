@@ -3,11 +3,11 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "main.h"
-
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
 #include "spi4_cs1.h"
 #include "spi5_cs1.h"
+#include "main.h"
 
 
 #define BME280_REG_ID               0xD0

@@ -4,17 +4,6 @@
 #ifndef __HT1621_H
 #define __HT1621_H
 
-#include "gpio_a5.h"
-#include "gpio_g2.h"
-#include "gpio_g3.h"
-
-
-#define  CS_LOW        A5_OUTPUT_LOW()
-#define  CS_HIGH       A5_OUTPUT_HIGH()
-#define  WR_LOW        G3_OUTPUT_LOW()
-#define  WR_HIGH       G3_OUTPUT_HIGH()
-#define  DATA_LOW      G2_OUTPUT_LOW()
-#define  DATA_HIGH     G2_OUTPUT_HIGH()
 
 #define  BIAS          0x29
 #define  RC256         0x18

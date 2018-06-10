@@ -4,8 +4,6 @@
 #ifndef __UART_DMA_CALLBACK_PARSER_H
 #define __UART_DMA_CALLBACK_PARSER_H
 
-#include "stm32f4xx_hal.h"
-
 
 #define SEL_UART3_DMA_CALLBACK_PARSER(x)        uart_dma_2_callback_parser(x)
 #define SEL_UART6_DMA_CALLBACK_PARSER(x)        uart_dma_1_callback_parser(x)

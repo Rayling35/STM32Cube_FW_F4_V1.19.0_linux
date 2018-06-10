@@ -4,8 +4,6 @@
 #ifndef __SPI_COMMON_API_H
 #define __SPI_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*spi_api_1)(struct device *dev, uint8_t *data, uint16_t length);

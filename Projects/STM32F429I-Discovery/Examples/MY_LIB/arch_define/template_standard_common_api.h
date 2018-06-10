@@ -4,8 +4,6 @@
 #ifndef __TEMPLATE_STANDARD_COMMON_API_H
 #define __TEMPLATE_STANDARD_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*standard_api_1)(struct device *dev);

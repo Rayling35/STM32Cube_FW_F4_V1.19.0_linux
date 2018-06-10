@@ -11,9 +11,6 @@
 #define SPI4C1_OUTPUT_PIN                 GPIO_PIN_2
 #define SPI4C1_OUTPUT_PORT                GPIOG
 
-#define SPI4C1_HIGH()      HAL_GPIO_WritePin(SPI4C1_OUTPUT_PORT, SPI4C1_OUTPUT_PIN, GPIO_PIN_SET)
-#define SPI4C1_LOW()       HAL_GPIO_WritePin(SPI4C1_OUTPUT_PORT, SPI4C1_OUTPUT_PIN, GPIO_PIN_RESET)
-
 struct spi_api* spi4_cs1_binding(void);
 
 

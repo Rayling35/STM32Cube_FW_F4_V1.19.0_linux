@@ -4,8 +4,6 @@
 #ifndef __UART_STRING_RECEIVE_PARSER_H
 #define __UART_STRING_RECEIVE_PARSER_H
 
-#include "api_define.h"
-
 
 typedef struct {
 	char start[6]; //GPABCD

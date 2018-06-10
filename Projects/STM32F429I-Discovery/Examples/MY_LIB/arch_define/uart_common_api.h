@@ -4,8 +4,6 @@
 #ifndef __UART_COMMON_API_H
 #define __UART_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*uart_api_1)(struct device *dev, uint8_t *data, uint16_t length);

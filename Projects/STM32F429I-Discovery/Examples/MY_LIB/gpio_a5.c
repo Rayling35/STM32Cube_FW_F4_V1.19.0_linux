@@ -1,8 +1,9 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
-#include "gpio_a5.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
+#include "gpio_a5.h"
 
 
 #ifdef A5_OUTPUT

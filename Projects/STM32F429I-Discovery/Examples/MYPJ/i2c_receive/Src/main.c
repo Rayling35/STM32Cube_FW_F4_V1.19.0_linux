@@ -3,11 +3,11 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "main.h"
-
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
 #include "i2c1.h"
 #include "i2c3.h"
+#include "main.h"
 
 
 #define BME280_ADDRESS           0x76

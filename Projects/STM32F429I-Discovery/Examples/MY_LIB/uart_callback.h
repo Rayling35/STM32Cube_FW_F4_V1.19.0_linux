@@ -4,8 +4,6 @@
 #ifndef __UART_CALLBACK_H
 #define __UART_CALLBACK_H
 
-#include "stm32f4xx_hal.h"
-
 
 #ifdef UART3_IT
 extern __IO FlagStatus uart3_rx_callbake_flag;

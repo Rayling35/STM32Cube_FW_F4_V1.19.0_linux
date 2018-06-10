@@ -3,6 +3,7 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
+#include "stm32f4xx_hal.h"
 #include "device.h"
 #include "max31855_driver.h"
 #include "sensor_common_api.h"

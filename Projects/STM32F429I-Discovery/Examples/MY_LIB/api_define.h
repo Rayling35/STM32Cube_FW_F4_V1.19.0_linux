@@ -4,8 +4,6 @@
 #ifndef __API_DEFINE_H
 #define __API_DEFINE_H
 
-#include "stm32f4xx_hal.h"
-
 
 #ifdef HAL_GPIO_MODULE_ENABLED
 struct gpio_api {

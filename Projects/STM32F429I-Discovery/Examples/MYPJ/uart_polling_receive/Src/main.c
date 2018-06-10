@@ -3,11 +3,12 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "main.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
 #include "uart3.h"
 #include "uart6.h"
 #include "uart7.h"
+#include "main.h"
 
 
 uint8_t myBuffer[] = "\nGPIO_INT\r\n";

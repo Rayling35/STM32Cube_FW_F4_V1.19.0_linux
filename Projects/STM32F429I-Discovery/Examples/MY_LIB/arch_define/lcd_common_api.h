@@ -4,8 +4,6 @@
 #ifndef __LCD_COMMON_API_H
 #define __LCD_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef void (*lcd_api_1)(struct device *dev);

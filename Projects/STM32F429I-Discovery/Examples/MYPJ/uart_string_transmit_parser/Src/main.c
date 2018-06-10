@@ -3,9 +3,10 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
-#include "main.h"
-#include "uart_string_transmit_parser.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
+#include "uart_string_transmit_parser.h"
+#include "main.h"
 #ifdef UART3
 #include "uart3.h"
 #elif UART6

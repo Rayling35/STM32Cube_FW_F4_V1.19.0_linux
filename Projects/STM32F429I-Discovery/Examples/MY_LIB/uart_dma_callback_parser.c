@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 #include <string.h>
+#include "stm32f4xx_hal.h"
 #include "uart_dma_callback_parser.h"
 
 

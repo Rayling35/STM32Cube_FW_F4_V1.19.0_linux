@@ -4,8 +4,6 @@
 #ifndef __HT1621_DRIVER_H
 #define __HT1621_DRIVER_H
 
-#include "stm32f4xx_hal.h"
-
 
 struct ht1621_data {
 	uint8_t data;

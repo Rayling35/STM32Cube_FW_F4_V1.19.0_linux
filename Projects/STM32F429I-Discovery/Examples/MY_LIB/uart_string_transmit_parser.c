@@ -2,6 +2,8 @@
  * SPDX-License-Identifier: MIT
  */
 #include <string.h>
+#include "stm32f4xx_hal.h"
+#include "api_define.h"
 #include "uart_string_transmit_parser.h"
 
 

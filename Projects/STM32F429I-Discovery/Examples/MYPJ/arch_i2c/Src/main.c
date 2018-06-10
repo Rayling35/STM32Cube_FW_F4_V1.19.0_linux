@@ -3,6 +3,7 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
+#include "stm32f4xx_hal.h"
 #include "device.h"
 #include "i2c_driver.h"
 #include "i2c_common_api.h"

@@ -4,8 +4,6 @@
 #ifndef __SENSOR_COMMON_API_H
 #define __SENSOR_COMMON_API_H
 
-#include "device.h"
-
 
 struct sensor_value {
 	int integer;

@@ -4,8 +4,6 @@
 #ifndef __WIFI_COMMON_API_H
 #define __WIFI_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*wifi_api_1)(struct device *dev);

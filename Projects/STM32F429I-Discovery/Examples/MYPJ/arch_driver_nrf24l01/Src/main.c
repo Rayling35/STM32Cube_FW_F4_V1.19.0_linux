@@ -3,6 +3,7 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
+#include "stm32f4xx_hal.h"
 #include "device.h"
 #include "nrf24l01_driver.h"
 #include "rf_common_api.h"

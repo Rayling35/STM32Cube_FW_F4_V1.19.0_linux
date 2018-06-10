@@ -4,8 +4,6 @@
 #ifndef __RF_COMMON_API_H
 #define __RF_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*rf_api_1)(struct device *dev);

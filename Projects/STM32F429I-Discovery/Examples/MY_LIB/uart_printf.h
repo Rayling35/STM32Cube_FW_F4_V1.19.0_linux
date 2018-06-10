@@ -4,9 +4,6 @@
 #ifndef __UART_PRINTF_H
 #define __UART_PRINTF_H
 
-#include "stm32f4xx_hal.h"
-#include <stdio.h>
-
 
 /* Definition for USARTxPrintf clock resources */
 #define USARTxPrintf                           USART1

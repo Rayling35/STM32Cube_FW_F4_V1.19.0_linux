@@ -1,10 +1,14 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
+#include "stm32f4xx_hal.h"
+#include "api_define.h"
 #include "spi4.h"
 #include "spi4_cs1.h"
-#include "api_define.h"
 
+
+#define SPI4C1_HIGH()      HAL_GPIO_WritePin(SPI4C1_OUTPUT_PORT, SPI4C1_OUTPUT_PIN, GPIO_PIN_SET)
+#define SPI4C1_LOW()       HAL_GPIO_WritePin(SPI4C1_OUTPUT_PORT, SPI4C1_OUTPUT_PIN, GPIO_PIN_RESET)
 
 extern SPI_HandleTypeDef SpiHandle4;
 

@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 #include "system_initialization.h"
+#include "stm32f4xx_hal.h"
 #include "uart_printf.h"
 #include "main.h"
 

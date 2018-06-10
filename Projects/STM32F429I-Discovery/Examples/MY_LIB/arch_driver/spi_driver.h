@@ -4,8 +4,6 @@
 #ifndef __SPI_DRIVER_H
 #define __SPI_DRIVER_H
 
-#include "stm32f4xx_hal.h"
-
 
 struct spi_data {
 	struct spi_api *spi_cs_hal;

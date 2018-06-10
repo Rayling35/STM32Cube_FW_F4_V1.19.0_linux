@@ -1,8 +1,9 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
-#include "i2c1.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
+#include "i2c1.h"
 
 
 I2C_HandleTypeDef I2cHandle1;

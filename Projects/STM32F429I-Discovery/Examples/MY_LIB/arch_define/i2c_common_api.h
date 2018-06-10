@@ -4,8 +4,6 @@
 #ifndef __I2C_COMMON_API_H
 #define __I2C_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*i2c_api_1)(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length);

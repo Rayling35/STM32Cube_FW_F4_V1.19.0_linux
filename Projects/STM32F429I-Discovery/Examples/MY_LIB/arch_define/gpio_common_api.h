@@ -4,8 +4,6 @@
 #ifndef __GPIO_COMMON_API_H
 #define __GPIO_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef int (*gpio_api_1)(struct device *dev);

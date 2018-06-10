@@ -1,10 +1,14 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
+#include "stm32f4xx_hal.h"
+#include "api_define.h"
 #include "spi5.h"
 #include "spi5_cs1.h"
-#include "api_define.h"
 
+
+#define SPI5C1_HIGH()      HAL_GPIO_WritePin(SPI5C1_OUTPUT_PORT, SPI5C1_OUTPUT_PIN, GPIO_PIN_SET)
+#define SPI5C1_LOW()       HAL_GPIO_WritePin(SPI5C1_OUTPUT_PORT, SPI5C1_OUTPUT_PIN, GPIO_PIN_RESET)
 
 extern SPI_HandleTypeDef SpiHandle5;
 

@@ -4,8 +4,6 @@
 #ifndef __TEMPLATE_DRIVER_H
 #define __TEMPLATE_DRIVER_H
 
-#include "stm32f4xx_hal.h"
-
 
 struct template_data {
 	struct device *binding_device_1;

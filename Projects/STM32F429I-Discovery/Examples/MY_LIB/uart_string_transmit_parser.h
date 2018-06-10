@@ -4,8 +4,6 @@
 #ifndef __UART_STRING_TRANSMIT_PARSER_H
 #define __UART_STRING_TRANSMIT_PARSER_H
 
-#include "api_define.h"
-
 
 typedef struct {
 	uint8_t head;

@@ -1,8 +1,9 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
-#include "gpio_g13.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
+#include "gpio_g13.h"
 
 
 #ifdef G13_OUTPUT

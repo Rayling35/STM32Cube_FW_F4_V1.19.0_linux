@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: MIT
  */
 #include <stdio.h>
+#include "cmsis_os.h"
 #include "thread2.h"
 
 static osMessageQId osQueue;

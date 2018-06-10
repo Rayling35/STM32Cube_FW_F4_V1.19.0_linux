@@ -4,8 +4,6 @@
 #ifndef __SPI5_H
 #define __SPI5_H
 
-#include "stm32f4xx_hal.h"
-
 
 #define SPI5_CLK_ENABLE()               __HAL_RCC_SPI5_CLK_ENABLE()
 #define SPI5_SCK_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOF_CLK_ENABLE()

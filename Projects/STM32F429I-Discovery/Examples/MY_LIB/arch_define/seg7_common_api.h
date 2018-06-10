@@ -4,8 +4,6 @@
 #ifndef __SEG7_COMMON_API_H
 #define __SEG7_COMMON_API_H
 
-#include "device.h"
-
 
                /*-----------API--------------*/
 typedef void (*seg7_api_1)(struct device *dev, uint8_t cmd);

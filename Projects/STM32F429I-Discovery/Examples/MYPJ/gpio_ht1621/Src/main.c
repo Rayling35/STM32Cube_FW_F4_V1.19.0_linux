@@ -3,10 +3,13 @@
  */
 #include "system_initialization.h"
 #include "uart_printf.h"
+#include "stm32f4xx_hal.h"
 #include "api_define.h"
-#include "main.h"
-
+#include "gpio_a5.h"
+#include "gpio_g2.h"
+#include "gpio_g3.h"
 #include "ht1621.h"
+#include "main.h"
 
 
 int main(void)

@@ -1,6 +1,8 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
+#include "stm32f4xx_hal.h"
+#include "device.h"
 #include "spi_driver.h"
 #include "spi_common_api.h"
 #include "max31855_driver.h"

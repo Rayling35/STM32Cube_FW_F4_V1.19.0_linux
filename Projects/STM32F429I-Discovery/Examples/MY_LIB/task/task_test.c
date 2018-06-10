@@ -1,6 +1,8 @@
 /* Copyright (C) 2018 Rayling <https://github.com/Rayling35>
  * SPDX-License-Identifier: MIT
  */
+#include "stm32f4xx_hal.h"
+#include "api_define.h"
 #include "cmsis_os.h"
 #include "task_test.h"
 
