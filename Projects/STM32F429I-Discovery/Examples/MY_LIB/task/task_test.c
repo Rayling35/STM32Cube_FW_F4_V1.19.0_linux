@@ -4,9 +4,8 @@
 #include "stm32f4xx_hal.h"
 #include "api_define.h"
 #include "cmsis_os.h"
-#include "task_test.h"
-
 #include "uart_dma_callback_parser.h"
+#include "task_test.h"
 
 
 static void uart_test(const void *argument)

@@ -4,8 +4,8 @@
 #include "stm32f4xx_hal.h"
 #include "device.h"
 #include "api_define.h"
-#include "gpio_common_api.h"
 #include "gpio_driver.h"
+#include "gpio_common_api.h"
 
 
 static int read_data(struct device *dev)

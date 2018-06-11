@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: MIT
  */
 #include "stm32f4xx_hal.h"
-#include "api_define.h"
 #include "uart7.h"
+#include "api_define.h"
 
 
 UART_HandleTypeDef UartHandle7;

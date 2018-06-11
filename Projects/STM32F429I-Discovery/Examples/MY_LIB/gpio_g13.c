@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: MIT
  */
 #include "stm32f4xx_hal.h"
-#include "api_define.h"
 #include "gpio_g13.h"
+#include "api_define.h"
 
 
 #ifdef G13_OUTPUT

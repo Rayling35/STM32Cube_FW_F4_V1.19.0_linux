@@ -4,8 +4,8 @@
 #include "stm32f4xx_hal.h"
 #include "device.h"
 #include "api_define.h"
-#include "i2c_common_api.h"
 #include "i2c_driver.h"
+#include "i2c_common_api.h"
 
 
 static int mem_write_data(struct device *dev, uint16_t addr, uint16_t reg, uint8_t *w_data, uint16_t length)

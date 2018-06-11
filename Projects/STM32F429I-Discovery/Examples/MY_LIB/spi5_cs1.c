@@ -2,9 +2,9 @@
  * SPDX-License-Identifier: MIT
  */
 #include "stm32f4xx_hal.h"
-#include "api_define.h"
 #include "spi5.h"
 #include "spi5_cs1.h"
+#include "api_define.h"
 
 
 #define SPI5C1_HIGH()      HAL_GPIO_WritePin(SPI5C1_OUTPUT_PORT, SPI5C1_OUTPUT_PIN, GPIO_PIN_SET)

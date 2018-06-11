@@ -4,9 +4,8 @@
 #include "stm32f4xx_hal.h"
 #include "api_define.h"
 #include "cmsis_os.h"
-#include "task_dma_parser.h"
-
 #include "uart_dma_callback_parser.h"
+#include "task_dma_parser.h"
 
 
 static void dma_uart_string_parser(const void *argument)

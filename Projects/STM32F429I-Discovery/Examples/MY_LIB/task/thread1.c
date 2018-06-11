@@ -6,6 +6,7 @@
 #include "thread1.h"
 #include "thread2.h"
 
+
 static struct message meter = {
 	.name = "rock man",
 	.age = 88,

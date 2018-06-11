@@ -5,6 +5,7 @@
 #include "cmsis_os.h"
 #include "thread2.h"
 
+
 static osMessageQId osQueue;
 
 void message_put(uint32_t msg)
