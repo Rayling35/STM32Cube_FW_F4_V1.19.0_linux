@@ -85,7 +85,7 @@ void uart_it_3_callback_parser(UART_HandleTypeDef *UartHandle)
 	i++;
 	if(uart_it_3_callback_string_byte == 0x0A  &&  buffer[i-2] == 0x0D) {
 		static uint16_t count = 0;
-		switch(count) {
+		switch (count) {
 			case 0:
 				buffer3_flag1 = 0;
 				memset((char *)*(string3_out+0), '\0', it_3_string_out_buffer_length);
