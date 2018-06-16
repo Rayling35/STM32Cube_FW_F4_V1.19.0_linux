@@ -38,8 +38,8 @@ static void gpio_c1_input_init(void)
 }
 #endif
 
-#ifdef C1_EXIT
-static void gpio_c1_exit_init(void)
+#ifdef C1_EXTI
+static void gpio_c1_exti_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -70,8 +70,8 @@ static void gpio_c1_init(void)
 	#ifdef C1_INPUT
 	gpio_c1_input_init();
 	#endif
-	#ifdef C1_EXIT
-	gpio_c1_exit_init();
+	#ifdef C1_EXTI
+	gpio_c1_exti_init();
 	#endif
 	printf("GPIO_C1 HAL init\r\n");
 }

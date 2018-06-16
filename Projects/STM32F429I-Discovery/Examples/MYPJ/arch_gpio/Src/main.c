@@ -21,7 +21,7 @@ int main(void)
 	gpio_init(gpio_g13);
 	printf("GPIO device init\r\n");
 	
-	#ifdef A0_EXIT
+	#ifdef A0_EXTI
 	while(1) {
 	}
 	#elif A0_INPUT
@@ -39,7 +39,7 @@ int main(void)
 	#endif
 }
 
-void a0_exit_handel(void)
+void a0_exti_handel(void)
 {
 	struct device *gpio_g13 = gpio_g13_device_binding();
 	gpio_toggle_write(gpio_g13);

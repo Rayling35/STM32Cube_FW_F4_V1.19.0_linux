@@ -38,8 +38,8 @@ static void gpio_g2_input_init(void)
 }
 #endif
 
-#ifdef G2_EXIT
-static void gpio_g2_exit_init(void)
+#ifdef G2_EXTI
+static void gpio_g2_exti_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -70,8 +70,8 @@ static void gpio_g2_init(void)
 	#ifdef G2_INPUT
 	gpio_g2_input_init();
 	#endif
-	#ifdef G2_EXIT
-	gpio_g2_exit_init();
+	#ifdef G2_EXTI
+	gpio_g2_exti_init();
 	#endif
 	printf("GPIO_G2 HAL init\r\n");
 }

@@ -38,8 +38,8 @@ static void gpio_a5_input_init(void)
 }
 #endif
 
-#ifdef A5_EXIT
-static void gpio_a5_exit_init(void)
+#ifdef A5_EXTI
+static void gpio_a5_exti_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -70,8 +70,8 @@ static void gpio_a5_init(void)
 	#ifdef A5_INPUT
 	gpio_a5_input_init();
 	#endif
-	#ifdef A5_EXIT
-	gpio_a5_exit_init();
+	#ifdef A5_EXTI
+	gpio_a5_exti_init();
 	#endif
 	printf("GPIO_A5 HAL init\r\n");
 }

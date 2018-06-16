@@ -20,7 +20,7 @@ int main(void)
 	gpio_a0->init();
 	gpio_g13->init();
 	
-	#ifdef A0_EXIT
+	#ifdef A0_EXTI
 	while(1) {
 	}
 	#elif A0_INPUT

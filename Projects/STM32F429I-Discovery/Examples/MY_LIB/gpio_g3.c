@@ -38,8 +38,8 @@ static void gpio_g3_input_init(void)
 }
 #endif
 
-#ifdef G3_EXIT
-static void gpio_g3_exit_init(void)
+#ifdef G3_EXTI
+static void gpio_g3_exti_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -70,8 +70,8 @@ static void gpio_g3_init(void)
 	#ifdef G3_INPUT
 	gpio_g3_input_init();
 	#endif
-	#ifdef G3_EXIT
-	gpio_g3_exit_init();
+	#ifdef G3_EXTI
+	gpio_g3_exti_init();
 	#endif
 	printf("GPIO_G3 HAL init\r\n");
 }

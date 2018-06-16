@@ -105,7 +105,7 @@ struct device* nrf24l01_device_binding(void)
 }
 
 
-void a0_exit_handel(void)
+void a0_exti_handel(void)
 {
 	printf("NRF24L01 IRQ handel\r\n");
 }

@@ -65,8 +65,8 @@ struct device* gpio_a0_device_binding(void)
 	return &gpio_a0;
 }
 
-#ifdef A0_EXIT
-__weak void a0_exit_handel(void)
+#ifdef A0_EXTI
+__weak void a0_exti_handel(void)
 {
 }
 #endif
@@ -99,8 +99,8 @@ struct device* gpio_a5_device_binding(void)
 	return &gpio_a5;
 }
 
-#ifdef A5_EXIT
-__weak void a5_exit_handel(void)
+#ifdef A5_EXTI
+__weak void a5_exti_handel(void)
 {
 }
 #endif
@@ -133,8 +133,8 @@ struct device* gpio_c1_device_binding(void)
 	return &gpio_c1;
 }
 
-#ifdef C1_EXIT
-__weak void c1_exit_handel(void)
+#ifdef C1_EXTI
+__weak void c1_exti_handel(void)
 {
 }
 #endif
@@ -167,8 +167,8 @@ struct device* gpio_g2_device_binding(void)
 	return &gpio_g2;
 }
 
-#ifdef G2_EXIT
-__weak void g2_exit_handel(void)
+#ifdef G2_EXTI
+__weak void g2_exti_handel(void)
 {
 }
 #endif
@@ -201,8 +201,8 @@ struct device* gpio_g3_device_binding(void)
 	return &gpio_g3;
 }
 
-#ifdef G3_EXIT
-__weak void g3_exit_handel(void)
+#ifdef G3_EXTI
+__weak void g3_exti_handel(void)
 {
 }
 #endif
@@ -235,8 +235,8 @@ struct device* gpio_g13_device_binding(void)
 	return &gpio_g13;
 }
 
-#ifdef G13_EXIT
-__weak void g13_exit_handel(void)
+#ifdef G13_EXTI
+__weak void g13_exti_handel(void)
 {
 }
 #endif
@@ -245,39 +245,39 @@ __weak void g13_exit_handel(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	#ifdef A0_EXIT
+	#ifdef A0_EXTI
 	if(GPIO_Pin == GPIO_PIN_0) {
-		a0_exit_handel();
+		a0_exti_handel();
 	}
 	#endif
 	
-	#ifdef A5_EXIT
+	#ifdef A5_EXTI
 	if(GPIO_Pin == GPIO_PIN_5) {
-		a5_exit_handel();
+		a5_exti_handel();
 	}
 	#endif
 	
-	#ifdef C1_EXIT
+	#ifdef C1_EXTI
 	if(GPIO_Pin == GPIO_PIN_1) {
-		c1_exit_handel();
+		c1_exti_handel();
 	}
 	#endif
 	
-	#ifdef G2_EXIT
+	#ifdef G2_EXTI
 	if(GPIO_Pin == GPIO_PIN_2) {
-		g2_exit_handel();
+		g2_exti_handel();
 	}
 	#endif
 	
-	#ifdef G3_EXIT
+	#ifdef G3_EXTI
 	if(GPIO_Pin == GPIO_PIN_3) {
-		g3_exit_handel();
+		g3_exti_handel();
 	}
 	#endif
 	
-	#ifdef G13_EXIT
+	#ifdef G13_EXTI
 	if(GPIO_Pin == GPIO_PIN_13) {
-		g13_exit_handel();
+		g13_exti_handel();
 	}
 	#endif
 }

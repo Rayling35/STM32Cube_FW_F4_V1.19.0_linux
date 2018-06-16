@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER,STM32F429xx, A0_EXIT, G13_OUTPUT</Define>
+              <Define>USE_HAL_DRIVER,STM32F429xx, A0_EXTI, G13_OUTPUT</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB</IncludePath>
             </VariousControls>

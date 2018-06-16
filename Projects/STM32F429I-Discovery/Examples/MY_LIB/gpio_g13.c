@@ -38,8 +38,8 @@ static void gpio_g13_input_init(void)
 }
 #endif
 
-#ifdef G13_EXIT
-static void gpio_g13_exit_init(void)
+#ifdef G13_EXTI
+static void gpio_g13_exti_init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStruct;
 	
@@ -70,8 +70,8 @@ static void gpio_g13_init(void)
 	#ifdef G13_INPUT
 	gpio_g13_input_init();
 	#endif
-	#ifdef G13_EXIT
-	gpio_g13_exit_init();
+	#ifdef G13_EXTI
+	gpio_g13_exti_init();
 	#endif
 	printf("GPIO_G13 HAL init\r\n");
 }
