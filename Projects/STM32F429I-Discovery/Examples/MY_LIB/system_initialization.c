@@ -62,7 +62,6 @@ static void SystemClock_Config(void)
   HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5);
 }
 
-
 void system_initialization(void)
 {
   HAL_Init();
