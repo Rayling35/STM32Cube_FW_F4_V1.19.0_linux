@@ -47,16 +47,16 @@ static void gpio_g13_exti_init(void)
 	
 	GPIO_InitStruct.Pin   = PG13_PIN;
 	GPIO_InitStruct.Mode  = GPIO_MODE_IT_RISING;
-	GPIO_InitStruct.Pull  = GPIO_NOPULL;
+	GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
 	GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
 	
 	HAL_GPIO_Init(PG13_PORT, &GPIO_InitStruct);
 	
-	HAL_NVIC_SetPriority(EXTI1_IRQn, 2, 0);
-	HAL_NVIC_EnableIRQ(EXTI1_IRQn);
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 2, 0);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 }
 
-void EXTI1_IRQHandler(void)
+void EXTI15_10_IRQHandler(void)
 {
 	HAL_GPIO_EXTI_IRQHandler(PG13_PIN);
 }

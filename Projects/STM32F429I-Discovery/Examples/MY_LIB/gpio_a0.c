@@ -47,7 +47,7 @@ static void gpio_a0_exti_init(void)
 	
 	GPIO_InitStruct.Pin   = PA0_PIN;
 	GPIO_InitStruct.Mode  = GPIO_MODE_IT_RISING;
-	GPIO_InitStruct.Pull  = GPIO_NOPULL;
+	GPIO_InitStruct.Pull  = GPIO_PULLDOWN;
 	GPIO_InitStruct.Speed = GPIO_SPEED_LOW;
 	
 	HAL_GPIO_Init(PA0_PORT, &GPIO_InitStruct);
