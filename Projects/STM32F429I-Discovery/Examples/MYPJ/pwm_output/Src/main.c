@@ -30,24 +30,24 @@ int main(void)
 	uint32_t prescaler_test;
 	
 	while(1) {
-		pwm3_1->pin_set(period1-1, period1/2, prescaler-1); //(90M / period1*perscaler) = 1
+		pwm3_1->pin_set(period1-1, period1/2, prescaler-1); //(90M/period1*perscaler) = 1
 		HAL_Delay(5000);
-		pwm3_1->pin_set(period2-1, period2/2, prescaler-1); //(90M / period2*perscaler) = 10
+		pwm3_1->pin_set(period2-1, period2/2, prescaler-1); //(90M/period2*perscaler) = 10
 		HAL_Delay(5000);
-		pwm3_1->pin_set(period3-1, period3/2, prescaler-1); //(90M / period3*perscaler) = 100
+		pwm3_1->pin_set(period3-1, period3/2, prescaler-1); //(90M/period3*perscaler) = 100
 		HAL_Delay(5000);
-		pwm3_1->pin_set(period4-1, period4/2, prescaler-1); //(90M / period4*perscaler) = 1K
+		pwm3_1->pin_set(period4-1, period4/2, prescaler-1); //(90M/period4*perscaler) = 1K
 		HAL_Delay(5000);
-		pwm3_1->pin_set(period5-1, period5/2, prescaler-1); //(90M / period5*perscaler) = 5K
+		pwm3_1->pin_set(period5-1, period5/2, prescaler-1); //(90M/period5*perscaler) = 5K
 		HAL_Delay(5000);
 		
-		//freq count to 1000hz from 100hz (use period)
+		//frequency count to 1000hz from 100hz use period
 		for(period_test = 100; period_test >= 10; period_test -= 1) {
 			pwm3_1->pin_set(period_test-1, period_test/2, prescaler-1);
 			HAL_Delay(500);
 		}
 		
-		//freq count to 1000hz from 100hz (use perscaler)
+		//frequency count to 1000hz from 100hz use perscaler
 		for(prescaler_test = 9000; prescaler_test >= 900; prescaler_test -= 10) {
 			pwm3_1->pin_set(period3-1, period3/2, prescaler_test-1);
 			HAL_Delay(100);

@@ -8,6 +8,28 @@
 
 TIM_HandleTypeDef TimHandle3;
 
+static void _PWM3_1_MspInit(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+	
+	TIM3_CHANNEL1_CLK_ENABLE();
+	
+	GPIO_InitStruct.Pin       = TIM3_CHANNEL1_PIN;
+	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull      = GPIO_PULLUP;
+	GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = TIM3_CHANNEL1_AF;
+	HAL_GPIO_Init(TIM3_CHANNEL1_PORT, &GPIO_InitStruct);
+	
+	TIM3_CLK_ENABLE();
+}
+
+static void pwm3_1_init(void)
+{
+	_PWM3_1_MspInit();
+	printf("PWM3_1 HAL init\r\n");
+}
+
 static int pwm3_1_pin_set(uint32_t period_cycles, uint32_t pulse_cycles, uint32_t prescaler)
 {
 	TIM_OC_InitTypeDef sConfig;
@@ -30,28 +52,6 @@ static int pwm3_1_pin_set(uint32_t period_cycles, uint32_t pulse_cycles, uint32_
 	HAL_TIM_PWM_ConfigChannel(&TimHandle3, &sConfig, TIM3_CHANNEL1);
 	
 	return HAL_TIM_PWM_Start(&TimHandle3, TIM3_CHANNEL1);
-}
-
-static void _PWM3_1_MspInit(void)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	
-	TIM3_CHANNEL1_CLK_ENABLE();
-	
-	GPIO_InitStruct.Pin       = TIM3_CHANNEL1_PIN;
-	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull      = GPIO_PULLUP;
-	GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
-	GPIO_InitStruct.Alternate = TIM3_CHANNEL1_AF;
-	HAL_GPIO_Init(TIM3_CHANNEL1_PORT, &GPIO_InitStruct);
-	
-	TIM3_CLK_ENABLE();
-}
-
-static void pwm3_1_init(void)
-{
-	_PWM3_1_MspInit();
-	printf("PWM3_1 HAL init\r\n");
 }
 
 static struct pwm_api pwm3_1_api = {
