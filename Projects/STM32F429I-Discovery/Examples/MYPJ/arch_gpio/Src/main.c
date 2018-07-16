@@ -25,6 +25,8 @@ int main(void)
 	while(1) {
 	}
 	#elif A0_INPUT
+	printf("PA0 Counter %d msec\n\r", gpio_counter_read(gpio_a0, MILLISECOND));
+	printf("PA0 Counter %d sec\n\r", gpio_counter_read(gpio_a0, SECOND));
 	while(1) {
 		if(gpio_read(gpio_a0)) {
 			gpio_write(gpio_g13, 1);

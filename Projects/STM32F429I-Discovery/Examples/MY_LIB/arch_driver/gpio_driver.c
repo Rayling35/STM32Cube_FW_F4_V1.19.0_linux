@@ -32,10 +32,48 @@ static void toggle_write_data(struct device *dev)
 	gpio_hal->toggle_write();
 }
 
+static uint32_t counter_read_data(struct device *dev, enum count_unit unit)
+{
+	struct gpio_data *d_data  = dev->data;
+	struct gpio_api *gpio_hal = d_data->gpio_hal;
+	int no_count_status;
+	uint32_t count;
+	
+	no_count_status = gpio_hal->read();
+	
+	switch (unit) {
+		case MILLISECOND:
+			while(1) {
+				if(gpio_hal->read() != no_count_status) {
+					count = 0;
+					do {
+						HAL_Delay(1);
+						count++;
+					}while(gpio_hal->read() != no_count_status);
+					return count;
+				}
+			}
+		case SECOND:
+			while(1) {
+				if(gpio_hal->read() != no_count_status) {
+					count = 0;
+					do {
+						HAL_Delay(100);
+						count++;
+					}while(gpio_hal->read() != no_count_status);
+					return count * 100;
+				}
+			}
+		default:
+			return 0;
+	}
+}
+
 static const struct gpio_common_api gpio_common_api = {
 	.read         = read_data,
 	.write        = write_data,
 	.toggle_write = toggle_write_data,
+	.counter_read = counter_read_data,
 };
 
 
