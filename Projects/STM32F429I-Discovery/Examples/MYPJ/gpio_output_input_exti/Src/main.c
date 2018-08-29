@@ -27,11 +27,11 @@ int main(void)
 	while(1) {
 		if(gpio_a0->read()) {
 			gpio_g13->write(1);
-			printf("PA0 STATE %d\n\r", gpio_a0->read());
+			printf("PA0 STATE %d\r\n", gpio_a0->read());
 			HAL_Delay(100);
 		}else {
 			gpio_g13->write(0);
-			printf("PA0 STATE %d\n\r", gpio_a0->read());
+			printf("PA0 STATE %d\r\n", gpio_a0->read());
 			HAL_Delay(100);
 		}
 	}

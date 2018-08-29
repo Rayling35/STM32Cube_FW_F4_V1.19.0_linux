@@ -25,16 +25,16 @@ int main(void)
 	while(1) {
 	}
 	#elif A0_INPUT
-	printf("PA0 Counter %d msec\n\r", gpio_counter_read(gpio_a0, MILLISECOND));
-	printf("PA0 Counter %d sec\n\r", gpio_counter_read(gpio_a0, SECOND));
+	printf("PA0 Counter %d msec\r\n", gpio_counter_read(gpio_a0, MILLISECOND));
+	printf("PA0 Counter %d sec\r\n", gpio_counter_read(gpio_a0, SECOND));
 	while(1) {
 		if(gpio_read(gpio_a0)) {
 			gpio_write(gpio_g13, 1);
-			printf("PA0 STATE %d\n\r", gpio_read(gpio_a0));
+			printf("PA0 STATE %d\r\n", gpio_read(gpio_a0));
 			HAL_Delay(100);
 		}else {
 			gpio_write(gpio_g13, 0);
-			printf("PA0 STATE %d\n\r", gpio_read(gpio_a0));
+			printf("PA0 STATE %d\r\n", gpio_read(gpio_a0));
 			HAL_Delay(100);
 		}
 	}
