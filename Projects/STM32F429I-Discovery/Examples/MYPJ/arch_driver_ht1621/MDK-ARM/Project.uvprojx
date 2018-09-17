@@ -336,7 +336,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, GPIO_A5_DEV, GPIO_G2_DEV, GPIO_G3_DEV, A5_OUTPUT, G2_OUTPUT, G3_OUTPUT</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_driver</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_define\hal;..\..\..\MY_LIB\arch_define\driver;..\..\..\MY_LIB\arch_driver\hal;..\..\..\MY_LIB\arch_driver\driver;..\..\..\MY_LIB\extra</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -398,12 +398,12 @@
             <File>
               <FileName>gpio_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\gpio_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\hal\gpio_driver.c</FilePath>
             </File>
             <File>
               <FileName>ht1621_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\ht1621_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\driver\ht1621_driver.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -438,7 +438,7 @@
             <File>
               <FileName>ht1621.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\ht1621.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\extra\ht1621.c</FilePath>
             </File>
           </Files>
         </Group>

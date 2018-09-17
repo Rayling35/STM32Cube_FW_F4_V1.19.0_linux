@@ -283,7 +283,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\ht1621.c</PathWithFileName>
+      <PathWithFileName>..\..\..\MY_LIB\extra\ht1621.c</PathWithFileName>
       <FilenameWithoutPath>ht1621.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

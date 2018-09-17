@@ -336,7 +336,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, UART3_DEV, UART3_IT, UART3_DMA, UART6_DEV, UART7_DEV</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_driver</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_define\hal;..\..\..\MY_LIB\arch_driver\hal</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -398,7 +398,7 @@
             <File>
               <FileName>uart_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\uart_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\hal\uart_driver.c</FilePath>
             </File>
           </Files>
         </Group>

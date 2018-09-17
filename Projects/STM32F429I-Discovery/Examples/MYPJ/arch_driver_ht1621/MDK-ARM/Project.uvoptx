@@ -223,7 +223,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\arch_driver\gpio_driver.c</PathWithFileName>
+      <PathWithFileName>..\..\..\MY_LIB\arch_driver\hal\gpio_driver.c</PathWithFileName>
       <FilenameWithoutPath>gpio_driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -235,7 +235,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\arch_driver\ht1621_driver.c</PathWithFileName>
+      <PathWithFileName>..\..\..\MY_LIB\arch_driver\driver\ht1621_driver.c</PathWithFileName>
       <FilenameWithoutPath>ht1621_driver.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -315,7 +315,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\MY_LIB\ht1621.c</PathWithFileName>
+      <PathWithFileName>..\..\..\MY_LIB\extra\ht1621.c</PathWithFileName>
       <FilenameWithoutPath>ht1621.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>

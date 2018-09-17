@@ -336,7 +336,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER, STM32F429xx, GPIO_A0_DEV, A0_INPUT</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\..\..\..\..\Utilities;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_driver</IncludePath>
+              <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\..\..\..\..\Utilities;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_define\hal;..\..\..\MY_LIB\arch_define\driver;..\..\..\MY_LIB\arch_driver\hal;..\..\..\MY_LIB\arch_driver\driver</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -398,12 +398,12 @@
             <File>
               <FileName>gpio_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\gpio_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\hal\gpio_driver.c</FilePath>
             </File>
             <File>
               <FileName>button_event_driver.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\arch_driver\button_event_driver.c</FilePath>
+              <FilePath>..\..\..\MY_LIB\arch_driver\driver\button_event_driver.c</FilePath>
             </File>
           </Files>
         </Group>
