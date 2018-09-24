@@ -7,23 +7,19 @@
 #include "cmsis_os.h"
 #include "device.h"
 #include "button_event_driver.h"
-#include "button_event_common_api.h"
+#include "api_button_event_common.h"
 #include "main.h"
 
 
-static void main_thread(const void *button_event)
+static void main_thread(const void *Button_event)
 {
-	struct device *button = (struct device *)button_event;
+	struct device *Button = (struct device *)Button_event;
+	uint32_t press_time;
 	
 	while(1) {
-		if(button_status_get(button, GPIO_A0)) {
-			printf("GPIO_A0\r\n");
-		}
-		if(button_status_get(button, GPIO_A0_5_SEC)) {
-			printf("GPIO_A0_5_SEC\r\n");
-		}
-		if(button_status_get(button, GPIO_A0_10_SEC)) {
-			printf("GPIO_A0_10_SEC\r\n");
+		press_time = button_get_press_time(Button);
+		if(press_time) {
+			printf("press time %d\r\n", press_time);
 		}
 	}
 }
@@ -33,13 +29,13 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct device *button_event = button_event_device_binding();
+	struct device *Button_event = button_event_device_binding();
 	
-	button_event_init(button_event);
+	button_event_init(Button_event);
 	printf("All device init\r\n");
 	
 	osThreadDef(main, main_thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
-	osThreadCreate(osThread(main), button_event);
+	osThreadCreate(osThread(main), Button_event);
 	
 	osKernelStart();
 	while(1) {
