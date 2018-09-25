@@ -408,6 +408,16 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>MY_LIB/Extra</GroupName>
+          <Files>
+            <File>
+              <FileName>ht1621.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\MY_LIB\extra\ht1621.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>MY_LIB/API</GroupName>
           <Files>
             <File>
@@ -434,11 +444,6 @@
               <FileName>gpio_g3.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\MY_LIB\gpio_g3.c</FilePath>
-            </File>
-            <File>
-              <FileName>ht1621.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\MY_LIB\extra\ht1621.c</FilePath>
             </File>
           </Files>
         </Group>
