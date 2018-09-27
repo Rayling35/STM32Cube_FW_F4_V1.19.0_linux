@@ -12,13 +12,13 @@ enum uart_mode{
 };
 
 struct uart_data {
-	struct uart_api *uart_hal;
+	struct uart_api *Uart_hal;
 };
 
 struct uart_config {
-	uint32_t tx_timeout;
-	uint32_t rx_timeout;
-	enum uart_mode mode;
+	uint32_t value_tx_timeout;
+	uint32_t value_rx_timeout;
+	enum uart_mode e_mode;
 };
 
 #ifdef UART3_DEV

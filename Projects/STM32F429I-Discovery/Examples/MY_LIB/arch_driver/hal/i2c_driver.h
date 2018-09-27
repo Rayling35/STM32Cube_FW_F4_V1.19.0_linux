@@ -6,12 +6,12 @@
 
 
 struct i2c_data {
-	struct i2c_api *i2c_hal;
+	struct i2c_api *I2c_hal;
 };
 
 struct i2c_config {
-	uint32_t write_timeout;
-	uint32_t read_timeout;
+	uint32_t value_write_timeout;
+	uint32_t value_read_timeout;
 };
 
 #ifdef I2C1_DEV
