@@ -4,37 +4,35 @@
 #include "system_initialization.h"
 #include "uart_printf.h"
 #include "stm32f4xx_hal.h"
+#include "cmsis_os.h"
 #include "device.h"
 #include "gpio_driver.h"
-#include "gpio_common_api.h"
+#include "api_gpio_common.h"
 #include "main.h"
 
 
-int main(void)
+static void main_thread(const void *argument)
 {
-	system_initialization();
-	uart_printf_init();
-	
-	struct device *gpio_a0 = gpio_a0_device_binding();
-	struct device *gpio_g13 = gpio_g13_device_binding();
-	gpio_init(gpio_a0);
-	gpio_init(gpio_g13);
+	struct device *Gpio_a0 = gpio_a0_device_binding();
+	struct device *Gpio_g13 = gpio_g13_device_binding();
+	gpio_init(Gpio_a0);
+	gpio_init(Gpio_g13);
 	printf("GPIO device init\r\n");
 	
 	#ifdef A0_EXTI
 	while(1) {
 	}
 	#elif A0_INPUT
-	printf("PA0 Counter %d msec\r\n", gpio_counter_read(gpio_a0, MILLISECOND));
-	printf("PA0 Counter %d sec\r\n", gpio_counter_read(gpio_a0, SECOND));
+	printf("PA0 Counter %d msec\r\n", gpio_press_time(Gpio_a0, MILLISECOND));
+	printf("PA0 Counter %d sec\r\n", gpio_press_time(Gpio_a0, SECOND));
 	while(1) {
-		if(gpio_read(gpio_a0)) {
-			gpio_write(gpio_g13, 1);
-			printf("PA0 STATE %d\r\n", gpio_read(gpio_a0));
+		if(gpio_read(Gpio_a0)) {
+			gpio_write(Gpio_g13, 1);
+			printf("PA0 STATE %d\r\n", gpio_read(Gpio_a0));
 			HAL_Delay(100);
 		}else {
-			gpio_write(gpio_g13, 0);
-			printf("PA0 STATE %d\r\n", gpio_read(gpio_a0));
+			gpio_write(Gpio_g13, 0);
+			printf("PA0 STATE %d\r\n", gpio_read(Gpio_a0));
 			HAL_Delay(100);
 		}
 	}
@@ -43,6 +41,19 @@ int main(void)
 
 void a0_exti_handel(void)
 {
-	struct device *gpio_g13 = gpio_g13_device_binding();
-	gpio_toggle_write(gpio_g13);
+	struct device *Gpio_g13 = gpio_g13_device_binding();
+	gpio_toggle_write(Gpio_g13);
+}
+
+int main(void)
+{
+	system_initialization();
+	uart_printf_init();
+	
+	osThreadDef(main, main_thread, osPriorityNormal, 0, configMINIMAL_STACK_SIZE);
+	osThreadCreate(osThread(main), NULL);
+	
+	osKernelStart();
+	while(1) {
+	}
 }

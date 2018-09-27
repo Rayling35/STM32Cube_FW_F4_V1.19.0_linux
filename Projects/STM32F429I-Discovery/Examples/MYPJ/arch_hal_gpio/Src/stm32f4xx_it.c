@@ -1,4 +1,5 @@
 #include "stm32f4xx_hal.h"
+#include "cmsis_os.h"
 #include "stm32f4xx_it.h"
 
 
@@ -30,20 +31,13 @@ void UsageFault_Handler(void)
   }
 }
 
-void SVC_Handler(void)
-{
-}
-
 void DebugMon_Handler(void)
-{
-}
-
-void PendSV_Handler(void)
 {
 }
 
 void SysTick_Handler(void)
 {
   HAL_IncTick();
+  osSystickHandler();
 }
 
