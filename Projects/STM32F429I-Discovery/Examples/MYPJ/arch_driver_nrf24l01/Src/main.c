@@ -6,7 +6,7 @@
 #include "stm32f4xx_hal.h"
 #include "device.h"
 #include "nrf24l01_driver.h"
-#include "rf_common_api.h"
+#include "api_rf_common.h"
 #include "main.h"
 
 
@@ -15,11 +15,11 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct device *nrf24l01 = nrf24l01_device_binding();
-	rf_init(nrf24l01);
+	struct device *Nrf24l01 = nrf24l01_device_binding();
+	rf_init(Nrf24l01);
 	printf("All device init finish\r\n");
 	
-	rf_device_test(nrf24l01);
+	rf_device_test(Nrf24l01);
 	
 	while(1) {
 	}

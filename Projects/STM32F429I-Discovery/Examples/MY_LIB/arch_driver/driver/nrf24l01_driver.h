@@ -6,13 +6,13 @@
 
 
 struct nrf24l01_data {
-	struct device *spi;
-	struct device *gpio;
-	uint8_t rx_data[5];
+	struct device *Spi;
+	struct device *Gpio;
+	uint8_t value_rx_data[5];
 };
 
 struct nrf24l01_config {
-	uint8_t tx_config[5];
+	uint8_t value_tx_config[5];
 };
 
 //commands
