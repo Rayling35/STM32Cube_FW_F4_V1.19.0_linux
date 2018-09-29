@@ -17,12 +17,12 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct gpio_api *gpio_a5 = gpio_a5_binding();
-	struct gpio_api *gpio_g2 = gpio_g2_binding();
-	struct gpio_api *gpio_g3 = gpio_g3_binding();
-	gpio_a5->init();
-	gpio_g2->init();
-	gpio_g3->init();
+	struct gpio_api *Gpio_a5 = gpio_a5_binding();
+	struct gpio_api *Gpio_g2 = gpio_g2_binding();
+	struct gpio_api *Gpio_g3 = gpio_g3_binding();
+	Gpio_a5->init();
+	Gpio_g2->init();
+	Gpio_g3->init();
 	
 	ht1621_init();
 	

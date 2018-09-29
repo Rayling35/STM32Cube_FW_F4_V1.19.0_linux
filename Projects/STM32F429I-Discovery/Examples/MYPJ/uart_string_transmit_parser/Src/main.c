@@ -19,32 +19,32 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 #ifdef UART3
-	struct uart_api *uart = (struct uart_api *)uart3_binding();
+	struct uart_api *Uart = (struct uart_api *)uart3_binding();
 #elif UART6
-	struct uart_api *uart = (struct uart_api *)uart6_binding();
+	struct uart_api *Uart = (struct uart_api *)uart6_binding();
 #endif
-	uart->init();
+	Uart->init();
 	
-	pzem004t_data_t pzem004t = {
-	.head = 0xB0,
-	.data1 = 0xC0,
-	.data2 = 0xA8,
-	.data3 = 0x01,
-	.data4 = 0x01,
-	.data5 = 0x00,
-	.sum = (pzem004t.head + pzem004t.data1 +
-					pzem004t.data2 + pzem004t.data3 +
-					pzem004t.data4 + pzem004t.data5) & 0xFF,
+	pzem004t_data_t Pzem004t = {
+		.value_head  = 0xB0,
+		.value_data1 = 0xC0,
+		.value_data2 = 0xA8,
+		.value_data3 = 0x01,
+		.value_data4 = 0x01,
+		.value_data5 = 0x00,
+		.value_sum   = (Pzem004t.value_head + Pzem004t.value_data1 +
+										Pzem004t.value_data2 + Pzem004t.value_data3 +
+										Pzem004t.value_data4 + Pzem004t.value_data5) & 0xFF,
 	};
-	pzem_data_send(uart, &pzem004t);
+	pzem_data_send(Uart, &Pzem004t);
 	
 	/*---------------------------------------------------------*/
-	uat_data_t uat = {
-	.command = "AT",
-	.device = "UART",
-	.data1 = 115200,
-	.data2 = 0,
-	.data3 = 1,
+	uat_data_t Uat = {
+		.value_command = "AT",
+		.value_device  = "UART",
+		.value_data1   = 115200,
+		.value_data2   = 0,
+		.value_data3   = 1,
 	};
-	uart_at_command(uart, &uat);
+	uart_at_command(Uart, &Uat);
 }

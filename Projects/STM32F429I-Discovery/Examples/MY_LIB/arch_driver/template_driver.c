@@ -13,11 +13,11 @@ static int send_data(struct device *Dev, uint8_t *tx_data, uint16_t length)
 {
 	struct template_data *D_data = Dev->data;
 	const struct template_config *D_config = Dev->config;
-	struct device *Binding_dev_1 = D_data->Binding_device_1;
-	struct device *Binding_dev_2 = D_data->Binding_device_2;
+	struct device *Binding_device_1 = D_data->Binding_device_1;
+	struct device *Binding_device_2 = D_data->Binding_device_2;
 	
-	binding_1_app(Binding_dev_1, D_data->value_data1, D_config->value_this_config_1);
-	binding_2_app(Binding_dev_2, D_data->value_data1, D_config->value_this_config_1);
+	binding_1_app(Binding_device_1, D_data->value_data1, D_config->value_this_config_1);
+	binding_2_app(Binding_device_2, D_data->value_data1, D_config->value_this_config_1);
 	
 	return 0;
 }
@@ -26,11 +26,11 @@ static int get_data(struct device *Dev, uint8_t *rx_data, uint16_t length)
 {
 	struct template_data *D_data = Dev->data;
 	const struct template_config *D_config = Dev->config;
-	struct device *Binding_dev_1 = D_data->Binding_device_1;
-	struct device *Binding_dev_2 = D_data->Binding_device_2;
+	struct device *Binding_device_1 = D_data->Binding_device_1;
+	struct device *Binding_device_2 = D_data->Binding_device_2;
 	
-	binding_1_app(Binding_dev_1, D_data->value_data2, D_config->value_this_config_2);
-	binding_2_app(Binding_dev_2, D_data->value_data2, D_config->value_this_config_2);
+	binding_1_app(Binding_device_1, D_data->value_data2, D_config->value_this_config_2);
+	binding_2_app(Binding_device_2, D_data->value_data2, D_config->value_this_config_2);
 	
 	return 0;
 }

@@ -21,10 +21,10 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct spi_api *spi4_cs1 = spi4_cs1_binding();
-	struct spi_api *spi5_cs1 = spi5_cs1_binding();
-	spi4_cs1->init();
-	spi5_cs1->init();
+	struct spi_api *Spi4_cs1 = spi4_cs1_binding();
+	struct spi_api *Spi5_cs1 = spi5_cs1_binding();
+	Spi4_cs1->init();
+	Spi5_cs1->init();
 	printf("SPI init\r\n");
 	
 	int status;
@@ -37,14 +37,14 @@ int main(void)
 	l3gd20_tx[0] = L3GD20_WHO_AM_I_ADDR;
 	
 	while(1) {
-		status = spi4_cs1->transmit_receive(bme280_tx, bme280_rx, 2, 1);
+		status = Spi4_cs1->transmit_receive(bme280_tx, bme280_rx, 2, 1);
 		if(status != HAL_OK) {
 			printf("BME280 transfer fail! %d\r\n", status);
 		}
 		printf("BME280_0x60 == %X\r\n", bme280_rx[1]);
 		
 		
-		status = spi5_cs1->transmit_receive(l3gd20_tx, l3gd20_rx, 2, 1);
+		status = Spi5_cs1->transmit_receive(l3gd20_tx, l3gd20_rx, 2, 1);
 		if(status != HAL_OK) {
 			printf("L3GD20 transfer fail! %d\r\n", status);
 		}

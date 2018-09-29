@@ -37,136 +37,136 @@ static void spi4_cs1_error(void)
 
 static int spi4_cs1_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Transmit(&SpiHandle4, data, length, timeout);
+	e_status = HAL_SPI_Transmit(&SpiHandle4, data, length, timeout);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Receive(&SpiHandle4, data, length, timeout);
+	e_status = HAL_SPI_Receive(&SpiHandle4, data, length, timeout);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_receive32(uint32_t *data, uint16_t length, uint32_t timeout)
 {
-	int status;
+	int e_status;
 	uint8_t rx_data[4];
 	uint16_t i;
 	
 	for(i = 0; i < length; i++) {
 		SPI4C1_LOW();
-		status = HAL_SPI_Receive(&SpiHandle4, rx_data, 4, timeout);
+		e_status = HAL_SPI_Receive(&SpiHandle4, rx_data, 4, timeout);
 		SPI4C1_HIGH();
 		data[i] = (rx_data[0] << 24) | (rx_data[1] << 16) | (rx_data[2] << 8) | rx_data[3];
-		if(status != HAL_OK) {
+		if(e_status != HAL_OK) {
 			spi4_cs1_error();
-			return status;
+			return e_status;
 		}
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_TransmitReceive(&SpiHandle4, tx_data, rx_data, length, timeout);
+	e_status = HAL_SPI_TransmitReceive(&SpiHandle4, tx_data, rx_data, length, timeout);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef SPI4C1_IT
 static int spi4_cs1_transmit_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Transmit_IT(&SpiHandle4, data, length);
+	e_status = HAL_SPI_Transmit_IT(&SpiHandle4, data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_receive_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Receive_IT(&SpiHandle4, data, length);
+	e_status = HAL_SPI_Receive_IT(&SpiHandle4, data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_transmit_receive_it(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_TransmitReceive_IT(&SpiHandle4, tx_data, rx_data, length);
+	e_status = HAL_SPI_TransmitReceive_IT(&SpiHandle4, tx_data, rx_data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef SPI4C1_DMA
 static int spi4_cs1_transmit_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Transmit_DMA(&SpiHandle4, data, length);
+	e_status = HAL_SPI_Transmit_DMA(&SpiHandle4, data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_receive_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_Receive_DMA(&SpiHandle4, data, length);
+	e_status = HAL_SPI_Receive_DMA(&SpiHandle4, data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi4_cs1_transmit_receive_dma(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI4C1_LOW();
-	status = HAL_SPI_TransmitReceive_DMA(&SpiHandle4, tx_data, rx_data, length);
+	e_status = HAL_SPI_TransmitReceive_DMA(&SpiHandle4, tx_data, rx_data, length);
 	SPI4C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi4_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 #endif
 #endif
 
-static struct spi_api spi4_cs1_api = {
+static struct spi_api Spi4_cs1_api = {
 	.init                 = spi4_cs1_init,
 	.transmit             = spi4_cs1_transmit,
 	.receive              = spi4_cs1_receive,
@@ -186,5 +186,5 @@ static struct spi_api spi4_cs1_api = {
 
 struct spi_api* spi4_cs1_binding(void)
 {
-	return &spi4_cs1_api; //傳遞位置
+	return &Spi4_cs1_api; //傳遞位置
 }

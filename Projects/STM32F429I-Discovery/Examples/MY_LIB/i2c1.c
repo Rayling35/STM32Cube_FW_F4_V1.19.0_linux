@@ -140,89 +140,89 @@ static void i2c1_error(void)
 
 static int i2c1_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Master_Transmit(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Master_Transmit(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int i2c1_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Master_Receive(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Master_Receive(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int i2c1_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Write(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int i2c1_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Read(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef I2C1_IT
 static int i2c1_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Write_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int i2c1_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Read_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef I2C1_DMA
 static int i2c1_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Write_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Write_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int i2c1_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_I2C_Mem_Read_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
-	if(status != HAL_OK) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_I2C_Mem_Read_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
-	return status;
+	return e_status;
 }
 #endif
 #endif
 
-static struct i2c_api i2c1_api = {
+static struct i2c_api I2c1_api = {
 	.init            = i2c1_init,
 	.master_transmit = i2c1_master_transmit,
 	.master_receive  = i2c1_master_receive,
@@ -264,5 +264,5 @@ void DMA_I2C1_RX_IRQHandler(void)
 
 struct i2c_api* i2c1_binding(void)
 {
-	return &i2c1_api; //傳遞位置
+	return &I2c1_api; //傳遞位置
 }

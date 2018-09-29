@@ -54,12 +54,12 @@ static int pwm3_1_pin_set(uint32_t period_cycles, uint32_t pulse_cycles, uint32_
 	return HAL_TIM_PWM_Start(&TimHandle3, TIM3_CHANNEL1);
 }
 
-static struct pwm_api pwm3_1_api = {
+static struct pwm_api Pwm3_1_api = {
 	.init    = pwm3_1_init,
 	.pin_set = pwm3_1_pin_set,
 };
 
 struct pwm_api* pwm3_1_binding(void)
 {
-	return &pwm3_1_api;
+	return &Pwm3_1_api;
 }

@@ -135,69 +135,69 @@ static void uart3_error(void)
 
 static int uart3_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit(&UartHandle3, data, length, timeout);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit(&UartHandle3, data, length, timeout);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart3_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive(&UartHandle3, data, length, timeout);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive(&UartHandle3, data, length, timeout);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef UART3_IT
 static int uart3_transmit_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit_IT(&UartHandle3, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit_IT(&UartHandle3, data, length);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart3_receive_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive_IT(&UartHandle3, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive_IT(&UartHandle3, data, length);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef UART3_DMA
 static int uart3_transmit_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit_DMA(&UartHandle3, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit_DMA(&UartHandle3, data, length);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart3_receive_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive_DMA(&UartHandle3, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive_DMA(&UartHandle3, data, length);
+	if(e_status == HAL_ERROR) {
 		uart3_error();
 	}
-	return status;
+	return e_status;
 }
 #endif
 #endif
 
-static struct uart_api uart3_api = {
+static struct uart_api Uart3_api = {
 	.init         = uart3_init,
 	.transmit     = uart3_transmit,
 	.receive      = uart3_receive,
@@ -232,5 +232,5 @@ void DMA_UART3_RX_IRQHandler(void)
 
 struct uart_api* uart3_binding(void)
 {
-	return &uart3_api; //傳遞位置
+	return &Uart3_api; //傳遞位置
 }

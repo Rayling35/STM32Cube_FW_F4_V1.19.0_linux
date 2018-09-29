@@ -37,136 +37,136 @@ static void spi5_cs1_error(void)
 
 static int spi5_cs1_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Transmit(&SpiHandle5, data, length, timeout);
+	e_status = HAL_SPI_Transmit(&SpiHandle5, data, length, timeout);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Receive(&SpiHandle5, data, length, timeout);
+	e_status = HAL_SPI_Receive(&SpiHandle5, data, length, timeout);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_receive32(uint32_t *data, uint16_t length, uint32_t timeout)
 {
-	int status;
+	int e_status;
 	uint8_t rx_data[4];
 	uint16_t i;
 	
 	for(i = 0; i < length; i++) {
 		SPI5C1_LOW();
-		status = HAL_SPI_Receive(&SpiHandle5, rx_data, 4, timeout);
+		e_status = HAL_SPI_Receive(&SpiHandle5, rx_data, 4, timeout);
 		SPI5C1_HIGH();
 		data[i] = (rx_data[0] << 24) | (rx_data[1] << 16) | (rx_data[2] << 8) | rx_data[3];
-		if(status != HAL_OK) {
+		if(e_status != HAL_OK) {
 			spi5_cs1_error();
-			return status;
+			return e_status;
 		}
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_transmit_receive(uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_TransmitReceive(&SpiHandle5, tx_data, rx_data, length, timeout);
+	e_status = HAL_SPI_TransmitReceive(&SpiHandle5, tx_data, rx_data, length, timeout);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef SPI5C1_IT
 static int spi5_cs1_transmit_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Transmit_IT(&SpiHandle5, data, length);
+	e_status = HAL_SPI_Transmit_IT(&SpiHandle5, data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_receive_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Receive_IT(&SpiHandle5, data, length);
+	e_status = HAL_SPI_Receive_IT(&SpiHandle5, data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_transmit_receive_it(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_TransmitReceive_IT(&SpiHandle5, tx_data, rx_data, length);
+	e_status = HAL_SPI_TransmitReceive_IT(&SpiHandle5, tx_data, rx_data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef SPI5C1_DMA
 static int spi5_cs1_transmit_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Transmit_DMA(&SpiHandle5, data, length);
+	e_status = HAL_SPI_Transmit_DMA(&SpiHandle5, data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_receive_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_Receive_DMA(&SpiHandle5, data, length);
+	e_status = HAL_SPI_Receive_DMA(&SpiHandle5, data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int spi5_cs1_transmit_receive_dma(uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
+	HAL_StatusTypeDef e_status = HAL_OK;
 	SPI5C1_LOW();
-	status = HAL_SPI_TransmitReceive_DMA(&SpiHandle5, tx_data, rx_data, length);
+	e_status = HAL_SPI_TransmitReceive_DMA(&SpiHandle5, tx_data, rx_data, length);
 	SPI5C1_HIGH();
-	if(status != HAL_OK) {
+	if(e_status != HAL_OK) {
 		spi5_cs1_error();
 	}
-	return status;
+	return e_status;
 }
 #endif
 #endif
 
-static struct spi_api spi5_cs1_api = {
+static struct spi_api Spi5_cs1_api = {
 	.init                 = spi5_cs1_init,
 	.transmit             = spi5_cs1_transmit,
 	.receive              = spi5_cs1_receive,
@@ -186,5 +186,5 @@ static struct spi_api spi5_cs1_api = {
 
 struct spi_api* spi5_cs1_binding(void)
 {
-	return &spi5_cs1_api; //傳遞位置
+	return &Spi5_cs1_api; //傳遞位置
 }

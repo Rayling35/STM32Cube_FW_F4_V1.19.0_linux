@@ -6,25 +6,25 @@
 
 
 typedef struct {
-	uint8_t head;
-	uint8_t data1;
-	uint8_t data2;
-	uint8_t data3;
-	uint8_t data4;
-	uint8_t data5;
-	uint8_t sum;
+	uint8_t value_head;
+	uint8_t value_data1;
+	uint8_t value_data2;
+	uint8_t value_data3;
+	uint8_t value_data4;
+	uint8_t value_data5;
+	uint8_t value_sum;
 }pzem004t_data_t;
 
 typedef struct {
-	char *command;
-	char *device;
-	int data1;
-	int data2;
-	int data3;
+	char *value_command;
+	char *value_device;
+	int value_data1;
+	int value_data2;
+	int value_data3;
 }uat_data_t;
 
-int pzem_data_send(struct uart_api *huart, pzem004t_data_t *data);
-int uart_at_command(struct uart_api *huart, uat_data_t *data);
+int pzem_data_send(struct uart_api *Huart, pzem004t_data_t *Data);
+int uart_at_command(struct uart_api *Huart, uat_data_t *Data);
 
 
 #endif

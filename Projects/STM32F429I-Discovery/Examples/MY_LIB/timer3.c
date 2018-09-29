@@ -39,7 +39,7 @@ static int timer3_stop_it(void)
 	return HAL_TIM_Base_Stop_IT(&TimHandle3);
 }
 
-static struct timer_api timer3_api = {
+static struct timer_api Timer3_api = {
 	.init           = timer3_init,
 	.timer_start_it = timer3_start_it,
 	.timer_stop_it  = timer3_stop_it,
@@ -52,5 +52,5 @@ void TIM3_IRQHandler(void)
 
 struct timer_api* timer3_binding(void)
 {
-	return &timer3_api;
+	return &Timer3_api;
 }

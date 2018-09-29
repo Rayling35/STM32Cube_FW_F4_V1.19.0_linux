@@ -34,22 +34,22 @@ static void EXTILine0_Config(void)
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t gpio_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_0) {
+	if(gpio_Pin == GPIO_PIN_0) {
 		#ifdef UART3_IT
-		struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-		uart3->transmit_it(buffer3, 10);
+		struct uart_api *Uart3 = (struct uart_api *)uart3_binding();
+		Uart3->transmit_it(buffer3, 10);
 		#endif
 		
 		#ifdef UART6_IT
-		struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-		uart6->transmit_it(buffer6, 10);
+		struct uart_api *Uart6 = (struct uart_api *)uart6_binding();
+		Uart6->transmit_it(buffer6, 10);
 		#endif
 		
 		#ifdef UART7_IT
-		struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-		uart7->transmit_it(buffer7, 10);
+		struct uart_api *Uart7 = (struct uart_api *)uart7_binding();
+		Uart7->transmit_it(buffer7, 10);
 		#endif
   }
 }
@@ -66,67 +66,67 @@ int main(void)
 	EXTILine0_Config();
 	
 	#ifdef UART3_IT
-	uint8_t RxData3;
-	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-	uart3->init();
-	uart3->receive_it(&RxData3, 1);
-	uart3_rx_callbake_flag = SET;
+	uint8_t rx_data3;
+	struct uart_api *Uart3 = (struct uart_api *)uart3_binding();
+	Uart3->init();
+	Uart3->receive_it(&rx_data3, 1);
+	e_uart3_rx_callbake_flag = SET;
 	uint16_t u3 = 0;
 	#endif
 	
 	#ifdef UART6_IT
-	uint8_t RxData6;
-	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-	uart6->init();
-	uart6->receive_it(&RxData6, 1);
-	uart6_rx_callbake_flag = SET;
+	uint8_t rx_data6;
+	struct uart_api *Uart6 = (struct uart_api *)uart6_binding();
+	Uart6->init();
+	Uart6->receive_it(&rx_data6, 1);
+	e_uart6_rx_callbake_flag = SET;
 	uint16_t u6 = 0;
 	#endif
 	
 	#ifdef UART7_IT
-	uint8_t RxData7;
-	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-	uart7->init();
-	uart7->receive_it(&RxData7, 1);
-	uart7_rx_callbake_flag = SET;
+	uint8_t rx_data7;
+	struct uart_api *Uart7 = (struct uart_api *)uart7_binding();
+	Uart7->init();
+	Uart7->receive_it(&rx_data7, 1);
+	e_uart7_rx_callbake_flag = SET;
 	uint16_t u7 = 0;
 	#endif
 	
 	
 	while(1) {
 		#ifdef UART3_IT
-		if(uart3_rx_callbake_flag == RESET) {
-			buffer3[u3] = RxData3;
+		if(e_uart3_rx_callbake_flag == RESET) {
+			buffer3[u3] = rx_data3;
 			u3++;
 			if(u3 >= 10) {
 				u3 = 0;
 			}
-			uart3->receive_it(&RxData3, 1);
-			uart3_rx_callbake_flag = SET;
+			Uart3->receive_it(&rx_data3, 1);
+			e_uart3_rx_callbake_flag = SET;
 		}
 		#endif
 		
 		#ifdef UART6_IT
-		if(uart6_rx_callbake_flag == RESET) {
-			buffer6[u6] = RxData6;
+		if(e_uart6_rx_callbake_flag == RESET) {
+			buffer6[u6] = rx_data6;
 			u6++;
 			if(u6 >= 10) {
 				u6 = 0;
 			}
-			uart6->receive_it(&RxData6, 1);
-			uart6_rx_callbake_flag = SET;
+			Uart6->receive_it(&rx_data6, 1);
+			e_uart6_rx_callbake_flag = SET;
 		}
 		#endif
 		
 		#ifdef UART7_IT
-		if(uart7_rx_callbake_flag == RESET) {
-			buffer7[u7] = RxData7;
+		if(e_uart7_rx_callbake_flag == RESET) {
+			buffer7[u7] = rx_data7;
 			u7++;
 			if(u7 >= 10) {
 				u7 = 0;
 			}
-			uart7->receive_it(&RxData7, 1);
-			uart7_rx_callbake_flag = SET;
+			Uart7->receive_it(&rx_data7, 1);
+			e_uart7_rx_callbake_flag = SET;
 		}
 		#endif
 	}

@@ -14,8 +14,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	#ifdef A0_EXTI
 	if(GPIO_Pin == GPIO_PIN_0) {
-		struct gpio_api *gpio_g13 = gpio_g13_binding();
-		gpio_g13->toggle_write();
+		struct gpio_api *Gpio_g13 = gpio_g13_binding();
+		Gpio_g13->toggle_write();
 	}
 	#endif
 }

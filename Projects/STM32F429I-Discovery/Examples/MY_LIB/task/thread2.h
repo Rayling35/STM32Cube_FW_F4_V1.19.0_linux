@@ -6,9 +6,9 @@
 
 
 struct message {
-	char *name;
-	uint16_t age;
-	float height;
+	char *value_name;
+	uint16_t value_age;
+	float value_height;
 };
 
 void message_put(uint32_t msg);

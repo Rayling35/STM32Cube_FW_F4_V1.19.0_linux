@@ -7,17 +7,21 @@
 #include "uart_string_transmit_parser.h"
 
 
-int pzem_data_send(struct uart_api *huart, pzem004t_data_t *data)
+int pzem_data_send(struct uart_api *Huart, pzem004t_data_t *Data)
 {
-	huart->transmit((uint8_t *)data, 7, 1000);
+	Huart->transmit((uint8_t *)Data, 7, 1000);
 	return 0;
 }
 
-int uart_at_command(struct uart_api *huart, uat_data_t *data)
+int uart_at_command(struct uart_api *Huart, uat_data_t *Data)
 {
 	char buffer[] = "\0";
 	
-	sprintf(buffer, "%s+%s=%d,%d,%d", data->command, data->device, data->data1, data->data2, data->data3);
-	huart->transmit((uint8_t *)buffer, strlen(buffer), 1000);
+	sprintf(buffer, "%s+%s=%d,%d,%d", Data->value_command,
+																		Data->value_device,
+																		Data->value_data1,
+																		Data->value_data2,
+																		Data->value_data3);
+	Huart->transmit((uint8_t *)buffer, strlen(buffer), 1000);
 	return 0;
 }

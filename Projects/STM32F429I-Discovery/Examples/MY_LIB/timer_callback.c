@@ -8,10 +8,10 @@
 
 uint32_t count;
 
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *Htim)
 {
 	#ifdef TIMER3_EXTI
-	if(htim->Instance == TIM3) {
+	if(Htim->Instance == TIM3) {
 		printf("Timer conut %d\r\n", count++);
 	}
 	#endif

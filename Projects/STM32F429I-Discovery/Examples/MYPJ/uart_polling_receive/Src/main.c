@@ -11,8 +11,8 @@
 #include "main.h"
 
 
-uint8_t myBuffer[] = "\nGPIO_INT\r\n";
-uint8_t Buffer[1];
+uint8_t my_buffer[] = "\nGPIO_INT\r\n";
+uint8_t buffer[1];
 uint8_t ok[] = "ok";
 
 static void EXTILine0_Config(void)
@@ -33,10 +33,10 @@ static void EXTILine0_Config(void)
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t gpio_Pin)
 {
-  if(GPIO_Pin == GPIO_PIN_0) {
-		printf("\n%s\r\n", myBuffer);
+  if(gpio_Pin == GPIO_PIN_0) {
+		printf("\n%s\r\n", my_buffer);
   }
 }
 
@@ -49,23 +49,23 @@ int main(void)
 {
 	system_initialization();
 	uart_printf_init();
-	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-	uart3->init();
-	uart6->init();
-	uart7->init();
+	struct uart_api *Uart3 = (struct uart_api *)uart3_binding();
+	struct uart_api *Uart6 = (struct uart_api *)uart6_binding();
+	struct uart_api *Uart7 = (struct uart_api *)uart7_binding();
+	Uart3->init();
+	Uart6->init();
+	Uart7->init();
   EXTILine0_Config();
 	
   while(1) {
-		uart3->receive(Buffer, 1, 1000);
-		uart6->receive(Buffer, 1, 1000);
-		uart7->receive(Buffer, 1, 1000);
-		if(Buffer[0] == 0x66) {
+		Uart3->receive(buffer, 1, 1000);
+		Uart6->receive(buffer, 1, 1000);
+		Uart7->receive(buffer, 1, 1000);
+		if(buffer[0] == 0x66) {
 			printf("Hi fff\r\n");
-			uart3->transmit(ok, 2, 1000);
-			uart6->transmit(ok, 2, 1000);
-			uart7->transmit(ok, 2, 1000);
+			Uart3->transmit(ok, 2, 1000);
+			Uart6->transmit(ok, 2, 1000);
+			Uart7->transmit(ok, 2, 1000);
 		}		
   }
 }

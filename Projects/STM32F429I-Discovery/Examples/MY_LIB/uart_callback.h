@@ -6,15 +6,15 @@
 
 
 #ifdef UART3_IT
-extern __IO FlagStatus uart3_rx_callbake_flag;
+extern __IO FlagStatus e_uart3_rx_callbake_flag;
 #endif
 
 #ifdef UART6_IT
-extern __IO FlagStatus uart6_rx_callbake_flag;
+extern __IO FlagStatus e_uart6_rx_callbake_flag;
 #endif
 
 #ifdef UART7_IT
-extern __IO FlagStatus uart7_rx_callbake_flag;
+extern __IO FlagStatus e_uart7_rx_callbake_flag;
 #endif
 
 

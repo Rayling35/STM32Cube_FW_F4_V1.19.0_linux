@@ -135,69 +135,69 @@ static void uart7_error(void)
 
 static int uart7_transmit(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit(&UartHandle7, data, length, timeout);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit(&UartHandle7, data, length, timeout);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart7_receive(uint8_t *data, uint16_t length, uint32_t timeout)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive(&UartHandle7, data, length, timeout);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive(&UartHandle7, data, length, timeout);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef UART7_IT
 static int uart7_transmit_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit_IT(&UartHandle7, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit_IT(&UartHandle7, data, length);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart7_receive_it(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive_IT(&UartHandle7, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive_IT(&UartHandle7, data, length);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 
 #ifdef UART7_DMA
 static int uart7_transmit_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Transmit_DMA(&UartHandle7, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Transmit_DMA(&UartHandle7, data, length);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 
 static int uart7_receive_dma(uint8_t *data, uint16_t length)
 {
-	HAL_StatusTypeDef status = HAL_OK;
-	status = HAL_UART_Receive_DMA(&UartHandle7, data, length);
-	if(status == HAL_ERROR) {
+	HAL_StatusTypeDef e_status = HAL_OK;
+	e_status = HAL_UART_Receive_DMA(&UartHandle7, data, length);
+	if(e_status == HAL_ERROR) {
 		uart7_error();
 	}
-	return status;
+	return e_status;
 }
 #endif
 #endif
 
-static struct uart_api uart7_api = {
+static struct uart_api Uart7_api = {
 	.init         = uart7_init,
 	.transmit     = uart7_transmit,
 	.receive      = uart7_receive,
@@ -232,5 +232,5 @@ void DMA_UART7_RX_IRQHandler(void)
 
 struct uart_api* uart7_binding(void)
 {
-	return &uart7_api; //傳遞位置
+	return &Uart7_api; //傳遞位置
 }

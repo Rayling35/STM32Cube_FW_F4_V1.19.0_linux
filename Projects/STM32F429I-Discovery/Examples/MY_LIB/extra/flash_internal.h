@@ -33,9 +33,9 @@ enum flash_sector {
 	SECTOR_23_128KB_81E0000 = 0x081E0000,
 };
 
-int flash_internal_erase(enum flash_sector sector);
-int flash_internal_write(enum flash_sector sector, uint32_t offset, uint8_t data);
-uint8_t flash_internal_read(enum flash_sector sector, uint32_t offset);
+int flash_internal_erase(enum flash_sector e_sector);
+int flash_internal_write(enum flash_sector e_sector, uint32_t offset, uint8_t data);
+uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset);
 
 
 #endif

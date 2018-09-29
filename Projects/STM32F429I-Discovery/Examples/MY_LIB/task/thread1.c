@@ -7,15 +7,15 @@
 #include "thread2.h"
 
 
-static struct message meter = {
-	.name = "rock man",
-	.age = 88,
-	.height = 251.36
+static struct message Meter = {
+	.value_name   = "rock man",
+	.value_age    = 88,
+	.value_height = 251.36
 };
 
 static void Thread1(const void *argument)
 {
-	message_put((uint32_t)&meter);
+	message_put((uint32_t)&Meter);
 }
 
 void thread1(void)

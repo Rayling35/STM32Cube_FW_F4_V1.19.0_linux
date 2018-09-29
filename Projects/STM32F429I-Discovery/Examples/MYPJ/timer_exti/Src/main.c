@@ -16,8 +16,8 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
-	struct timer_api *timer3 = timer3_binding();
-	timer3->init();
+	struct timer_api *Timer3 = timer3_binding();
+	Timer3->init();
 	
 	//max clk = 90Mhz
 	uint32_t prescaler = 9000;
@@ -31,40 +31,40 @@ int main(void)
 	while(1) {
 		count = 0;
 		printf("1 sec of 60 sec\r\n");
-		timer3->timer_start_it(period1-1, prescaler-1); // 1/(90M/period1*perscaler) = 1 sec
+		Timer3->timer_start_it(period1-1, prescaler-1); // 1/(90M/period1*perscaler) = 1 sec
 		HAL_Delay(8000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		HAL_Delay(5000);
-		timer3->timer_start_it(period1-1, prescaler-1);
+		Timer3->timer_start_it(period1-1, prescaler-1);
 		HAL_Delay(15000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		HAL_Delay(12000);
-		timer3->timer_start_it(period1-1, prescaler-1);
+		Timer3->timer_start_it(period1-1, prescaler-1);
 		HAL_Delay(20000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		
 		count = 0;
 		printf("2 sec of 60 sec\r\n");
-		timer3->timer_start_it(period2-1, prescaler-1); // 1/(90M/period2*perscaler) = 2 sec
+		Timer3->timer_start_it(period2-1, prescaler-1); // 1/(90M/period2*perscaler) = 2 sec
 		HAL_Delay(60000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		
 		count = 0;
 		printf("0.5 sec of 60 sec\r\n");
-		timer3->timer_start_it(period3-1, prescaler-1); // 1/(90M/period3*perscaler) = 0.5 sec
+		Timer3->timer_start_it(period3-1, prescaler-1); // 1/(90M/period3*perscaler) = 0.5 sec
 		HAL_Delay(60000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		
 		count = 0;
 		printf("6 sec of 60 sec\r\n");
-		timer3->timer_start_it(period4-1, prescaler-1); // 1/(90M/period4*perscaler) = 6 sec
+		Timer3->timer_start_it(period4-1, prescaler-1); // 1/(90M/period4*perscaler) = 6 sec
 		HAL_Delay(60000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 		
 		count = 0;
 		printf("0.1 sec of 60 sec\r\n");
-		timer3->timer_start_it(period5-1, prescaler-1); // 1/(90M/period5*perscaler) = 0.1 sec
+		Timer3->timer_start_it(period5-1, prescaler-1); // 1/(90M/period5*perscaler) = 0.1 sec
 		HAL_Delay(60000);
-		timer3->timer_stop_it();
+		Timer3->timer_stop_it();
 	}
 }

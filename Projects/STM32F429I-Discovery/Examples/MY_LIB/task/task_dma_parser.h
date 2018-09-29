@@ -5,7 +5,7 @@
 #define __TASK_DMA_PARSER_H
 
 
-void task_dma_parser(struct uart_api *uart);
+void task_dma_parser(struct uart_api *Uart);
 
 
 #endif

@@ -51,7 +51,7 @@ static const struct sensor_common_api Max31855_api = {
 
 static struct max31855_data Max31855_data;
 
-static int max31855_dev_init(struct device *Dev)
+static int max31855_device_init(struct device *Dev)
 {
 	struct max31855_data *D_data = Dev->data;
 	
@@ -65,7 +65,7 @@ static int max31855_dev_init(struct device *Dev)
 struct device Max31855 = {
 	.api  = &Max31855_api,
 	.data = &Max31855_data,
-	.init = max31855_dev_init,
+	.init = max31855_device_init,
 };
 
 struct device* max31855_device_binding(void)

@@ -34,20 +34,20 @@ static void EXTILine0_Config(void)
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+void HAL_GPIO_EXTI_Callback(uint16_t gpio_Pin)
 {
-	if(GPIO_Pin == GPIO_PIN_0) {
+	if(gpio_Pin == GPIO_PIN_0) {
 		#ifdef UART3_IT
-		struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-		uart3->transmit_it(buffer3, 10);
+		struct uart_api *Uart3 = (struct uart_api *)uart3_binding();
+		Uart3->transmit_it(buffer3, 10);
 		#endif
 		#ifdef UART6_IT
-		struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-		uart6->transmit_it(buffer6, 10);
+		struct uart_api *Uart6 = (struct uart_api *)uart6_binding();
+		Uart6->transmit_it(buffer6, 10);
 		#endif
 		#ifdef UART7_IT
-		struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-		uart7->transmit_it(buffer7, 10);
+		struct uart_api *Uart7 = (struct uart_api *)uart7_binding();
+		Uart7->transmit_it(buffer7, 10);
 		#endif
   }
 }
@@ -64,21 +64,21 @@ int main(void)
 	EXTILine0_Config();
 	
 	#ifdef UART3_IT
-	struct uart_api *uart3 = (struct uart_api *)uart3_binding();
-	uart3->init();
-	uart3->receive_it(&uart_it_1_callback_string_byte, 1);
+	struct uart_api *Uart3 = (struct uart_api *)uart3_binding();
+	Uart3->init();
+	Uart3->receive_it(&uart_it_1_callback_string_byte, 1);
 	uint8_t *uart3_string_checkout;	
 	#endif
 	#ifdef UART6_IT
-	struct uart_api *uart6 = (struct uart_api *)uart6_binding();
-	uart6->init();
-	uart6->receive_it(&uart_it_2_callback_string_byte, 1);
+	struct uart_api *Uart6 = (struct uart_api *)uart6_binding();
+	Uart6->init();
+	Uart6->receive_it(&uart_it_2_callback_string_byte, 1);
 	uint8_t *uart6_string_checkout;	
 	#endif
 	#ifdef UART7_IT
-	struct uart_api *uart7 = (struct uart_api *)uart7_binding();
-	uart7->init();
-	uart7->receive_it(&uart_it_3_callback_string_byte, 1);
+	struct uart_api *Uart7 = (struct uart_api *)uart7_binding();
+	Uart7->init();
+	Uart7->receive_it(&uart_it_3_callback_string_byte, 1);
 	uint8_t *uart7_string_checkout;	
 	#endif
 	

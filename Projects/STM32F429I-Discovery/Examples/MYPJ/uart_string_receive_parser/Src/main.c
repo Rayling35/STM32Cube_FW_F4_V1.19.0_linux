@@ -20,26 +20,26 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 #ifdef UART3
-	struct uart_api *uart = (struct uart_api *)uart3_binding();
+	struct uart_api *Uart = (struct uart_api *)uart3_binding();
 #elif UART6
-	struct uart_api *uart = (struct uart_api *)uart6_binding();
+	struct uart_api *Uart = (struct uart_api *)uart6_binding();
 #endif
-	uart->init();
+	Uart->init();
 
 	uint8_t buffer[50];
 	
-	head_checkout(uart, "GPABCD", buffer, 50);
-	gps_data_t *gps = a_parser(buffer);
-	printf("START = %s\r\n", gps->start);
+	head_checkout(Uart, "GPABCD", buffer, 50);
+	gps_data_t *Gps = a_parser(buffer);
+	printf("START = %s\r\n", Gps->value_start);
 
 /*---------------------------------------------------------*/
 	char name[] = {0x0A,0x41};
-	head_checkout(uart, name, buffer, 50);
-	version_data_t *version = version_parser(buffer);
+	head_checkout(Uart, name, buffer, 50);
+	version_data_t *Version = version_parser(buffer);
 	
 	char region[5];
 	int re;
-	sprintf(region, "%.5s\r\n", version->region);
+	sprintf(region, "%.5s\r\n", Version->value_region);
 	re = strtol(region, NULL, 16);
 	printf("region %d\r\n", re);
 }
