@@ -104,3 +104,25 @@ uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset)
 	
 	return data;
 }
+
+int flash_data_write(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length)
+{
+	uint16_t i;
+	
+	for(i = 0; i < length; i++) {
+		flash_internal_write(e_sector, address + i, data[i]);
+	}
+	
+	return 0;
+}
+
+int flash_data_read(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length)
+{
+	uint16_t i;
+	
+	for(i = 0; i < length; i++) {
+		data[i] = flash_internal_read(e_sector, address + i);
+	}
+	
+	return 0;
+}

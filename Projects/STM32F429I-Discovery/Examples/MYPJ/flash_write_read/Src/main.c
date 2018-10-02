@@ -13,6 +13,14 @@ int main(void)
 	system_initialization();
 	uart_printf_init();
 	
+	uint8_t hello[] = "Hi, nice to meet you";
+	uint8_t temp[20];
+	
+	flash_internal_erase(SECTOR_2_16KB_8008000);
+	flash_data_write(SECTOR_2_16KB_8008000, 0, hello, 20);
+	flash_data_read(SECTOR_2_16KB_8008000, 0, temp, 20);
+	printf("%s\r\n", temp);
+	
 //	flash_internal_erase(SECTOR_0_16KB_8000000);
 //	flash_internal_write(SECTOR_0_16KB_8000000, 0, 01);
 //	flash_internal_write(SECTOR_0_16KB_8000000, 16383, 02);

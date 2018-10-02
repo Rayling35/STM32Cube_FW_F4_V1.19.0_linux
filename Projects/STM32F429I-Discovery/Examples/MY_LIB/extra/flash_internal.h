@@ -36,6 +36,8 @@ enum flash_sector {
 int flash_internal_erase(enum flash_sector e_sector);
 int flash_internal_write(enum flash_sector e_sector, uint32_t offset, uint8_t data);
 uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset);
+int flash_data_write(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length);
+int flash_data_read(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length);
 
 
 #endif
