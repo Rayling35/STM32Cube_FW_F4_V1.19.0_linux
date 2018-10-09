@@ -68,6 +68,8 @@ int flash_internal_erase(enum flash_sector e_sector)
 	uint32_t first_sector = get_sector(e_sector);
 	uint32_t Nb_of_sectors = get_sector(e_sector);
 	uint32_t sector_error = 0;
+	uint16_t count;
+	HAL_StatusTypeDef e_status;
 	
 	Erase.TypeErase    = FLASH_TYPEERASE_SECTORS;
 	Erase.Banks        = 0;
@@ -76,10 +78,20 @@ int flash_internal_erase(enum flash_sector e_sector)
 	Erase.VoltageRange = FLASH_VOLTAGE_RANGE_3;
 	
 	HAL_FLASH_Unlock();
-	if(HAL_FLASHEx_Erase(&Erase, &sector_error) != HAL_OK) { 
-		return 1;
+	for(count = 0; count < 10; count++) {
+		e_status = HAL_FLASHEx_Erase(&Erase, &sector_error);
+		if(e_status == HAL_OK) {
+			break;
+		}
 	}
 	HAL_FLASH_Lock();
+	
+	if(count >= 10) {
+		printf("Flash erase fail!!\r\n");
+		return 1;
+	}else if(count >= 1) {
+		printf("Flash erase %d times to success\r\n", count+1);
+	}
 	
 	return 0;
 }
