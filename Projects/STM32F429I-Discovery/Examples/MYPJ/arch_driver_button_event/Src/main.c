@@ -186,14 +186,56 @@ static void main_thread(const void *argument)
 			while(!My_button_press_status.flag_button_press_5_second || button_click) {
 				if(button_click) {
 					button_click = 0;
-					printf("go into Button press 4 seconds\r\n");
 					while(1) {
-						if(button_click) {
-							button_click = 0;
-							printf("Button click in 4 second house\r\n");
-						}
+							printf("go into Button press 4-1 seconds\r\n");
+							while(1) {
+								if(button_click) {
+									button_click = 0;
+									printf("Button click in 4-1 second house\r\n");
+								}
+								if(My_button_press_status.flag_button_press_1_second) {
+									break;
+								}
+							}
+							printf("Save and Exit 4-1 second house\r\n");
+						
 						if(My_button_press_status.flag_button_press_1_second) {
-							printf("Save and Exit 4 second house\r\n");
+							printf("go into Button press 4-2 seconds\r\n");
+							while(My_button_press_status.flag_button_press_1_second || !button_click) {
+								osDelay(1);
+							}
+							button_click = 0;
+							while(1) {
+								if(button_click) {
+									button_click = 0;
+									printf("Button click in 4-2 second house\r\n");
+								}
+								if(My_button_press_status.flag_button_press_1_second) {
+									break;
+								}
+							}
+							printf("Save and Exit 4-2 second house\r\n");
+						}
+		
+						if(My_button_press_status.flag_button_press_1_second) {
+							printf("go into Button press 4-3 seconds\r\n");
+							while(My_button_press_status.flag_button_press_1_second || !button_click) {
+								osDelay(1);
+							}
+							button_click = 0;
+							while(1) {
+								if(button_click) {
+									button_click = 0;
+									printf("Button click in 4-3 second house\r\n");
+								}
+								if(My_button_press_status.flag_button_press_1_second) {
+									break;
+								}
+							}
+							printf("Save and Exit 4-3 second house\r\n");
+						}
+						
+						if(My_button_press_status.flag_button_press_1_second) {
 							while(!button_click) {
 								osDelay(1);
 							}
