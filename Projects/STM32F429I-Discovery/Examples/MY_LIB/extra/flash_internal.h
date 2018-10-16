@@ -5,9 +5,16 @@
 #define __FLASH_INTERNAL_H
 
 
+enum flash_type {
+	PROGRAM_BYTE       = 0x00000000U,
+	PROGRAM_HALFWORD   = 0x00000001U,
+	PROGRAM_WORD       = 0x00000002U,
+	PROGRAM_DOUBLEWORD = 0x00000003U,
+};
+
 enum flash_sector {
 	SECTOR_0_16KB_8000000   = 0x08000000, //Bank 1
-	SECTOR_1_16KB_8004000   = 0x08004000,
+	SECTOR_1_16KB_8004000   = 0x08004000, /* Start @ of user Flash area */
 	SECTOR_2_16KB_8008000   = 0x08008000,
 	SECTOR_3_16KB_800C000   = 0x0800C000,
 	SECTOR_4_64KB_8010000   = 0x08010000,
@@ -30,14 +37,17 @@ enum flash_sector {
 	SECTOR_20_128KB_8180000 = 0x08180000,
 	SECTOR_21_128KB_81A0000 = 0x081A0000,
 	SECTOR_22_128KB_81C0000 = 0x081C0000,
-	SECTOR_23_128KB_81E0000 = 0x081E0000,
+	SECTOR_23_128KB_81E0000 = 0x081E0000, /* End @ of user Flash area */
 };
 
 int flash_internal_erase(enum flash_sector e_sector);
-int flash_internal_write(enum flash_sector e_sector, uint32_t offset, uint8_t data);
-uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset);
-int flash_data_write(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length);
-int flash_data_read(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length);
+int flash_internal_write(enum flash_type e_type, enum flash_sector e_sector, uint32_t offset, uint64_t data);
+uint8_t flash_internal_read_byte(enum flash_sector e_sector, uint32_t offset);
+uint16_t flash_internal_read_halfword(enum flash_sector e_sector, uint32_t offset);
+uint32_t flash_internal_read_word(enum flash_sector e_sector, uint32_t offset);
+uint64_t flash_internal_read_doubleword(enum flash_sector e_sector, uint32_t offset);
+int flash_data_write(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length);
+int flash_data_read(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length);
 
 
 #endif

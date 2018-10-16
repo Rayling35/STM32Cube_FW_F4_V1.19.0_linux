@@ -96,12 +96,12 @@ int flash_internal_erase(enum flash_sector e_sector)
 	return 0;
 }
 
-int flash_internal_write(enum flash_sector e_sector, uint32_t offset, uint8_t data)
+int flash_internal_write(enum flash_type e_type, enum flash_sector e_sector, uint32_t offset, uint64_t data)
 {
 	uint32_t address = e_sector + offset;
 	
 	HAL_FLASH_Unlock();
-	if(HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, address, data) != HAL_OK) {
+	if(HAL_FLASH_Program(e_type, address, data) != HAL_OK) {
 		return 1;
 	}
 	HAL_FLASH_Lock();
@@ -109,7 +109,7 @@ int flash_internal_write(enum flash_sector e_sector, uint32_t offset, uint8_t da
 	return 0;
 }
 
-uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset)
+uint8_t flash_internal_read_byte(enum flash_sector e_sector, uint32_t offset)
 {
 	uint32_t address = e_sector + offset;
 	__IO uint8_t data = *(__IO uint8_t *)address;;
@@ -117,23 +117,47 @@ uint8_t flash_internal_read(enum flash_sector e_sector, uint32_t offset)
 	return data;
 }
 
-int flash_data_write(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length)
+uint16_t flash_internal_read_halfword(enum flash_sector e_sector, uint32_t offset)
+{
+	uint32_t address = e_sector + offset;
+	__IO uint16_t data = *(__IO uint16_t *)address;;
+	
+	return data;
+}
+
+uint32_t flash_internal_read_word(enum flash_sector e_sector, uint32_t offset)
+{
+	uint32_t address = e_sector + offset;
+	__IO uint32_t data = *(__IO uint32_t *)address;;
+	
+	return data;
+}
+
+uint64_t flash_internal_read_doubleword(enum flash_sector e_sector, uint32_t offset)
+{
+	uint32_t address = e_sector + offset;
+	__IO uint64_t data = *(__IO uint64_t *)address;;
+	
+	return data;
+}
+
+int flash_data_write(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length)
 {
 	uint16_t i;
 	
 	for(i = 0; i < length; i++) {
-		flash_internal_write(e_sector, address + i, data[i]);
+		flash_internal_write(PROGRAM_BYTE, e_sector, offset + i, data[i]);
 	}
 	
 	return 0;
 }
 
-int flash_data_read(enum flash_sector e_sector, uint32_t address, uint8_t *data, uint16_t length)
+int flash_data_read(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length)
 {
 	uint16_t i;
 	
 	for(i = 0; i < length; i++) {
-		data[i] = flash_internal_read(e_sector, address + i);
+		data[i] = flash_internal_read_byte(e_sector, offset + i);
 	}
 	
 	return 0;
