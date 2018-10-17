@@ -152,8 +152,7 @@ static void main_thread(const void *argument)
 		}
 #endif
 #if 1
-		if(My_button_press_status.flag_button_press_3_second)
-		{
+		if(My_button_press_status.flag_button_press_3_second) {
 			count_click = 0;
 			printf("-->Button press 3 seconds\r\n");
 			while(!My_button_press_status.flag_button_press_4_second || button_click) {
@@ -216,7 +215,7 @@ static void main_thread(const void *argument)
 							}
 							printf("Save and Exit 4-2 second house\r\n");
 						}
-		
+						
 						if(My_button_press_status.flag_button_press_1_second) {
 							printf("go into Button press 4-3 seconds\r\n");
 							while(My_button_press_status.flag_button_press_1_second || !button_click) {

@@ -112,7 +112,7 @@ int flash_internal_write(enum flash_type e_type, enum flash_sector e_sector, uin
 uint8_t flash_internal_read_byte(enum flash_sector e_sector, uint32_t offset)
 {
 	uint32_t address = e_sector + offset;
-	__IO uint8_t data = *(__IO uint8_t *)address;;
+	__IO uint8_t data = *(__IO uint8_t *)address;
 	
 	return data;
 }
@@ -120,7 +120,7 @@ uint8_t flash_internal_read_byte(enum flash_sector e_sector, uint32_t offset)
 uint16_t flash_internal_read_halfword(enum flash_sector e_sector, uint32_t offset)
 {
 	uint32_t address = e_sector + offset;
-	__IO uint16_t data = *(__IO uint16_t *)address;;
+	__IO uint16_t data = *(__IO uint16_t *)address;
 	
 	return data;
 }
@@ -128,7 +128,7 @@ uint16_t flash_internal_read_halfword(enum flash_sector e_sector, uint32_t offse
 uint32_t flash_internal_read_word(enum flash_sector e_sector, uint32_t offset)
 {
 	uint32_t address = e_sector + offset;
-	__IO uint32_t data = *(__IO uint32_t *)address;;
+	__IO uint32_t data = *(__IO uint32_t *)address;
 	
 	return data;
 }
@@ -136,7 +136,7 @@ uint32_t flash_internal_read_word(enum flash_sector e_sector, uint32_t offset)
 uint64_t flash_internal_read_doubleword(enum flash_sector e_sector, uint32_t offset)
 {
 	uint32_t address = e_sector + offset;
-	__IO uint64_t data = *(__IO uint64_t *)address;;
+	__IO uint64_t data = *(__IO uint64_t *)address;
 	
 	return data;
 }
