@@ -81,7 +81,7 @@ static int gpio_a5_read(void)
 	return HAL_GPIO_ReadPin(PA5_PORT, PA5_PIN);
 }
 
-static void gpio_a5_write(uint16_t state)
+static void gpio_a5_write(uint8_t state)
 {
 	if(state == 0) {
 		HAL_GPIO_WritePin(PA5_PORT, PA5_PIN, GPIO_PIN_RESET);

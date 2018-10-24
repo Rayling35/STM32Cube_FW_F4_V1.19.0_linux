@@ -81,7 +81,7 @@ static int gpio_g2_read(void)
 	return HAL_GPIO_ReadPin(PG2_PORT, PG2_PIN);
 }
 
-static void gpio_g2_write(uint16_t state)
+static void gpio_g2_write(uint8_t state)
 {
 	if(state == 0) {
 		HAL_GPIO_WritePin(PG2_PORT, PG2_PIN, GPIO_PIN_RESET);

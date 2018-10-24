@@ -81,7 +81,7 @@ static int gpio_g3_read(void)
 	return HAL_GPIO_ReadPin(PG3_PORT, PG3_PIN);
 }
 
-static void gpio_g3_write(uint16_t state)
+static void gpio_g3_write(uint8_t state)
 {
 	if(state == 0) {
 		HAL_GPIO_WritePin(PG3_PORT, PG3_PIN, GPIO_PIN_RESET);
