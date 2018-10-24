@@ -141,7 +141,7 @@ uint64_t flash_internal_read_doubleword(enum flash_sector e_sector, uint32_t off
 	return data;
 }
 
-int flash_data_write(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length)
+int flash_data_write(enum flash_sector e_sector, uint32_t offset, uint8_t *data, uint16_t length)
 {
 	uint16_t i;
 	
@@ -152,7 +152,7 @@ int flash_data_write(enum flash_sector e_sector, uint32_t offset, uint8_t data[]
 	return 0;
 }
 
-int flash_data_read(enum flash_sector e_sector, uint32_t offset, uint8_t data[], uint16_t length)
+int flash_data_read(enum flash_sector e_sector, uint32_t offset, uint8_t *data, uint16_t length)
 {
 	uint16_t i;
 	
