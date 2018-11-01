@@ -44,9 +44,9 @@ static int pwm3_1_device_init(struct device *Dev)
 }
 
 struct device Pwm_3_1 = {
-	.api    = &Pwm_common_api,
-	.data   = &Pwm3_1_data,
-	.init   = pwm3_1_device_init,
+	.api  = &Pwm_common_api,
+	.data = &Pwm3_1_data,
+	.init = pwm3_1_device_init,
 };
 
 struct device* pwm3_1_device_binding(void)
