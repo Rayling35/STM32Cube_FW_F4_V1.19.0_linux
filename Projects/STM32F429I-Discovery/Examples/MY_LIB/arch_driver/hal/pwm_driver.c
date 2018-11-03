@@ -28,6 +28,7 @@ static const struct pwm_common_api Pwm_common_api = {
 	.output = output_data,
 };
 
+
 #ifdef PWM3_1_DEV
 #include "pwm3_1.h"
 static struct pwm_data Pwm3_1_data;

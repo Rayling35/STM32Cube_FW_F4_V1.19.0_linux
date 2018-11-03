@@ -16,8 +16,8 @@ struct uart_data {
 };
 
 struct uart_config {
-	uint32_t value_tx_timeout;
-	uint32_t value_rx_timeout;
+	uint8_t value_tx_timeout;
+	uint8_t value_rx_timeout;
 	enum uart_mode e_mode;
 };
 

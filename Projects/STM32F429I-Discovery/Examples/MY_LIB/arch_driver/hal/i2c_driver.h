@@ -10,8 +10,8 @@ struct i2c_data {
 };
 
 struct i2c_config {
-	uint32_t value_write_timeout;
-	uint32_t value_read_timeout;
+	uint8_t value_write_timeout;
+	uint8_t value_read_timeout;
 };
 
 #ifdef I2C1_DEV

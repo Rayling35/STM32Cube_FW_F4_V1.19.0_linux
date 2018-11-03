@@ -106,6 +106,7 @@ __weak void uart3_error_callback_handel(struct device *Dev)
 #endif
 #endif
 
+
 #ifdef UART6_DEV
 #include "uart6.h"
 static struct uart_data Uart6_data;
@@ -151,6 +152,7 @@ __weak void uart6_error_callback_handel(struct device *Dev)
 }
 #endif
 #endif
+
 
 #ifdef UART7_DEV
 #include "uart7.h"

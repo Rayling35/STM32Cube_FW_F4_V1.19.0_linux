@@ -65,6 +65,7 @@ struct device* i2c1_device_binding(void)
 }
 #endif
 
+
 #ifdef I2C3_DEV
 #include "i2c3.h"
 static struct i2c_data I2c3_data;
