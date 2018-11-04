@@ -37,17 +37,15 @@ static const struct seg7_common_api Ht1621_api = {
 	.write_data_bit_4 = write_data_bit_4,
 };
 
-static struct ht1621_data Ht1621_data;
-
 static int ht1621_device_init(struct device *Dev)
 {
-	struct device *Gpio_a5 = gpio_a5_device_binding();
-	struct device *Gpio_g2 = gpio_g2_device_binding();
-	struct device *Gpio_g3 = gpio_g3_device_binding();
+	struct device *Gpio_cs = gpio_a5_device_binding();
+	struct device *Gpio_wr = gpio_g2_device_binding();
+	struct device *Gpio_data = gpio_g3_device_binding();
 	
-	gpio_init(Gpio_a5);
-	gpio_init(Gpio_g2);
-	gpio_init(Gpio_g3);
+	gpio_init(Gpio_cs);
+	gpio_init(Gpio_wr);
+	gpio_init(Gpio_data);
 	ht1621_init();
 	printf("HT1621 device init\r\n");
 	
@@ -56,7 +54,6 @@ static int ht1621_device_init(struct device *Dev)
 
 struct device Ht1621 = {
 	.api  = &Ht1621_api,
-	.data = &Ht1621_data,
 	.init = ht1621_device_init,
 };
 

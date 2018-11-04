@@ -32,13 +32,7 @@ int main(void)
 	uart_printf_init();
 	
 	struct device *Ht1621 = ht1621_device_binding();
-	
 	seg7_init(Ht1621);
-	
-	seg7_write_command(Ht1621, BIAS);
-	seg7_write_command(Ht1621, RC256);
-	seg7_write_command(Ht1621, SYSEN);
-	seg7_write_command(Ht1621, LCDON);
 	
 	printf("All device init\r\n");
 	

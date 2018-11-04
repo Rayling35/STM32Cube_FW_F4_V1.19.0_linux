@@ -6,7 +6,7 @@
 
 
 struct button_event_data {
-	struct device *Gpio_a0; //button
+	struct device *Gpio; //button
 	
 	uint8_t value_pin_original_status;
 };

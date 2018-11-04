@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, GPIO_A5_DEV, GPIO_G2_DEV, GPIO_G3_DEV, A5_OUTPUT, G2_OUTPUT, G3_OUTPUT</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, A5_OUTPUT, G2_OUTPUT, G3_OUTPUT, GPIO_A5_DEV, GPIO_G2_DEV, GPIO_G3_DEV</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_define\hal;..\..\..\MY_LIB\arch_define\driver;..\..\..\MY_LIB\arch_define\ap;..\..\..\MY_LIB\arch_driver\hal;..\..\..\MY_LIB\arch_driver\driver;..\..\..\MY_LIB\arch_driver\ap;..\..\..\MY_LIB\extra</IncludePath>
             </VariousControls>

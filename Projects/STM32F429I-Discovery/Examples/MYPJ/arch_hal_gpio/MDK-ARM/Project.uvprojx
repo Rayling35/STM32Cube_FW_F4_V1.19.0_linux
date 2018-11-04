@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--C99</MiscControls>
-              <Define>USE_HAL_DRIVER, STM32F429xx, GPIO_A0_DEV, GPIO_G13_DEV, A0_INPUT, G13_OUTPUT, RTOS_ON</Define>
+              <Define>USE_HAL_DRIVER, STM32F429xx, RTOS_ON, A0_INPUT, G13_OUTPUT, GPIO_A0_DEV, GPIO_G13_DEV</Define>
               <Undefine></Undefine>
               <IncludePath>..\Inc;..\..\..\..\..\..\Drivers\CMSIS\Device\ST\STM32F4xx\Include;..\..\..\..\..\..\Drivers\STM32F4xx_HAL_Driver\Inc;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM4F;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS;..\..\..\..\..\..\Middlewares\Third_Party\FreeRTOS\Source\include;..\..\..\MY_LIB;..\..\..\MY_LIB\arch_define;..\..\..\MY_LIB\arch_define\hal;..\..\..\MY_LIB\arch_driver\hal</IncludePath>
             </VariousControls>
