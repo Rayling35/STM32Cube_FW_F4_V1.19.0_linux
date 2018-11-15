@@ -8,22 +8,22 @@
 #include "api_i2c_common.h"
 
 
-static int mem_write_data(struct device *Dev, uint16_t addr, uint16_t reg, uint8_t *w_data, uint16_t length)
+static int mem_write_data(struct device *Dev, uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	struct i2c_data *D_data = Dev->data;
 	const struct i2c_config *D_config = Dev->config;
 	struct i2c_api *I2c_hal = D_data->I2c_hal;
 	
-	return I2c_hal->mem_write(addr, reg, w_data, length, D_config->value_write_timeout);
+	return I2c_hal->mem_write(addr, reg, data, length, D_config->value_write_timeout);
 }
 
-static int mem_read_data(struct device *Dev, uint16_t addr, uint16_t reg, uint8_t *r_data, uint16_t length)
+static int mem_read_data(struct device *Dev, uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	struct i2c_data *D_data = Dev->data;
 	const struct i2c_config *D_config = Dev->config;
 	struct i2c_api *I2c_hal = D_data->I2c_hal;
 	
-	return I2c_hal->mem_read(addr, reg, r_data, length, D_config->value_read_timeout);
+	return I2c_hal->mem_read(addr, reg, data, length, D_config->value_read_timeout);
 }
 
 static const struct i2c_common_api I2c_common_api = {

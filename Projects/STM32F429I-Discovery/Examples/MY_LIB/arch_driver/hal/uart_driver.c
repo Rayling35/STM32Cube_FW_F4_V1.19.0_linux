@@ -8,7 +8,7 @@
 #include "api_uart_common.h"
 
 
-static int transmit_data(struct device *Dev, uint8_t *tx_data, uint16_t length)
+static int transmit_data(struct device *Dev, uint8_t *data, uint16_t length)
 {
 	struct uart_data *D_data = Dev->data;
 	const struct uart_config *D_config = Dev->config;
@@ -17,13 +17,13 @@ static int transmit_data(struct device *Dev, uint8_t *tx_data, uint16_t length)
 	
 	switch (D_config->e_mode) {
 		case POLLING:
-			status = Uart_hal->transmit(tx_data, length, D_config->value_tx_timeout);
+			status = Uart_hal->transmit(data, length, D_config->value_tx_timeout);
 			break;
 		case IT:
-			status = Uart_hal->transmit_it(tx_data, length);
+			status = Uart_hal->transmit_it(data, length);
 			break;
 		case DMA:
-			status = Uart_hal->transmit_dma(tx_data, length);
+			status = Uart_hal->transmit_dma(data, length);
 			break;
 		default:
 			return -1;
@@ -31,7 +31,7 @@ static int transmit_data(struct device *Dev, uint8_t *tx_data, uint16_t length)
 	return status;
 }
 
-static int receive_data(struct device *Dev, uint8_t *rx_data, uint16_t length)
+static int receive_data(struct device *Dev, uint8_t *data, uint16_t length)
 {
 	struct uart_data *D_data = Dev->data;
 	const struct uart_config *D_config = Dev->config;
@@ -40,13 +40,13 @@ static int receive_data(struct device *Dev, uint8_t *rx_data, uint16_t length)
 	
 	switch (D_config->e_mode) {
 		case POLLING:
-			status = Uart_hal->receive(rx_data, length, D_config->value_rx_timeout);
+			status = Uart_hal->receive(data, length, D_config->value_rx_timeout);
 			break;
 		case IT:
-			status = Uart_hal->receive_it(rx_data, length);
+			status = Uart_hal->receive_it(data, length);
 			break;
 		case DMA:
-			status = Uart_hal->receive_dma(rx_data, length);
+			status = Uart_hal->receive_dma(data, length);
 			break;
 		default:
 			return -1;
