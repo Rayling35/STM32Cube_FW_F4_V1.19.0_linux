@@ -13,7 +13,7 @@
 #define I2C3_FORCE_RESET()              __HAL_RCC_I2C3_FORCE_RESET()
 #define I2C3_RELEASE_RESET()            __HAL_RCC_I2C3_RELEASE_RESET()
 
-#define I2C3_CLOCKSPEED                 100000
+#define I2C3_CLOCKSPEED                 400000
 
 #define I2C3_SCL_PIN                    GPIO_PIN_8
 #define I2C3_SCL_GPIO_PORT              GPIOA

@@ -13,7 +13,7 @@
 #define I2C1_FORCE_RESET()              __HAL_RCC_I2C1_FORCE_RESET()
 #define I2C1_RELEASE_RESET()            __HAL_RCC_I2C1_RELEASE_RESET()
 
-#define I2C1_CLOCKSPEED                 100000
+#define I2C1_CLOCKSPEED                 400000
 
 #define I2C1_SCL_PIN                    GPIO_PIN_6
 #define I2C1_SCL_GPIO_PORT              GPIOB

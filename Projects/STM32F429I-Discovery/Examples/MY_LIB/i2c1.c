@@ -25,7 +25,7 @@ static void _I2C1_MspInit(void)
 	
 	GPIO_InitStruct.Pin       = I2C1_SCL_PIN;
 	GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
-	GPIO_InitStruct.Pull      = GPIO_NOPULL;
+	GPIO_InitStruct.Pull      = GPIO_PULLUP;
 	GPIO_InitStruct.Speed     = GPIO_SPEED_FAST;
 	GPIO_InitStruct.Alternate = I2C1_SCL_AF;
 	HAL_GPIO_Init(I2C1_SCL_GPIO_PORT, &GPIO_InitStruct);
@@ -141,7 +141,7 @@ static void i2c1_error(void)
 static int i2c1_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Master_Transmit(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
+	e_status = HAL_I2C_Master_Transmit(&I2cHandle1, (uint16_t)addr<<1 & 0xFFFE, data, length, timeout);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -151,7 +151,7 @@ static int i2c1_master_transmit(uint16_t addr, uint8_t *data, uint16_t length, u
 static int i2c1_master_receive(uint16_t addr, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Master_Receive(&I2cHandle1, (uint16_t)addr<<1, data, length, timeout);
+	e_status = HAL_I2C_Master_Receive(&I2cHandle1, (uint16_t)addr<<1 | 0x0001, data, length, timeout);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -161,7 +161,7 @@ static int i2c1_master_receive(uint16_t addr, uint8_t *data, uint16_t length, ui
 static int i2c1_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Write(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
+	e_status = HAL_I2C_Mem_Write(&I2cHandle1, (uint16_t)addr<<1 & 0xFFFE, reg, I2C1_REG_BIT, data, length, timeout);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -171,7 +171,7 @@ static int i2c1_mem_write(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t l
 static int i2c1_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length, uint32_t timeout)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Read(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length, timeout);
+	e_status = HAL_I2C_Mem_Read(&I2cHandle1, (uint16_t)addr<<1 | 0x0001, reg, I2C1_REG_BIT, data, length, timeout);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -182,7 +182,7 @@ static int i2c1_mem_read(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t le
 static int i2c1_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Write_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	e_status = HAL_I2C_Mem_Write_IT(&I2cHandle1, (uint16_t)addr<<1 & 0xFFFE, reg, I2C1_REG_BIT, data, length);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -192,7 +192,7 @@ static int i2c1_mem_write_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_
 static int i2c1_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Read_IT(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	e_status = HAL_I2C_Mem_Read_IT(&I2cHandle1, (uint16_t)addr<<1 | 0x0001, reg, I2C1_REG_BIT, data, length);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -203,7 +203,7 @@ static int i2c1_mem_read_it(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t
 static int i2c1_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Write_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	e_status = HAL_I2C_Mem_Write_DMA(&I2cHandle1, (uint16_t)addr<<1 & 0xFFFE, reg, I2C1_REG_BIT, data, length);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
@@ -213,7 +213,7 @@ static int i2c1_mem_write_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16
 static int i2c1_mem_read_dma(uint16_t addr, uint16_t reg, uint8_t *data, uint16_t length)
 {
 	HAL_StatusTypeDef e_status = HAL_OK;
-	e_status = HAL_I2C_Mem_Read_DMA(&I2cHandle1, (uint16_t)addr<<1, reg, I2C1_REG_BIT, data, length);
+	e_status = HAL_I2C_Mem_Read_DMA(&I2cHandle1, (uint16_t)addr<<1 | 0x0001, reg, I2C1_REG_BIT, data, length);
 	if(e_status != HAL_OK) {
 		i2c1_error();
 	}
