@@ -35,13 +35,13 @@ static int receive_data32(struct device *Dev, uint32_t *data, uint16_t length)
 	return Spi_cs_hal->receive32(data, length, D_config->value_rx_timeout);
 }
 
-static int transmit_receive_data(struct device *Dev, uint8_t *data, uint8_t *data, uint16_t length)
+static int transmit_receive_data(struct device *Dev, uint8_t *tx_data, uint8_t *rx_data, uint16_t length)
 {
 	struct spi_data *D_data = Dev->data;
 	const struct spi_config *D_config = Dev->config;
 	struct spi_api *Spi_cs_hal = D_data->Spi_cs_hal;
 	
-	return Spi_cs_hal->transmit_receive(data, data, length, D_config->value_tx_rx_timeout);
+	return Spi_cs_hal->transmit_receive(tx_data, rx_data, length, D_config->value_tx_rx_timeout);
 }
 
 static const struct spi_common_api Spi_common_api = {
